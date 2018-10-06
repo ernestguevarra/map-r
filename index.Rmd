@@ -18,7 +18,7 @@ urlcolor: blue
 fontsize: 12pt
 always_allow_html: yes
 url: https\://validmeasures.org/map-r
-cover-image: figures/s3mlogo.png
+cover-image: figures/sudanMapTriSim.png
 description: "Mapping with R"
 ---
 
@@ -46,6 +46,6 @@ if(!require(magrittr)) install.packages("magrittr")
 if(!require(FNN)) install.packages("FNN")
 ```
 
-# Mapping with R {-}
+# Short course on the use of R for the mapping requirements of S3M {-}
 
-![](figures/s3mlogo.png)
+<center>![](figures/sudanMapTriSim.png)</center>
