@@ -1,1 +1,107 @@
 \usepackage{booktabs}
+\usepackage[table]{xcolor}
+\usepackage{color}
+\usepackage{tcolorbox}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{longtable}
+%\usepackage{amsmath}
+%\usepackage{mathtools}
+
+\onehalfspacing
+
+%\raggedbottom
+
+\graphicspath{ {icons/} }
+
+\newenvironment{rmdremind}
+  {\begin{tcolorbox}[width=\textwidth, 
+                     colback = {white}, 
+                     title = {\textbf{Remember}}, 
+                     colbacktitle = lightgray,
+                     coltitle = black]
+  \begin{includegraphics}[scale = 1]{remind.png}
+  \begin{itemize}}
+  {\end{itemize}
+  \end{includegraphics}
+  \end{tcolorbox}}
+
+\newenvironment{rmdnote}
+  {\begin{tcolorbox}[width=\textwidth, 
+                     colback = {white}, 
+                     title = {\textbf{Note}}, 
+                     colbacktitle = lightgray,
+                     coltitle = black]
+  \begin{includegraphics}[scale = 1]{pencil.png}}
+  {\end{includegraphics}
+  \end{tcolorbox}}
+  
+\newenvironment{rmdcalc}
+  {\begin{tcolorbox}[width=\textwidth, 
+                     colback = {white}, 
+                     title = {\textbf{Calculations}}, 
+                     colbacktitle = lightgray,
+                     coltitle = black]
+  \begin{includegraphics}[scale = 2]{pencil.png}}
+  {\end{includegraphics}
+  \end{tcolorbox}}
+  
+\newenvironment{rmdexercise}
+  {\begin{tcolorbox}[width=\textwidth, 
+                     colback = {white}, 
+                     title = {\textbf{Exercise}}, 
+                     colbacktitle = lightgray,
+                     coltitle = black]
+  \begin{includegraphics}[scale = 1]{exercise.png}}
+  {\end{includegraphics}
+  \end{tcolorbox}}
+  
+\newenvironment{rmdbox}
+  {\begin{tcolorbox}[width=\textwidth, 
+                     colback = {white}, 
+                     title = {\textbf{Exercise}}, 
+                     colbacktitle = lightgray,
+                     coltitle = black]
+  \begin{includegraphics}[scale = 1]{pencil.png}}
+  {\end{includegraphics}
+  \end{tcolorbox}}
+  
+\newenvironment{rmdinfo}
+  {\begin{tcolorbox}[width=\textwidth, 
+                     colback = {white}, 
+                     title = {\textbf{Info}}, 
+                     colbacktitle = lightgray,
+                     coltitle = black]
+  \begin{includegraphics}[scale = 1]{info.png}}
+  {\end{includegraphics}
+  \end{tcolorbox}}  
+  
+\newenvironment{rmdwarning}
+  {\begin{tcolorbox}[width=\textwidth, 
+                     colback = {white}, 
+                     title = {\textbf{Warning}}, 
+                     colbacktitle = lightgray,
+                     coltitle = black]
+  \begin{includegraphics}[scale = 1]{warning.png}}
+  {\end{includegraphics}
+  \end{tcolorbox}}
+
+\newenvironment{rmdcaution}
+  {\begin{tcolorbox}[width=\textwidth, 
+                     colback = {white}, 
+                     title = {\textbf{Caution}}, 
+                     colbacktitle = lightgray,
+                     coltitle = black]
+  \begin{includegraphics}[scale = 1]{warning.png}}
+  {\end{includegraphics}
+  \end{tcolorbox}}
+
+\newenvironment{rmddownload}
+  {\begin{tcolorbox}[width=\textwidth, 
+                     colback = {white}, 
+                     title = {\textbf{Download}}, 
+                     colbacktitle = lightgray,
+                     coltitle = black]
+  \begin{includegraphics}[scale = 1]{download.png}}
+  {\end{includegraphics}
+  \end{tcolorbox}}
