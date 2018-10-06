@@ -11,6 +11,7 @@ bibliography: ["book.bib"]
 biblio-style: "apalike"
 link-citations: TRUE
 links-as-notes: FALSE
+subparagraph: TRUE
 colorlinks: TRUE
 linkcolor: blue
 citecolor: blue
