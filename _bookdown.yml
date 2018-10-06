@@ -2,4 +2,5 @@ book_filename: "map-r"
 delete_merged_file: true
 language:
   ui:
-    chapter_name: "Chapter "
+    chapter_name: "Exercise "
+output_dir: "docs"
