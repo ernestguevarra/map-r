@@ -49,6 +49,61 @@
 
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; }
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre, code { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; color: initial; }
+}
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.fl { color: #0000cf; } /* Float */
+code span.ch { color: #4e9a06; } /* Char */
+code span.st { color: #4e9a06; } /* String */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.ot { color: #8f5902; } /* Other */
+code span.al { color: #ef2929; } /* Alert */
+code span.fu { color: #000000; } /* Function */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code span.cn { color: #000000; } /* Constant */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.im { } /* Import */
+code span.va { color: #000000; } /* Variable */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.ex { } /* Extension */
+code span.at { color: #c4a000; } /* Attribute */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -92,6 +147,24 @@
             <section class="normal" id="section-">
 <div id="exercise1" class="section level1">
 <h1><span class="header-section-number">Exercise 1</span> Retrieving map data in R</h1>
+<p>In this exercise we will use <strong>R</strong> to read a <strong>shapefile</strong> dataset and get oriented with the structure and features of a <strong>shapefile</strong> dataset. The aim of the exercise is for you to become familiar with the use of R in handling <strong>shapefile</strong> datasets.</p>
+<p>By this time, you have already learned how to issue a command to retrieve a standard or typical dataset using the <code>read.table()</code> function</p>
+<p>For this exercise, we will use the <code>readOGR()</code> function provided by the <code>rgdal</code> package to retrieve <strong>shapefile</strong> dateset.</p>
+<p>First, we need to install and load the <code>rgdal</code> package.</p>
+<p> </p>
+<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(“rgdal”)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(rgdal)</a></code></pre>
+<p> </p>
+<p>We can now try to read the Sudan <strong>shapefile</strong>. To do this however, we need to have an orientation on what <strong>shapefiles</strong> are.</p>
+<p>A <strong>shapefile</strong> is a digital vector storage format for storing geometric location and associated attribute information. This format lacks the capacity to store topological information. The <strong>shapefile</strong> format was initially developed for proprietary use with ArcView GIS version 2 in the early 1990s. It is now possible to read and write <strong>shapefiles</strong> using a variety of programs including data analysis software such as <strong>R</strong>.</p>
+<p><strong>Shapefiles</strong> are simple because they store the primitive geometric data types of points, lines, and polygons. They are of limited use without any attributes to specify what they represent. Therefore, a table of records will store properties/attributes for each primitive shape in the <strong>shapefile</strong>. Shapes (points/lines/polygons) together with data attributes can create infinitely many representations about geographic data. Representation provides the ability for powerful and accurate computations.</p>
+<p>While the term “shapefile” is quite common, a <strong>shapefile</strong> is actually a set of several files. Three individual files are mandatory to store the core data that comprise a <strong>shapefile</strong>:</p>
+<ul>
+<li>.shp</li>
+<li>.shx</li>
+<li>.dbf</li>
+</ul>
+<p>The actual <strong>shapefile</strong> relates specifically to <code>.shp</code> files but alone is incomplete for distribution, as the other supporting files are required.</p>
 
 </div>
             </section>
