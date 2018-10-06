@@ -1,0 +1,19 @@
+Package: map-r
+Title: Mapping with R
+Version: 0.1.0
+Authors@R: person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
+           email = "ernest@guevarra.io", role = c("aut", "cre"))
+Description: Short course on the use of R for the mapping requirements of the
+    Simple Spatial Survey Method (S3M). This course was designed and developed 
+    for the Sudan S3M National Survey.
+Depends: R (>= 3.0.1)
+Remotes: validmeasures/spatialsampler
+Imports: bookdown,
+    sp,
+    rgdal,
+    rgeos,
+    raster,
+    maptools,
+    maps
+License: AGPL-3
+RoxygenNote: 6.0.1
