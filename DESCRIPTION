@@ -1,4 +1,4 @@
-Package: map-r
+Package: mapr
 Title: Mapping with R
 Version: 0.1.0
 Authors@R: person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
