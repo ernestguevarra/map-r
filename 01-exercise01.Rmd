@@ -1,0 +1,1 @@
+# Retrieving map data in R {#exercise1}
