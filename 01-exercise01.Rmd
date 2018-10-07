@@ -31,4 +31,455 @@ While the term "shapefile" is quite common, a **shapefile** is actually a set of
 
 The actual **shapefile** relates specifically to `.shp` files but alone is incomplete for distribution, as the other supporting files are required.
 
+With this knowledge of **shapefiles**, let us now take a look at the Sudan **shapefiles** dataset.
+
+The Sudan **shapefiles** dataset contains the following **shapefiles**:
+
+&nbsp;
+
+Table: (\#tab:table1) Sudan shapefiles structure
+
++--------------------+--------------------+----------------------------------------+
+| **Directory name** | **Directory files**| **Description**                        |
++====================+====================+========================================+
+| sudan01            | sudan01.shp        | Polygon shapefile of Sudan up to state |
+|                    | sudan01.shx        | administrative level                   |
+|                    | sudan01.dbf        |                                        |
+|                    | sudan01.prj        |                                        |
+|                    | sudan01.qpj        |                                        |
++--------------------+--------------------+----------------------------------------+
+| sudan02            | sudan02.shp        | Polygon shapefile of Sudan up to       |
+|                    | sudan02.shx        | locality administrative level          |
+|                    | sudan02.dbf        |                                        |
+|                    | sudan02.prj        |                                        |
+|                    | sudan02.qpj        |                                        |
++--------------------+--------------------+----------------------------------------+
+| grid12poly         | grid12poly.shp     | Polygon shapefile of rectangular grid  |
+|                    | grid12poly.shx     | at d = 12km                            |
+|                    | grid12poly.dbf     |                                        |
+|                    | grid12poly.prj     |                                        |
+|                    | grid12poly.qpj     |                                        |
++--------------------+--------------------+----------------------------------------+
+| grid12kmSudan      | grid12kmSudan.shp  | Line shapefile of rectangular grid     |
+|                    | grid12kmSudan.shx  | at d = 12km                            |
+|                    | grid12kmSudan.dbf  |                                        |
+|                    | grid12kmSudan.prj  |                                        |
+|                    | grid12kmSudan.qpj  |                                        |
++--------------------+--------------------+----------------------------------------+
+ 
+&nbsp; 
+    
+We can now retrieve these shapefile datasets and create an object for each one using the `readOGR()` function from the `rgdal` package.
+
+&nbsp;
+
+
+```{r, echo = TRUE, eval = TRUE}
+sudan01 <- readOGR(dsn = "maps", layer = "sudan01")
+
+sudan02 <- readOGR(dsn = "maps", layer = "sudan02")
+
+grid12poly <- readOGR(dsn = "maps", layer = "grid12poly")
+
+grid12kmSudan <- readOGR(dsn = "maps", layer = "grid12kmSudan")
+```
+
+&nbsp;
+
+This series of commands illustrates key things about the way shapefile data can be read and handled in **R**.
+
+First is that the retrieval of **shapefile** datasets follows a very similar syntax as that of other standard datasets but just using the `readOGR()` function. The same principles apply including ensuring that you specify the corresponding directory in which your **shapefiles** are stored.
+
+Now that we have stored the various shapefile data into objects, we can now explore and get ourselves oriented to the structure and features of a **shapefile** data object. We will do this using standard / basic functions in **R** that you have learned already in the previous training.
+
+First, let us learn the class of a **shapefile** data object. We can find this out using the same function that you are familiar with already and have used previously the `class()` function.
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+class(sudan01)
+```
+
+&nbsp;
+
+This command gives the following output:
+
+&nbsp;
+
+```{r, echo = FALSE, eval = TRUE}
+class(sudan01)
+```
+
+&nbsp;
+
+This tells us that the `sudan01` object is of class `SpatialPolygonsDataFrame`. It also tells us that this is a special class specific to the `sp` package. 
+
+The `sp` package provides classes and methods for spatial data. The classes document where the spatial location information resides, for 2D or 3D data. Utility functions are provided, e.g. for plotting data as maps, spatial selection, as well as methods for retrieving coordinates, for subsetting, print, summary, etc.
+
+If you check for the class of the other **shapefile** objects you've created, you will see that all of them are of the same `SpatialPolygonsDataFrame` class except for `grid12kmSudan`. Checking for the class of `grid12kmSudan` revealed the following:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = TRUE}
+class(grid12kmSudan)
+```
+
+&nbsp;
+
+This tells us that the `grid12kmSudan` objects is of class `SpatialLinesDataFrame`.
+
+You are now getting introduced to two of the most common shapes of a **shapefile**: *polygons* and *lines*.
+
+A *polygon* consists of one or more rings. A ring is a connected sequence of four or more points that form a closed, non-self-intersecting loop. A *polygon* may contain multiple outer rings. The order of vertices or orientation for a ring indicates which side of the ring is the interior of the *polygon*. The neighbourhood to the right of an observer walking along the ring in vertex order is the neighbourhood inside the *polygon*. Vertices of rings defining holes in *polygons* are in a counterclockwise direction. Vertices for a single, ringed *polygon* are, therefore, always in clockwise order. The rings of a *polygon* are referred to as its parts.
+
+A *line* is an ordered set of vertices that consists of one or more parts. A part is a connected sequence of two or more points. Parts may or may not be connected to one another. Parts may or may not intersect one another.
+
+One of the other shapes that **shapefiles** take or represent is *points*.
+
+A *point* consists of a pair of double-precision coordinates in the order `x`, `y`.
+
+Because of this simple property of a *point* **shapefile** (i.e. a basic set of `x` and `y` coordinates), the use of **shapefile** format to store the *point* shape is not commonly used. The `x` and `y` coordinates for *points* can be contained or stored in other more basic formats such as CSV.
+
+For example, the dataset that contains the `x` and `y` coordinates of all the known villages in Sudan is named `settlementsSudan.csv`. If we create an object called villages for this dataset
+
+&nbsp;
+
+```{r, echo = TRUE, eval = TRUE}
+villages <- read.csv("maps/settlementsSudan.csv", header = TRUE, sep = ",")
+```
+
+&nbsp;
+
+and use the `head()` function to view the first 10 rows of this dataset
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+head(villages, 10)
+```
+
+&nbsp;
+
+we get:
+
+&nbsp;
+
+```{r, echo = FALSE, eval = TRUE}
+head(villages, 10)
+```
+
+&nbsp;        
+
+As you will notice here, the villages object contains information on the `x` and `y` coordinates of each of the villages in Sudan. So, whilst this dataset is not a **shapefile** (it is a basic data frame), it has information and a structure that is comparable to a point **shapefile** as defined above.
+
+In the succeeding exercises, this similarity of a *point* **shapefile** and a standard data frame containing `x` and `y` coordinates of *points* will be further discussed and illuminated.
+
+This knowledge on classes and shapes of **shapefiles** is an important learning particularly when performing functions to handle or manipulate different **shapefile** objects. The general principle is that functions or operations between two or more **shapefile** objects require these objects to be of the same class or family of classes. Also, the shapes defined by the **shapefile** object determine the way the **shapefile** data is structured which in turn determine how these objects can and should be handled or manipulated in **R**. These principles will be further illuminated in the succeeding exercises.
+
+After learning about the class of **shapefile** objects, we now learn about the structure of these objects. We are able to appreciate the structure of a **shapefile** object by using the function `str()`.
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+str(sudan01)
+```
+
+&nbsp;
+
+The output of this command is:
+
+&nbsp;
+
+```{r, echo = FALSE, eval = TRUE}
+str(sudan01)
+```
+
+&nbsp;
+
+which gives the class of the **shapefile** object and gives us an idea of the data structure as having 5 slots. This is one of the key differences of a `sp` data frame compared to a standard basic data frame. In a basic data frame, you basically have single data set organised in rows and columns similar to that of a table. In a `sp` data frame, you can think of it as a compound data frame in which each slot contains a specific dataset.
+
+As you look further down into the structure of the **shapefile** object, you will notice the `@` symbol recurring 5 times. This is the symbol used to retrieve the different slots of the **shapefile** objects.
+
+\newpage
+
+The 5 slots in a `SpatialPolygonsDataFrame` are:
+
+&nbsp;
+
+Table: (\#tab:table2) SpatialPolygonsDataFrame structure
+
++-------------------------+--------------------------------------------------+
+| **data**                | Contains the index or reference data frame of the| 
+|                         | **shapefile** the number of rows of which        |
+|                         | indicates the number of polygons that comprise   |
+|                         | the entire **shapefile**.                        |
++-------------------------+--------------------------------------------------+
+| **polygons**            | Contains *n* number of datasets based on the     |
+|                         | number of *polygons* that comprise the entire    |
+|                         | **shapefile**.                                   |
++-------------------------+--------------------------------------------------+
+| **plotOrder**           | Contains an integer vector with a length equal to| 
+|                         | the number of *polygons* that comprise the entire| 
+|                         | **shapefile** and have values starting from 1 to |
+|                         | *n* number of *polygons* in the entire           |
+|                         | **shapefile**. The order of the values of this   |
+|                         | vector determines which *polygon* is drawn first |
+|                         | when plotting. This order is determined by       |
+|                         | decreasing area size of the *polygons*.          |
++-------------------------+--------------------------------------------------+
+| **bbox**                | Contains a matrix the values of which are the    |
+|                         | minimum and maximum `x` and `y` limits of the    |
+|                         | entire **shapefile**.                            |
++-------------------------+--------------------------------------------------+
+| **proj4string**         | Contains a character string that specifies the   |
+|                         | projection and datum of the **shapefile** object |
++-------------------------+--------------------------------------------------+
+
+&nbsp;
+
+Now let us try to extract the different slots of `sudan01` object. Making a call for the `data` slot gives:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = TRUE}
+sudan01@data
+```
+
+&nbsp;
+
+Here we note that the `sudan01` **shapefile** contains *polygons* of the each of the states of Sudan with `sudan01@data` specifying the names of each of these states.
+
+To check for the number of *polygons* in `sudan01` **shapefile** (the answer to which will also be the number of states in Sudan), we can use the `nrow()` function as follows:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+nrow(sudan01@data)
+```
+
+\newpage
+
+which gives a result of
+
+&nbsp;
+
+```{r, echo = FALSE, eval = TRUE}
+nrow(sudan01@data)
+```
+
+&nbsp;
+
+There are 18 polygons in `sudan01` **shapefile** which indicate that Sudan has about 18 states (if the **shapefile** used is up-to-date).
+
+Let us now try extract the *polygons* slot of `sudan01`. If we make a call for the *polygons* slot as below:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@polygons
+```
+
+&nbsp;
+
+we end up with a very long output which is not easy to review or appreciate. This is understandable because from the previous command extracting the slot data of `sudan01` we know already that the *polygons* slot will have 18 sets of *polygon* **shapefile** data each of which will have it's own datasets and data structure. This means that the output will be very long and not easy to manage.
+
+In this instance, a review of the structure of `sudan01@polygons` may help in getting an insight as to how to handle or manage the datasets contained inside this slot. We call the `str()` function on `sudan01@polygons` as follows:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = TRUE}
+str(sudan01@polygons)
+```
+
+&nbsp;
+
+The first thing we learn from the output of this command is that the `sudan01@polygons` is a list with a length of 18.
+
+In this case, we can then use our knowledge of the class list to our advantage to be able to handle `sudan01@polygons`.
+
+Lists are convenient class or mode of data because they can accommodate multiple objects within them and these objects don't have to be of the same mode / class or length. Lists are of single dimension each of which refer to a object or dataset that has been included into the list.
+
+This means that we can use **R**'s powerful subscripting (sometimes referred to as indexing) capabilities to access specific components of `sudan01@polygons`. We can try this by running the following command:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@polygons[1]
+```
+
+&nbsp;
+
+In this command we are instructing **R** to give us the first element / component in the list `sudan01@polygons`. This gives us the dataset and hints on the structure of the first *polygon* in the list of 18 *polygons* of `sudan01` **shapefile** (see below).
+
+&nbsp;
+
+```{r, echo = FALSE, eval = FALSE}
+sudan01@polygons[1]
+```
+
+&nbsp;
+
+If we want to view the dataset for the 11th *polygon* in the list, we use:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@polygons[11]
+```
+
+&nbsp;
+
+If we want to view the dataset for the 6th and 7th *polygon* in the list, we use:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@polygons[6:7]
+```
+
+&nbsp;
+
+or
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@polygons[c(6,7)]
+```
+
+&nbsp;
+
+If we want to view the dataset for the 3rd and the 16th *polygon* on the list, we use:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@polygons[c(3,16)]
+```
+
+&nbsp;
+
+Let us now try to extract the `plotOrder` slot of `sudan01` **shapefile**. We make a call as follows:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@plotOrder
+```
+
+&nbsp;
+
+which gives this result:
+
+&nbsp;
+
+```{r, echo = FALSE, eval = TRUE}
+sudan01@plotOrder
+```
+
+&nbsp;
+
+The output is a numeric vector of length 18. The values in the vector represent the *polygon* that gets plotted first. In this case, the 13th *polygon* is the first to be plotted and the 1st *polygon* will be the last to be plotted.
+
+The `plotOrder` slot is linked  or related to the area slot of each of the *polygon* found in the dataset for each of the *polygons* in `sudan01` object. The *polygon* with the biggest area gets plotted first and the one with the smallest area gets plotted last.
+
+Given this, it would be a good exercise of our newly learned skills of handling and manipulating mapping data to try to create a dataframe that combines the `sudan01@plotOrder` vector with the corresponding area size of each *polygon* referred to in the plotting order. This is a good way of checking whether indeed the plotting order of *polygons* is based on decreasing area size. We do this by:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = TRUE}
+areaAll <- NULL
+    
+for(i in 1:length(sudan01)) {
+  area <- sudan01@polygons[sudan01@plotOrder][[i]]@Polygons[[1]]@area
+  areaAll <- c(areaAll, area)
+}
+
+orderByArea <- data.frame(sudan01@plotOrder, areaAll)
+```
+
+&nbsp;
+
+The result of this is:
+
+&nbsp;
+
+```{r, echo = FALSE, eval = TRUE}
+orderByArea
+```
+
+&nbsp;
+
+Let us now take a look at the `bbox` slot of `sudan01`. We make a call as follows:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@bbox
+```
+
+&nbsp;
+
+This gives the following results:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@bbox
+```
+
+&nbsp;
+
+This is basically telling us that the **shapefile** has a minimum `x` coordinate value of `r sudan01@bbox[1]` and a maximum `x` coordinate value of `r sudan01@bbox[3]`. For the `y` coordinates, the **shapefile** has a minimum of `r sudan01@bbox[2]` and a maximum of `r sudan01@bbox[4]`.
+
+Another way of getting the minimum and maximum `x` and `y` coordinates of a **shapefile** is by using the `bbox()` function. It can be used as follows:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = TRUE}
+sudan01Limits <- bbox(sudan01)
+```
+
+&nbsp;
+
+The object `sudan01Limits` is equivalent to `sudan01@bbox`.
+
+This minimum and maximum `x` and `y` coordinates is for the entire **shapefile**.
+
+Finally, let us take a look at the `proj4string` slot of `sudan01`. This can be retrieved by calling the following:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@proj4string
+```
+
+&nbsp;
+
+The result of this command is:
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01@proj4string
+```
+
+This indicates that the projection of the **shapefile** is longitude and latitude based on **datum WGS84**.
+
+Another way of getting the projection is by using the `proj4string()` function as follows:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+proj4string(sudan01)
+```
+
+&nbsp;
+
+This gives the same result but with a slightly different format.
+
+&nbsp;
+
+```{r, echo = FALSE, eval = TRUE}
+proj4string(sudan01)
+```
+
 
