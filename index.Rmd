@@ -7,6 +7,7 @@ site: bookdown::bookdown_site
 documentclass: book
 geometry: margin=2cm
 classoption: a4paper
+papersize: a4
 bibliography: ["book.bib"]
 biblio-style: "apalike"
 link-citations: TRUE
@@ -17,13 +18,15 @@ linkcolor: blue
 citecolor: blue
 urlcolor: blue
 fontsize: 12pt
-always_allow_html: yes
+lof: TRUE
+lot: TRUE
+#always_allow_html: yes
 url: https\://validmeasures.org/map-r
 cover-image: figures/sudanMapTriSim.png
 description: "Mapping with R"
 ---
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
@@ -39,14 +42,30 @@ if(!require(rgdal)) install.packages("rgdal")
 if(!require(rgeos)) install.packages("rgeos")
 if(!require(raster)) install.packages("raster")
 if(!require(spatialsampler)) install_github("validmeasures/spatialsampler")
-if(!require(liberia)) install_github("validmeasures/liberia")
 if(!require(maps)) install.packages("maps")
 if(!require(knitr)) install.packages("knitr")
 if(!require(kableExtra)) install.packages("kableExtra")
 if(!require(magrittr)) install.packages("magrittr")
 if(!require(FNN)) install.packages("FNN")
+
+fn <- c(".shp", ".shx", ".dbf", ".prj", ".qpj")
+
+col1 <- c(rep("sudan01", 5), rep("sudan02", 5), 
+          rep("grid12poly", 5), rep("grid12kmSudan", 5))
+
+col2 <- c(paste("sudan01", fn, sep = ""), 
+          paste("sudan02", fn, sep = ""),
+          paste("grid12poly", fn, sep = ""),
+          paste("grid12kmSudan", fn, sep = ""))
+
+col3 <- c(rep("Polygon shapefile of Sudan up to state administrative level", 5),
+          rep("Polygon shapefile of Sudan up to locality administrative level", 5),
+          rep("Polygon shapefile of rectangular grid at d = 12km", 5),
+          rep("Line shapefile of rectangular grid at d = 12km", 5))
+
+tab1 <- data.frame(col1, col2, col3)
 ```
 
 # Short course on the use of R for the mapping requirements of S3M {-}
 
-<center>![](figures/sudanMapTriSim.png)</center>
+![](figures/sudanMapTriSim.png)
