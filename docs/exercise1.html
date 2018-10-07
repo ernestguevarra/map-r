@@ -25,7 +25,7 @@
 <meta name="author" content="Ernest Guevarra">
 
 
-<meta name="date" content="2018-10-06">
+<meta name="date" content="2018-10-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -165,6 +165,839 @@ code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Infor
 <li>.dbf</li>
 </ul>
 <p>The actual <strong>shapefile</strong> relates specifically to <code>.shp</code> files but alone is incomplete for distribution, as the other supporting files are required.</p>
+<p>With this knowledge of <strong>shapefiles</strong>, let us now take a look at the Sudan <strong>shapefiles</strong> dataset.</p>
+<p>The Sudan <strong>shapefiles</strong> dataset contains the following <strong>shapefiles</strong>:</p>
+<p> </p>
+<table>
+<caption><span id="tab:table1">Table 1.1: </span> Sudan shapefiles structure</caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="49%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Directory name</strong></th>
+<th><strong>Directory files</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sudan01</td>
+<td>sudan01.shp
+sudan01.shx
+sudan01.dbf
+sudan01.prj
+sudan01.qpj</td>
+<td>Polygon shapefile of Sudan up to state
+administrative level</td>
+</tr>
+<tr class="even">
+<td>sudan02</td>
+<td>sudan02.shp
+sudan02.shx
+sudan02.dbf
+sudan02.prj
+sudan02.qpj</td>
+<td>Polygon shapefile of Sudan up to
+locality administrative level</td>
+</tr>
+<tr class="odd">
+<td>grid12poly</td>
+<td>grid12poly.shp
+grid12poly.shx
+grid12poly.dbf
+grid12poly.prj
+grid12poly.qpj</td>
+<td>Polygon shapefile of rectangular grid
+at d = 12km</td>
+</tr>
+<tr class="even">
+<td>grid12kmSudan</td>
+<td>grid12kmSudan.shp
+grid12kmSudan.shx
+grid12kmSudan.dbf
+grid12kmSudan.prj
+grid12kmSudan.qpj</td>
+<td>Line shapefile of rectangular grid
+at d = 12km</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>We can now retrieve these shapefile datasets and create an object for each one using the <code>readOGR()</code> function from the <code>rgdal</code> package.</p>
+<p> </p>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">sudan01 &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="dt">dsn =</span> <span class="st">&quot;maps&quot;</span>, <span class="dt">layer =</span> <span class="st">&quot;sudan01&quot;</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; OGR data source with driver: ESRI Shapefile </span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; Source: &quot;/Users/ernest/Documents/GitHub/map-r/maps&quot;, layer: &quot;sudan01&quot;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; with 18 features</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; It has 8 fields</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">sudan02 &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="dt">dsn =</span> <span class="st">&quot;maps&quot;</span>, <span class="dt">layer =</span> <span class="st">&quot;sudan02&quot;</span>)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; OGR data source with driver: ESRI Shapefile </span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; Source: &quot;/Users/ernest/Documents/GitHub/map-r/maps&quot;, layer: &quot;sudan02&quot;</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; with 169 features</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; It has 15 fields</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">grid12poly &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="dt">dsn =</span> <span class="st">&quot;maps&quot;</span>, <span class="dt">layer =</span> <span class="st">&quot;grid12poly&quot;</span>)</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; OGR data source with driver: ESRI Shapefile </span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; Source: &quot;/Users/ernest/Documents/GitHub/map-r/maps&quot;, layer: &quot;grid12poly&quot;</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; with 13950 features</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; It has 5 fields</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; Integer64 fields read as strings:  ID</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">grid12kmSudan &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="dt">dsn =</span> <span class="st">&quot;maps&quot;</span>, <span class="dt">layer =</span> <span class="st">&quot;grid12kmSudan&quot;</span>)</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; OGR data source with driver: ESRI Shapefile </span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; Source: &quot;/Users/ernest/Documents/GitHub/map-r/maps&quot;, layer: &quot;grid12kmSudan&quot;</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; with 245 features</span></a>
+<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt; It has 2 fields</span></a>
+<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt; Integer64 fields read as strings:  ID</span></a></code></pre>
+<p> </p>
+<p>This series of commands illustrates key things about the way shapefile data can be read and handled in <strong>R</strong>.</p>
+<p>First is that the retrieval of <strong>shapefile</strong> datasets follows a very similar syntax as that of other standard datasets but just using the <code>readOGR()</code> function. The same principles apply including ensuring that you specify the corresponding directory in which your <strong>shapefiles</strong> are stored.</p>
+<p>Now that we have stored the various shapefile data into objects, we can now explore and get ourselves oriented to the structure and features of a <strong>shapefile</strong> data object. We will do this using standard / basic functions in <strong>R</strong> that you have learned already in the previous training.</p>
+<p>First, let us learn the class of a <strong>shapefile</strong> data object. We can find this out using the same function that you are familiar with already and have used previously the <code>class()</code> function.</p>
+<p> </p>
+<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">class</span>(sudan01)</a></code></pre>
+<p> </p>
+<p>This command gives the following output:</p>
+<p> </p>
+<pre><code>#&gt; [1] &quot;SpatialPolygonsDataFrame&quot;
+#&gt; attr(,&quot;package&quot;)
+#&gt; [1] &quot;sp&quot;</code></pre>
+<p> </p>
+<p>This tells us that the <code>sudan01</code> object is of class <code>SpatialPolygonsDataFrame</code>. It also tells us that this is a special class specific to the <code>sp</code> package.</p>
+<p>The <code>sp</code> package provides classes and methods for spatial data. The classes document where the spatial location information resides, for 2D or 3D data. Utility functions are provided, e.g. for plotting data as maps, spatial selection, as well as methods for retrieving coordinates, for subsetting, print, summary, etc.</p>
+<p>If you check for the class of the other <strong>shapefile</strong> objects you’ve created, you will see that all of them are of the same <code>SpatialPolygonsDataFrame</code> class except for <code>grid12kmSudan</code>. Checking for the class of <code>grid12kmSudan</code> revealed the following:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">class</span>(grid12kmSudan)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; [1] &quot;SpatialLinesDataFrame&quot;</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; attr(,&quot;package&quot;)</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; [1] &quot;sp&quot;</span></a></code></pre>
+<p> </p>
+<p>This tells us that the <code>grid12kmSudan</code> objects is of class <code>SpatialLinesDataFrame</code>.</p>
+<p>You are now getting introduced to two of the most common shapes of a <strong>shapefile</strong>: <em>polygons</em> and <em>lines</em>.</p>
+<p>A <em>polygon</em> consists of one or more rings. A ring is a connected sequence of four or more points that form a closed, non-self-intersecting loop. A <em>polygon</em> may contain multiple outer rings. The order of vertices or orientation for a ring indicates which side of the ring is the interior of the <em>polygon</em>. The neighbourhood to the right of an observer walking along the ring in vertex order is the neighbourhood inside the <em>polygon</em>. Vertices of rings defining holes in <em>polygons</em> are in a counterclockwise direction. Vertices for a single, ringed <em>polygon</em> are, therefore, always in clockwise order. The rings of a <em>polygon</em> are referred to as its parts.</p>
+<p>A <em>line</em> is an ordered set of vertices that consists of one or more parts. A part is a connected sequence of two or more points. Parts may or may not be connected to one another. Parts may or may not intersect one another.</p>
+<p>One of the other shapes that <strong>shapefiles</strong> take or represent is <em>points</em>.</p>
+<p>A <em>point</em> consists of a pair of double-precision coordinates in the order <code>x</code>, <code>y</code>.</p>
+<p>Because of this simple property of a <em>point</em> <strong>shapefile</strong> (i.e. a basic set of <code>x</code> and <code>y</code> coordinates), the use of <strong>shapefile</strong> format to store the <em>point</em> shape is not commonly used. The <code>x</code> and <code>y</code> coordinates for <em>points</em> can be contained or stored in other more basic formats such as CSV.</p>
+<p>For example, the dataset that contains the <code>x</code> and <code>y</code> coordinates of all the known villages in Sudan is named <code>settlementsSudan.csv</code>. If we create an object called villages for this dataset</p>
+<p> </p>
+<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">villages &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;maps/settlementsSudan.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>)</a></code></pre>
+<p> </p>
+<p>and use the <code>head()</code> function to view the first 10 rows of this dataset</p>
+<p> </p>
+<pre class="sourceCode r" id="cb7"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">head</span>(villages, <span class="dv">10</span>)</a></code></pre>
+<p> </p>
+<p>we get:</p>
+<p> </p>
+<pre><code>#&gt;    ID      Village Pop     Source      State Locality        X        Y
+#&gt; 1   1        Kosti         Georef White Nile    Kosti 32.66751 13.14846
+#&gt; 2   2     Tandalti     Calculated White Nile    Kosti 31.86393 13.00969
+#&gt; 3   3    Qawz kobi            GPS White Nile    Kosti 32.35000 13.60000
+#&gt; 4   4    Karjuggle            GPS White Nile    Kosti 32.38333 13.46667
+#&gt; 5   5   Idd maktuf            GPS White Nile    Kosti 32.28333 13.50000
+#&gt; 6   6       Maryam            GPS White Nile    Kosti 32.55000 13.46667
+#&gt; 7   7 Qawz nyaneir            GPS White Nile    Kosti 32.28333 13.60000
+#&gt; 8   8       Salogi            GPS White Nile    Kosti 32.45000 13.15000
+#&gt; 9   9      Sulayah            GPS White Nile    Kosti 32.25000 13.26667
+#&gt; 10 10      Seleima     Calculated White Nile    Kosti 32.05833 13.00833
+#&gt;    Remarks
+#&gt; 1         
+#&gt; 2         
+#&gt; 3         
+#&gt; 4         
+#&gt; 5         
+#&gt; 6         
+#&gt; 7         
+#&gt; 8         
+#&gt; 9         
+#&gt; 10</code></pre>
+<p> </p>
+<p>As you will notice here, the villages object contains information on the <code>x</code> and <code>y</code> coordinates of each of the villages in Sudan. So, whilst this dataset is not a <strong>shapefile</strong> (it is a basic data frame), it has information and a structure that is comparable to a point <strong>shapefile</strong> as defined above.</p>
+<p>In the succeeding exercises, this similarity of a <em>point</em> <strong>shapefile</strong> and a standard data frame containing <code>x</code> and <code>y</code> coordinates of <em>points</em> will be further discussed and illuminated.</p>
+<p>This knowledge on classes and shapes of <strong>shapefiles</strong> is an important learning particularly when performing functions to handle or manipulate different <strong>shapefile</strong> objects. The general principle is that functions or operations between two or more <strong>shapefile</strong> objects require these objects to be of the same class or family of classes. Also, the shapes defined by the <strong>shapefile</strong> object determine the way the <strong>shapefile</strong> data is structured which in turn determine how these objects can and should be handled or manipulated in <strong>R</strong>. These principles will be further illuminated in the succeeding exercises.</p>
+<p>After learning about the class of <strong>shapefile</strong> objects, we now learn about the structure of these objects. We are able to appreciate the structure of a <strong>shapefile</strong> object by using the function <code>str()</code>.</p>
+<p> </p>
+<pre class="sourceCode r" id="cb9"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">str</span>(sudan01)</a></code></pre>
+<p> </p>
+<p>The output of this command is:</p>
+<p> </p>
+<pre><code>#&gt; Formal class &#39;SpatialPolygonsDataFrame&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   ..@ data       :&#39;data.frame&#39;:  18 obs. of  8 variables:
+#&gt;   .. ..$ State     : chr [1:18] &quot;West Darfur&quot; &quot;Central Darfur&quot; &quot;North Darfur&quot; &quot;East Darfur&quot; ...
+#&gt;   .. ..$ Old_state : chr [1:18] &quot;West Darfur&quot; &quot;West Darfur&quot; &quot;North Darfur&quot; &quot;South Darfur&quot; ...
+#&gt;   .. ..$ New_State : chr [1:18] &quot;West Darfur&quot; &quot;Central Darfur&quot; &quot;North Darfur&quot; &quot;East Darfur&quot; ...
+#&gt;   .. ..$ STATE_1   : chr [1:18] NA NA NA NA ...
+#&gt;   .. ..$ STATEAR   : chr [1:18] NA NA NA NA ...
+#&gt;   .. ..$ Source    : chr [1:18] NA NA NA NA ...
+#&gt;   .. ..$ STATE_CODE: chr [1:18] NA NA NA NA ...
+#&gt;   .. ..$ ISO_CODE  : chr [1:18] NA NA NA NA ...
+#&gt;   ..@ polygons   :List of 18
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 22.6 13.5
+#&gt;   .. .. .. .. .. .. ..@ area   : num 1.86
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:981, 1:2] 22.1 22.1 22.1 22.2 22.2 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 22.6 13.5
+#&gt;   .. .. .. ..@ ID       : chr &quot;0&quot;
+#&gt;   .. .. .. ..@ area     : num 1.86
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 23.4 12.3
+#&gt;   .. .. .. .. .. .. ..@ area   : num 2.75
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:463, 1:2] 23.6 23.6 23.6 23.6 23.7 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 23.4 12.3
+#&gt;   .. .. .. ..@ ID       : chr &quot;1&quot;
+#&gt;   .. .. .. ..@ area     : num 2.75
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 25.6 16.2
+#&gt;   .. .. .. .. .. .. ..@ area   : num 26.7
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:669, 1:2] 27.5 27.5 27.2 27.1 26.9 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 25.6 16.2
+#&gt;   .. .. .. ..@ ID       : chr &quot;2&quot;
+#&gt;   .. .. .. ..@ area     : num 26.7
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 26.5 11
+#&gt;   .. .. .. .. .. .. ..@ area   : num 4.44
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:932, 1:2] 25.5 25.6 25.6 25.6 25.6 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 26.5 11
+#&gt;   .. .. .. ..@ ID       : chr &quot;3&quot;
+#&gt;   .. .. .. ..@ area     : num 4.44
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 24.4 11
+#&gt;   .. .. .. .. .. .. ..@ area   : num 6.91
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:1896, 1:2] 24.4 24.4 24.4 24.4 24.4 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 24.4 11
+#&gt;   .. .. .. ..@ ID       : chr &quot;4&quot;
+#&gt;   .. .. .. ..@ area     : num 6.91
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 33.3 14.6
+#&gt;   .. .. .. .. .. .. ..@ area   : num 2.28
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:490, 1:2] 33.6 33.6 33.6 33.6 33.6 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 33.3 14.6
+#&gt;   .. .. .. ..@ ID       : chr &quot;5&quot;
+#&gt;   .. .. .. ..@ area     : num 2.28
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 34.1 11.3
+#&gt;   .. .. .. .. .. .. ..@ area   : num 3.16
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:406, 1:2] 34.5 34.5 34.5 34.5 34.5 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 34.1 11.3
+#&gt;   .. .. .. ..@ ID       : chr &quot;6&quot;
+#&gt;   .. .. .. ..@ area     : num 3.16
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 35.1 14.2
+#&gt;   .. .. .. .. .. .. ..@ area   : num 4.99
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:505, 1:2] 34.2 34.3 34.4 34.4 34.5 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 35.1 14.2
+#&gt;   .. .. .. ..@ ID       : chr &quot;7&quot;
+#&gt;   .. .. .. ..@ area     : num 4.99
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 35.9 15.8
+#&gt;   .. .. .. .. .. .. ..@ area   : num 4.1
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:294, 1:2] 35.7 36 36.1 36.2 36.2 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 35.9 15.8
+#&gt;   .. .. .. ..@ ID       : chr &quot;8&quot;
+#&gt;   .. .. .. ..@ area     : num 4.1
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 32.8 15.9
+#&gt;   .. .. .. .. .. .. ..@ area   : num 1.79
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:198, 1:2] 33.5 33.7 34 34 34 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 32.8 15.9
+#&gt;   .. .. .. ..@ ID       : chr &quot;9&quot;
+#&gt;   .. .. .. ..@ area     : num 1.79
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 33.5 18.3
+#&gt;   .. .. .. .. .. .. ..@ area   : num 11.1
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:226, 1:2] 35.6 35.4 35.4 35.3 35.3 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 33.5 18.3
+#&gt;   .. .. .. ..@ ID       : chr &quot;10&quot;
+#&gt;   .. .. .. ..@ area     : num 11.1
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 29.3 19.6
+#&gt;   .. .. .. .. .. .. ..@ area   : num 31.4
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:117, 1:2] 31.7 32.1 32.1 32.4 32.4 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 29.3 19.6
+#&gt;   .. .. .. ..@ ID       : chr &quot;11&quot;
+#&gt;   .. .. .. ..@ area     : num 31.4
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 35.7 19.8
+#&gt;   .. .. .. .. .. .. ..@ area   : num 18.6
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:2309, 1:2] 37 37 37 37 37 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 35.7 19.8
+#&gt;   .. .. .. ..@ ID       : chr &quot;12&quot;
+#&gt;   .. .. .. ..@ area     : num 18.6
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 2
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 33.2 11.5
+#&gt;   .. .. .. .. .. .. ..@ area   : num 0.00152
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:10, 1:2] 33.2 33.2 33.2 33.1 33.1 ...
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 34 12.9
+#&gt;   .. .. .. .. .. .. ..@ area   : num 3.27
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:545, 1:2] 33.9 33.9 33.9 33.9 33.9 ...
+#&gt;   .. .. .. ..@ plotOrder: int [1:2] 2 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 34 12.9
+#&gt;   .. .. .. ..@ ID       : chr &quot;13&quot;
+#&gt;   .. .. .. ..@ area     : num 3.27
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 32.3 13.4
+#&gt;   .. .. .. .. .. .. ..@ area   : num 3.17
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:378, 1:2] 32.5 32.5 32.5 32.5 32.5 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 32.3 13.4
+#&gt;   .. .. .. ..@ ID       : chr &quot;14&quot;
+#&gt;   .. .. .. ..@ area     : num 3.17
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 30.8 11.3
+#&gt;   .. .. .. .. .. .. ..@ area   : num 6.49
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:451, 1:2] 31.7 31.7 31.7 31.7 31.7 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 30.8 11.3
+#&gt;   .. .. .. ..@ ID       : chr &quot;15&quot;
+#&gt;   .. .. .. ..@ area     : num 6.49
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 28.4 11.8
+#&gt;   .. .. .. .. .. .. ..@ area   : num 9.47
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:566, 1:2] 27.5 27.5 27.5 27.5 27.8 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 28.4 11.8
+#&gt;   .. .. .. ..@ ID       : chr &quot;16&quot;
+#&gt;   .. .. .. ..@ area     : num 9.47
+#&gt;   .. ..$ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. ..@ Polygons :List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots
+#&gt;   .. .. .. .. .. .. ..@ labpt  : num [1:2] 29.7 14.8
+#&gt;   .. .. .. .. .. .. ..@ area   : num 15.7
+#&gt;   .. .. .. .. .. .. ..@ hole   : logi FALSE
+#&gt;   .. .. .. .. .. .. ..@ ringDir: int 1
+#&gt;   .. .. .. .. .. .. ..@ coords : num [1:385, 1:2] 26.9 27.1 27.2 27.5 28.6 ...
+#&gt;   .. .. .. ..@ plotOrder: int 1
+#&gt;   .. .. .. ..@ labpt    : num [1:2] 29.7 14.8
+#&gt;   .. .. .. ..@ ID       : chr &quot;17&quot;
+#&gt;   .. .. .. ..@ area     : num 15.7
+#&gt;   ..@ plotOrder  : int [1:18] 12 3 13 18 11 17 5 16 8 4 ...
+#&gt;   ..@ bbox       : num [1:2, 1:2] 21.81 8.64 38.59 23.14
+#&gt;   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+#&gt;   .. .. ..$ : chr [1:2] &quot;x&quot; &quot;y&quot;
+#&gt;   .. .. ..$ : chr [1:2] &quot;min&quot; &quot;max&quot;
+#&gt;   ..@ proj4string:Formal class &#39;CRS&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. ..@ projargs: chr &quot;+proj=utm +zone=36 +a=6378249.2 +b=6356514.999904194 +units=m +no_defs&quot;</code></pre>
+<p> </p>
+<p>which gives the class of the <strong>shapefile</strong> object and gives us an idea of the data structure as having 5 slots. This is one of the key differences of a <code>sp</code> data frame compared to a standard basic data frame. In a basic data frame, you basically have single data set organised in rows and columns similar to that of a table. In a <code>sp</code> data frame, you can think of it as a compound data frame in which each slot contains a specific dataset.</p>
+<p>As you look further down into the structure of the <strong>shapefile</strong> object, you will notice the <code>@</code> symbol recurring 5 times. This is the symbol used to retrieve the different slots of the <strong>shapefile</strong> objects.</p>
+
+<p>The 5 slots in a <code>SpatialPolygonsDataFrame</code> are:</p>
+<p> </p>
+<table>
+<caption><span id="tab:table2">Table 1.2: </span> SpatialPolygonsDataFrame structure</caption>
+<colgroup>
+<col width="33%" />
+<col width="66%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>data</strong></td>
+<td>Contains the index or reference data frame of the
+<strong>shapefile</strong> the number of rows of which
+indicates the number of polygons that comprise
+the entire <strong>shapefile</strong>.</td>
+</tr>
+<tr class="even">
+<td><strong>polygons</strong></td>
+<td>Contains <em>n</em> number of datasets based on the
+number of <em>polygons</em> that comprise the entire
+<strong>shapefile</strong>.</td>
+</tr>
+<tr class="odd">
+<td><strong>plotOrder</strong></td>
+<td>Contains an integer vector with a length equal to
+the number of <em>polygons</em> that comprise the entire
+<strong>shapefile</strong> and have values starting from 1 to
+<em>n</em> number of <em>polygons</em> in the entire
+<strong>shapefile</strong>. The order of the values of this
+vector determines which <em>polygon</em> is drawn first
+when plotting. This order is determined by
+decreasing area size of the <em>polygons</em>.</td>
+</tr>
+<tr class="even">
+<td><strong>bbox</strong></td>
+<td>Contains a matrix the values of which are the
+minimum and maximum <code>x</code> and <code>y</code> limits of the
+entire <strong>shapefile</strong>.</td>
+</tr>
+<tr class="odd">
+<td><strong>proj4string</strong></td>
+<td>Contains a character string that specifies the
+projection and datum of the <strong>shapefile</strong> object</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>Now let us try to extract the different slots of <code>sudan01</code> object. Making a call for the <code>data</code> slot gives:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb11"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">sudan01<span class="op">@</span>data</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt;                State         Old_state         New_State STATE_1</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; 0        West Darfur       West Darfur       West Darfur    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; 1     Central Darfur       West Darfur    Central Darfur    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; 2       North Darfur      North Darfur      North Darfur    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; 3        East Darfur      South Darfur       East Darfur    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; 4       South Darfur      South Darfur      South Darfur    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; 5          Al Gezira              &lt;NA&gt;              &lt;NA&gt;    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; 6          Blue Nile              &lt;NA&gt;              &lt;NA&gt;    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; 7            Gedaref              &lt;NA&gt;              &lt;NA&gt;    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; 8            Kassala              &lt;NA&gt;              &lt;NA&gt;    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; 9           Khartoum              &lt;NA&gt;              &lt;NA&gt;    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="co">#&gt; 10              Nile              &lt;NA&gt;              &lt;NA&gt;    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt; 11          Northern              &lt;NA&gt;              &lt;NA&gt;    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt; 12           Red Sea              &lt;NA&gt;              &lt;NA&gt;    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt; 13            Sennar              &lt;NA&gt;              &lt;NA&gt;    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt; 14        White Nile              &lt;NA&gt;              &lt;NA&gt;    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt; 15 Southern Kordofan Southern Kordofan Southern Kordofan    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="co">#&gt; 16  Western Kordofan    South Kordofan  Western Kordofan    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-20" data-line-number="20"><span class="co">#&gt; 17 Northern Kordofan Northern Kordofan Northern Kordofan    &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-21" data-line-number="21"><span class="co">#&gt;         STATEAR Source STATE_CODE ISO_CODE</span></a>
+<a class="sourceLine" id="cb11-22" data-line-number="22"><span class="co">#&gt; 0          &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-23" data-line-number="23"><span class="co">#&gt; 1          &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-24" data-line-number="24"><span class="co">#&gt; 2          &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-25" data-line-number="25"><span class="co">#&gt; 3          &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-26" data-line-number="26"><span class="co">#&gt; 4          &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-27" data-line-number="27"><span class="co">#&gt; 5       ÇáÌÒíÑÉ    CBS       SU04    SD-07</span></a>
+<a class="sourceLine" id="cb11-28" data-line-number="28"><span class="co">#&gt; 6  Çáäíá ÇáÇÒÑÞ    CBS       SU02    SD-24</span></a>
+<a class="sourceLine" id="cb11-29" data-line-number="29"><span class="co">#&gt; 7       ÇáÞÖÇÑÝ    CBS       SU05    SD-06</span></a>
+<a class="sourceLine" id="cb11-30" data-line-number="30"><span class="co">#&gt; 8          ßÓáÇ    CBS       SU07    SD-05</span></a>
+<a class="sourceLine" id="cb11-31" data-line-number="31"><span class="co">#&gt; 9       ÇáÎÑØæã    CBS       SU08    SD-03</span></a>
+<a class="sourceLine" id="cb11-32" data-line-number="32"><span class="co">#&gt; 10    äåÑ Çáäíá    CBS       SU10    SD-04</span></a>
+<a class="sourceLine" id="cb11-33" data-line-number="33"><span class="co">#&gt; 11     ÇáÔãÇáíÉ    CBS       SU11    SD-01</span></a>
+<a class="sourceLine" id="cb11-34" data-line-number="34"><span class="co">#&gt; 12 ÇáÈÍÑ ÇáÇÍãÑ    CBS       SU15    SD-26</span></a>
+<a class="sourceLine" id="cb11-35" data-line-number="35"><span class="co">#&gt; 13         ÓäÇÑ    CBS       SU16    SD-25</span></a>
+<a class="sourceLine" id="cb11-36" data-line-number="36"><span class="co">#&gt; 14 Çáäíá ÇáÇÈíÖ    CBS       SU25    SD-08</span></a>
+<a class="sourceLine" id="cb11-37" data-line-number="37"><span class="co">#&gt; 15         &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-38" data-line-number="38"><span class="co">#&gt; 16         &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb11-39" data-line-number="39"><span class="co">#&gt; 17         &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;</span></a></code></pre>
+<p> </p>
+<p>Here we note that the <code>sudan01</code> <strong>shapefile</strong> contains <em>polygons</em> of the each of the states of Sudan with <code>sudan01@data</code> specifying the names of each of these states.</p>
+<p>To check for the number of <em>polygons</em> in <code>sudan01</code> <strong>shapefile</strong> (the answer to which will also be the number of states in Sudan), we can use the <code>nrow()</code> function as follows:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb12"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">nrow</span>(sudan01<span class="op">@</span>data)</a></code></pre>
+
+<p>which gives a result of</p>
+<p> </p>
+<pre><code>#&gt; [1] 18</code></pre>
+<p> </p>
+<p>There are 18 polygons in <code>sudan01</code> <strong>shapefile</strong> which indicate that Sudan has about 18 states (if the <strong>shapefile</strong> used is up-to-date).</p>
+<p>Let us now try extract the <em>polygons</em> slot of <code>sudan01</code>. If we make a call for the <em>polygons</em> slot as below:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb14"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">sudan01<span class="op">@</span>polygons</a></code></pre>
+<p> </p>
+<p>we end up with a very long output which is not easy to review or appreciate. This is understandable because from the previous command extracting the slot data of <code>sudan01</code> we know already that the <em>polygons</em> slot will have 18 sets of <em>polygon</em> <strong>shapefile</strong> data each of which will have it’s own datasets and data structure. This means that the output will be very long and not easy to manage.</p>
+<p>In this instance, a review of the structure of <code>sudan01@polygons</code> may help in getting an insight as to how to handle or manage the datasets contained inside this slot. We call the <code>str()</code> function on <code>sudan01@polygons</code> as follows:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb15"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">str</span>(sudan01<span class="op">@</span>polygons)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; List of 18</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 22.6 13.5</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 1.86</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:981, 1:2] 22.1 22.1 22.1 22.2 22.2 ...</span></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 22.6 13.5</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co">#&gt;   .. ..@ ID       : chr &quot;0&quot;</span></a>
+<a class="sourceLine" id="cb15-14" data-line-number="14"><span class="co">#&gt;   .. ..@ area     : num 1.86</span></a>
+<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-16" data-line-number="16"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-17" data-line-number="17"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-18" data-line-number="18"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 23.4 12.3</span></a>
+<a class="sourceLine" id="cb15-19" data-line-number="19"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 2.75</span></a>
+<a class="sourceLine" id="cb15-20" data-line-number="20"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-21" data-line-number="21"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-22" data-line-number="22"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:463, 1:2] 23.6 23.6 23.6 23.6 23.7 ...</span></a>
+<a class="sourceLine" id="cb15-23" data-line-number="23"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-24" data-line-number="24"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 23.4 12.3</span></a>
+<a class="sourceLine" id="cb15-25" data-line-number="25"><span class="co">#&gt;   .. ..@ ID       : chr &quot;1&quot;</span></a>
+<a class="sourceLine" id="cb15-26" data-line-number="26"><span class="co">#&gt;   .. ..@ area     : num 2.75</span></a>
+<a class="sourceLine" id="cb15-27" data-line-number="27"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-28" data-line-number="28"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-29" data-line-number="29"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-30" data-line-number="30"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 25.6 16.2</span></a>
+<a class="sourceLine" id="cb15-31" data-line-number="31"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 26.7</span></a>
+<a class="sourceLine" id="cb15-32" data-line-number="32"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-33" data-line-number="33"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-34" data-line-number="34"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:669, 1:2] 27.5 27.5 27.2 27.1 26.9 ...</span></a>
+<a class="sourceLine" id="cb15-35" data-line-number="35"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-36" data-line-number="36"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 25.6 16.2</span></a>
+<a class="sourceLine" id="cb15-37" data-line-number="37"><span class="co">#&gt;   .. ..@ ID       : chr &quot;2&quot;</span></a>
+<a class="sourceLine" id="cb15-38" data-line-number="38"><span class="co">#&gt;   .. ..@ area     : num 26.7</span></a>
+<a class="sourceLine" id="cb15-39" data-line-number="39"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-40" data-line-number="40"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-41" data-line-number="41"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-42" data-line-number="42"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 26.5 11</span></a>
+<a class="sourceLine" id="cb15-43" data-line-number="43"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 4.44</span></a>
+<a class="sourceLine" id="cb15-44" data-line-number="44"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-45" data-line-number="45"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-46" data-line-number="46"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:932, 1:2] 25.5 25.6 25.6 25.6 25.6 ...</span></a>
+<a class="sourceLine" id="cb15-47" data-line-number="47"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-48" data-line-number="48"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 26.5 11</span></a>
+<a class="sourceLine" id="cb15-49" data-line-number="49"><span class="co">#&gt;   .. ..@ ID       : chr &quot;3&quot;</span></a>
+<a class="sourceLine" id="cb15-50" data-line-number="50"><span class="co">#&gt;   .. ..@ area     : num 4.44</span></a>
+<a class="sourceLine" id="cb15-51" data-line-number="51"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-52" data-line-number="52"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-53" data-line-number="53"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-54" data-line-number="54"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 24.4 11</span></a>
+<a class="sourceLine" id="cb15-55" data-line-number="55"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 6.91</span></a>
+<a class="sourceLine" id="cb15-56" data-line-number="56"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-57" data-line-number="57"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-58" data-line-number="58"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:1896, 1:2] 24.4 24.4 24.4 24.4 24.4 ...</span></a>
+<a class="sourceLine" id="cb15-59" data-line-number="59"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-60" data-line-number="60"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 24.4 11</span></a>
+<a class="sourceLine" id="cb15-61" data-line-number="61"><span class="co">#&gt;   .. ..@ ID       : chr &quot;4&quot;</span></a>
+<a class="sourceLine" id="cb15-62" data-line-number="62"><span class="co">#&gt;   .. ..@ area     : num 6.91</span></a>
+<a class="sourceLine" id="cb15-63" data-line-number="63"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-64" data-line-number="64"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-65" data-line-number="65"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-66" data-line-number="66"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 33.3 14.6</span></a>
+<a class="sourceLine" id="cb15-67" data-line-number="67"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 2.28</span></a>
+<a class="sourceLine" id="cb15-68" data-line-number="68"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-69" data-line-number="69"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-70" data-line-number="70"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:490, 1:2] 33.6 33.6 33.6 33.6 33.6 ...</span></a>
+<a class="sourceLine" id="cb15-71" data-line-number="71"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-72" data-line-number="72"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 33.3 14.6</span></a>
+<a class="sourceLine" id="cb15-73" data-line-number="73"><span class="co">#&gt;   .. ..@ ID       : chr &quot;5&quot;</span></a>
+<a class="sourceLine" id="cb15-74" data-line-number="74"><span class="co">#&gt;   .. ..@ area     : num 2.28</span></a>
+<a class="sourceLine" id="cb15-75" data-line-number="75"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-76" data-line-number="76"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-77" data-line-number="77"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-78" data-line-number="78"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 34.1 11.3</span></a>
+<a class="sourceLine" id="cb15-79" data-line-number="79"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 3.16</span></a>
+<a class="sourceLine" id="cb15-80" data-line-number="80"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-81" data-line-number="81"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-82" data-line-number="82"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:406, 1:2] 34.5 34.5 34.5 34.5 34.5 ...</span></a>
+<a class="sourceLine" id="cb15-83" data-line-number="83"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-84" data-line-number="84"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 34.1 11.3</span></a>
+<a class="sourceLine" id="cb15-85" data-line-number="85"><span class="co">#&gt;   .. ..@ ID       : chr &quot;6&quot;</span></a>
+<a class="sourceLine" id="cb15-86" data-line-number="86"><span class="co">#&gt;   .. ..@ area     : num 3.16</span></a>
+<a class="sourceLine" id="cb15-87" data-line-number="87"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-88" data-line-number="88"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-89" data-line-number="89"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-90" data-line-number="90"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 35.1 14.2</span></a>
+<a class="sourceLine" id="cb15-91" data-line-number="91"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 4.99</span></a>
+<a class="sourceLine" id="cb15-92" data-line-number="92"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-93" data-line-number="93"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-94" data-line-number="94"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:505, 1:2] 34.2 34.3 34.4 34.4 34.5 ...</span></a>
+<a class="sourceLine" id="cb15-95" data-line-number="95"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-96" data-line-number="96"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 35.1 14.2</span></a>
+<a class="sourceLine" id="cb15-97" data-line-number="97"><span class="co">#&gt;   .. ..@ ID       : chr &quot;7&quot;</span></a>
+<a class="sourceLine" id="cb15-98" data-line-number="98"><span class="co">#&gt;   .. ..@ area     : num 4.99</span></a>
+<a class="sourceLine" id="cb15-99" data-line-number="99"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-100" data-line-number="100"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-101" data-line-number="101"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-102" data-line-number="102"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 35.9 15.8</span></a>
+<a class="sourceLine" id="cb15-103" data-line-number="103"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 4.1</span></a>
+<a class="sourceLine" id="cb15-104" data-line-number="104"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-105" data-line-number="105"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-106" data-line-number="106"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:294, 1:2] 35.7 36 36.1 36.2 36.2 ...</span></a>
+<a class="sourceLine" id="cb15-107" data-line-number="107"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-108" data-line-number="108"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 35.9 15.8</span></a>
+<a class="sourceLine" id="cb15-109" data-line-number="109"><span class="co">#&gt;   .. ..@ ID       : chr &quot;8&quot;</span></a>
+<a class="sourceLine" id="cb15-110" data-line-number="110"><span class="co">#&gt;   .. ..@ area     : num 4.1</span></a>
+<a class="sourceLine" id="cb15-111" data-line-number="111"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-112" data-line-number="112"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-113" data-line-number="113"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-114" data-line-number="114"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 32.8 15.9</span></a>
+<a class="sourceLine" id="cb15-115" data-line-number="115"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 1.79</span></a>
+<a class="sourceLine" id="cb15-116" data-line-number="116"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-117" data-line-number="117"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-118" data-line-number="118"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:198, 1:2] 33.5 33.7 34 34 34 ...</span></a>
+<a class="sourceLine" id="cb15-119" data-line-number="119"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-120" data-line-number="120"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 32.8 15.9</span></a>
+<a class="sourceLine" id="cb15-121" data-line-number="121"><span class="co">#&gt;   .. ..@ ID       : chr &quot;9&quot;</span></a>
+<a class="sourceLine" id="cb15-122" data-line-number="122"><span class="co">#&gt;   .. ..@ area     : num 1.79</span></a>
+<a class="sourceLine" id="cb15-123" data-line-number="123"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-124" data-line-number="124"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-125" data-line-number="125"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-126" data-line-number="126"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 33.5 18.3</span></a>
+<a class="sourceLine" id="cb15-127" data-line-number="127"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 11.1</span></a>
+<a class="sourceLine" id="cb15-128" data-line-number="128"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-129" data-line-number="129"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-130" data-line-number="130"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:226, 1:2] 35.6 35.4 35.4 35.3 35.3 ...</span></a>
+<a class="sourceLine" id="cb15-131" data-line-number="131"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-132" data-line-number="132"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 33.5 18.3</span></a>
+<a class="sourceLine" id="cb15-133" data-line-number="133"><span class="co">#&gt;   .. ..@ ID       : chr &quot;10&quot;</span></a>
+<a class="sourceLine" id="cb15-134" data-line-number="134"><span class="co">#&gt;   .. ..@ area     : num 11.1</span></a>
+<a class="sourceLine" id="cb15-135" data-line-number="135"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-136" data-line-number="136"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-137" data-line-number="137"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-138" data-line-number="138"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 29.3 19.6</span></a>
+<a class="sourceLine" id="cb15-139" data-line-number="139"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 31.4</span></a>
+<a class="sourceLine" id="cb15-140" data-line-number="140"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-141" data-line-number="141"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-142" data-line-number="142"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:117, 1:2] 31.7 32.1 32.1 32.4 32.4 ...</span></a>
+<a class="sourceLine" id="cb15-143" data-line-number="143"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-144" data-line-number="144"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 29.3 19.6</span></a>
+<a class="sourceLine" id="cb15-145" data-line-number="145"><span class="co">#&gt;   .. ..@ ID       : chr &quot;11&quot;</span></a>
+<a class="sourceLine" id="cb15-146" data-line-number="146"><span class="co">#&gt;   .. ..@ area     : num 31.4</span></a>
+<a class="sourceLine" id="cb15-147" data-line-number="147"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-148" data-line-number="148"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-149" data-line-number="149"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-150" data-line-number="150"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 35.7 19.8</span></a>
+<a class="sourceLine" id="cb15-151" data-line-number="151"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 18.6</span></a>
+<a class="sourceLine" id="cb15-152" data-line-number="152"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-153" data-line-number="153"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-154" data-line-number="154"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:2309, 1:2] 37 37 37 37 37 ...</span></a>
+<a class="sourceLine" id="cb15-155" data-line-number="155"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-156" data-line-number="156"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 35.7 19.8</span></a>
+<a class="sourceLine" id="cb15-157" data-line-number="157"><span class="co">#&gt;   .. ..@ ID       : chr &quot;12&quot;</span></a>
+<a class="sourceLine" id="cb15-158" data-line-number="158"><span class="co">#&gt;   .. ..@ area     : num 18.6</span></a>
+<a class="sourceLine" id="cb15-159" data-line-number="159"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-160" data-line-number="160"><span class="co">#&gt;   .. ..@ Polygons :List of 2</span></a>
+<a class="sourceLine" id="cb15-161" data-line-number="161"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-162" data-line-number="162"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 33.2 11.5</span></a>
+<a class="sourceLine" id="cb15-163" data-line-number="163"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 0.00152</span></a>
+<a class="sourceLine" id="cb15-164" data-line-number="164"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-165" data-line-number="165"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-166" data-line-number="166"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:10, 1:2] 33.2 33.2 33.2 33.1 33.1 ...</span></a>
+<a class="sourceLine" id="cb15-167" data-line-number="167"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-168" data-line-number="168"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 34 12.9</span></a>
+<a class="sourceLine" id="cb15-169" data-line-number="169"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 3.27</span></a>
+<a class="sourceLine" id="cb15-170" data-line-number="170"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-171" data-line-number="171"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-172" data-line-number="172"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:545, 1:2] 33.9 33.9 33.9 33.9 33.9 ...</span></a>
+<a class="sourceLine" id="cb15-173" data-line-number="173"><span class="co">#&gt;   .. ..@ plotOrder: int [1:2] 2 1</span></a>
+<a class="sourceLine" id="cb15-174" data-line-number="174"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 34 12.9</span></a>
+<a class="sourceLine" id="cb15-175" data-line-number="175"><span class="co">#&gt;   .. ..@ ID       : chr &quot;13&quot;</span></a>
+<a class="sourceLine" id="cb15-176" data-line-number="176"><span class="co">#&gt;   .. ..@ area     : num 3.27</span></a>
+<a class="sourceLine" id="cb15-177" data-line-number="177"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-178" data-line-number="178"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-179" data-line-number="179"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-180" data-line-number="180"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 32.3 13.4</span></a>
+<a class="sourceLine" id="cb15-181" data-line-number="181"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 3.17</span></a>
+<a class="sourceLine" id="cb15-182" data-line-number="182"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-183" data-line-number="183"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-184" data-line-number="184"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:378, 1:2] 32.5 32.5 32.5 32.5 32.5 ...</span></a>
+<a class="sourceLine" id="cb15-185" data-line-number="185"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-186" data-line-number="186"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 32.3 13.4</span></a>
+<a class="sourceLine" id="cb15-187" data-line-number="187"><span class="co">#&gt;   .. ..@ ID       : chr &quot;14&quot;</span></a>
+<a class="sourceLine" id="cb15-188" data-line-number="188"><span class="co">#&gt;   .. ..@ area     : num 3.17</span></a>
+<a class="sourceLine" id="cb15-189" data-line-number="189"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-190" data-line-number="190"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-191" data-line-number="191"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-192" data-line-number="192"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 30.8 11.3</span></a>
+<a class="sourceLine" id="cb15-193" data-line-number="193"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 6.49</span></a>
+<a class="sourceLine" id="cb15-194" data-line-number="194"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-195" data-line-number="195"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-196" data-line-number="196"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:451, 1:2] 31.7 31.7 31.7 31.7 31.7 ...</span></a>
+<a class="sourceLine" id="cb15-197" data-line-number="197"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-198" data-line-number="198"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 30.8 11.3</span></a>
+<a class="sourceLine" id="cb15-199" data-line-number="199"><span class="co">#&gt;   .. ..@ ID       : chr &quot;15&quot;</span></a>
+<a class="sourceLine" id="cb15-200" data-line-number="200"><span class="co">#&gt;   .. ..@ area     : num 6.49</span></a>
+<a class="sourceLine" id="cb15-201" data-line-number="201"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-202" data-line-number="202"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-203" data-line-number="203"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-204" data-line-number="204"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 28.4 11.8</span></a>
+<a class="sourceLine" id="cb15-205" data-line-number="205"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 9.47</span></a>
+<a class="sourceLine" id="cb15-206" data-line-number="206"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-207" data-line-number="207"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-208" data-line-number="208"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:566, 1:2] 27.5 27.5 27.5 27.5 27.8 ...</span></a>
+<a class="sourceLine" id="cb15-209" data-line-number="209"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-210" data-line-number="210"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 28.4 11.8</span></a>
+<a class="sourceLine" id="cb15-211" data-line-number="211"><span class="co">#&gt;   .. ..@ ID       : chr &quot;16&quot;</span></a>
+<a class="sourceLine" id="cb15-212" data-line-number="212"><span class="co">#&gt;   .. ..@ area     : num 9.47</span></a>
+<a class="sourceLine" id="cb15-213" data-line-number="213"><span class="co">#&gt;  $ :Formal class &#39;Polygons&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-214" data-line-number="214"><span class="co">#&gt;   .. ..@ Polygons :List of 1</span></a>
+<a class="sourceLine" id="cb15-215" data-line-number="215"><span class="co">#&gt;   .. .. ..$ :Formal class &#39;Polygon&#39; [package &quot;sp&quot;] with 5 slots</span></a>
+<a class="sourceLine" id="cb15-216" data-line-number="216"><span class="co">#&gt;   .. .. .. .. ..@ labpt  : num [1:2] 29.7 14.8</span></a>
+<a class="sourceLine" id="cb15-217" data-line-number="217"><span class="co">#&gt;   .. .. .. .. ..@ area   : num 15.7</span></a>
+<a class="sourceLine" id="cb15-218" data-line-number="218"><span class="co">#&gt;   .. .. .. .. ..@ hole   : logi FALSE</span></a>
+<a class="sourceLine" id="cb15-219" data-line-number="219"><span class="co">#&gt;   .. .. .. .. ..@ ringDir: int 1</span></a>
+<a class="sourceLine" id="cb15-220" data-line-number="220"><span class="co">#&gt;   .. .. .. .. ..@ coords : num [1:385, 1:2] 26.9 27.1 27.2 27.5 28.6 ...</span></a>
+<a class="sourceLine" id="cb15-221" data-line-number="221"><span class="co">#&gt;   .. ..@ plotOrder: int 1</span></a>
+<a class="sourceLine" id="cb15-222" data-line-number="222"><span class="co">#&gt;   .. ..@ labpt    : num [1:2] 29.7 14.8</span></a>
+<a class="sourceLine" id="cb15-223" data-line-number="223"><span class="co">#&gt;   .. ..@ ID       : chr &quot;17&quot;</span></a>
+<a class="sourceLine" id="cb15-224" data-line-number="224"><span class="co">#&gt;   .. ..@ area     : num 15.7</span></a></code></pre>
+<p> </p>
+<p>The first thing we learn from the output of this command is that the <code>sudan01@polygons</code> is a list with a length of 18.</p>
+<p>In this case, we can then use our knowledge of the class list to our advantage to be able to handle <code>sudan01@polygons</code>.</p>
+<p>Lists are convenient class or mode of data because they can accommodate multiple objects within them and these objects don’t have to be of the same mode / class or length. Lists are of single dimension each of which refer to a object or dataset that has been included into the list.</p>
+<p>This means that we can use <strong>R</strong>’s powerful subscripting (sometimes referred to as indexing) capabilities to access specific components of <code>sudan01@polygons</code>. We can try this by running the following command:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb16"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">sudan01<span class="op">@</span>polygons[<span class="dv">1</span>]</a></code></pre>
+<p> </p>
+<p>In this command we are instructing <strong>R</strong> to give us the first element / component in the list <code>sudan01@polygons</code>. This gives us the dataset and hints on the structure of the first <em>polygon</em> in the list of 18 <em>polygons</em> of <code>sudan01</code> <strong>shapefile</strong> (see below).</p>
+<p> </p>
+<p> </p>
+<p>If we want to view the dataset for the 11th <em>polygon</em> in the list, we use:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb17"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">sudan01<span class="op">@</span>polygons[<span class="dv">11</span>]</a></code></pre>
+<p> </p>
+<p>If we want to view the dataset for the 6th and 7th <em>polygon</em> in the list, we use:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb18"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">sudan01<span class="op">@</span>polygons[<span class="dv">6</span><span class="op">:</span><span class="dv">7</span>]</a></code></pre>
+<p> </p>
+<p>or</p>
+<p> </p>
+<pre class="sourceCode r" id="cb19"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">sudan01<span class="op">@</span>polygons[<span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">7</span>)]</a></code></pre>
+<p> </p>
+<p>If we want to view the dataset for the 3rd and the 16th <em>polygon</em> on the list, we use:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb20"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">sudan01<span class="op">@</span>polygons[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">16</span>)]</a></code></pre>
+<p> </p>
+<p>Let us now try to extract the <code>plotOrder</code> slot of <code>sudan01</code> <strong>shapefile</strong>. We make a call as follows:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb21"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">sudan01<span class="op">@</span>plotOrder</a></code></pre>
+<p> </p>
+<p>which gives this result:</p>
+<p> </p>
+<pre><code>#&gt;  [1] 12  3 13 18 11 17  5 16  8  4  9 14 15  7  2  6  1 10</code></pre>
+<p> </p>
+<p>The output is a numeric vector of length 18. The values in the vector represent the <em>polygon</em> that gets plotted first. In this case, the 13th <em>polygon</em> is the first to be plotted and the 1st <em>polygon</em> will be the last to be plotted.</p>
+<p>The <code>plotOrder</code> slot is linked or related to the area slot of each of the <em>polygon</em> found in the dataset for each of the <em>polygons</em> in <code>sudan01</code> object. The <em>polygon</em> with the biggest area gets plotted first and the one with the smallest area gets plotted last.</p>
+<p>Given this, it would be a good exercise of our newly learned skills of handling and manipulating mapping data to try to create a dataframe that combines the <code>sudan01@plotOrder</code> vector with the corresponding area size of each <em>polygon</em> referred to in the plotting order. This is a good way of checking whether indeed the plotting order of <em>polygons</em> is based on decreasing area size. We do this by:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb23"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">areaAll &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">    </a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(sudan01)) {</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">  area &lt;-<span class="st"> </span>sudan01<span class="op">@</span>polygons[sudan01<span class="op">@</span>plotOrder][[i]]<span class="op">@</span>Polygons[[<span class="dv">1</span>]]<span class="op">@</span>area</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">  areaAll &lt;-<span class="st"> </span><span class="kw">c</span>(areaAll, area)</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8">orderByArea &lt;-<span class="st"> </span><span class="kw">data.frame</span>(sudan01<span class="op">@</span>plotOrder, areaAll)</a></code></pre>
+<p> </p>
+<p>The result of this is:</p>
+<p> </p>
+<pre><code>#&gt;    sudan01.plotOrder   areaAll
+#&gt; 1                 12 31.366210
+#&gt; 2                  3 26.736778
+#&gt; 3                 13 18.573504
+#&gt; 4                 18 15.716028
+#&gt; 5                 11 11.146239
+#&gt; 6                 17  9.469990
+#&gt; 7                  5  6.905019
+#&gt; 8                 16  6.491091
+#&gt; 9                  8  4.985051
+#&gt; 10                 4  4.436722
+#&gt; 11                 9  4.102905
+#&gt; 12                14  0.001525
+#&gt; 13                15  3.169614
+#&gt; 14                 7  3.160318
+#&gt; 15                 2  2.745432
+#&gt; 16                 6  2.277623
+#&gt; 17                 1  1.859501
+#&gt; 18                10  1.790615</code></pre>
+<p> </p>
+<p>Let us now take a look at the <code>bbox</code> slot of <code>sudan01</code>. We make a call as follows:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb25"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">sudan01<span class="op">@</span>bbox</a></code></pre>
+<p> </p>
+<p>This gives the following results:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb26"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">sudan01<span class="op">@</span>bbox</a></code></pre>
+<p> </p>
+<p>This is basically telling us that the <strong>shapefile</strong> has a minimum <code>x</code> coordinate value of 21.8131148 and a maximum <code>x</code> coordinate value of 38.5909212. For the <code>y</code> coordinates, the <strong>shapefile</strong> has a minimum of 8.6411405 and a maximum of 23.1428919.</p>
+<p>Another way of getting the minimum and maximum <code>x</code> and <code>y</code> coordinates of a <strong>shapefile</strong> is by using the <code>bbox()</code> function. It can be used as follows:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb27"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">sudan01Limits &lt;-<span class="st"> </span><span class="kw">bbox</span>(sudan01)</a></code></pre>
+<p> </p>
+<p>The object <code>sudan01Limits</code> is equivalent to <code>sudan01@bbox</code>.</p>
+<p>This minimum and maximum <code>x</code> and <code>y</code> coordinates is for the entire <strong>shapefile</strong>.</p>
+<p>Finally, let us take a look at the <code>proj4string</code> slot of <code>sudan01</code>. This can be retrieved by calling the following:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb28"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">sudan01<span class="op">@</span>proj4string</a></code></pre>
+<p> </p>
+<p>The result of this command is:</p>
+<pre class="sourceCode r" id="cb29"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">sudan01<span class="op">@</span>proj4string</a></code></pre>
+<p>This indicates that the projection of the <strong>shapefile</strong> is longitude and latitude based on <strong>datum WGS84</strong>.</p>
+<p>Another way of getting the projection is by using the <code>proj4string()</code> function as follows:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb30"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">proj4string</span>(sudan01)</a></code></pre>
+<p> </p>
+<p>This gives the same result but with a slightly different format.</p>
+<p> </p>
+<pre><code>#&gt; [1] &quot;+proj=utm +zone=36 +a=6378249.2 +b=6356514.999904194 +units=m +no_defs&quot;</code></pre>
 
 </div>
             </section>
