@@ -1,1 +1,419 @@
 # Plotting maps {#exercise2}
+
+In this exercise, we will learn how to plot maps using your existing knowledge of basic plotting functions and new lessons on additional plotting functions specific to maps.
+
+By now you would be familiar already with the `plot()` function which is the most basic of plotting functions. For maps, we use `plot()` in the same way as we would for other datasets. The main difference is that the methods used in the plotting functions for **shapefiles** are set by the `sp` package and is optimised for mapping purposes.
+
+Therefore, plotting maps is as easy as calling the `plot()` function and passing the `spatial` object to it as shown below. 
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+plot(sudan01)
+```
+
+\newpage
+
+This produces the following map:
+
+&nbsp;
+
+```{r map1, echo = FALSE, eval = TRUE, fig.cap = "Map of the states of Sudan with default plotting options", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+plot(sudan01)
+```
+
+&nbsp;
+
+From this plot of `sudan01` `SpatialPolygonsDataFrame` object, we learn about some of the default plotting parameters under the `sp` package. *Line type* (`lty`) is set as a solid line (`lty = 1`) and *line width* (`lwd`) is set at `lwd = 1`. *Border colour* (`border`) is set as `border = black` while the *fill colour* (`col`) is set at `col = NA`. We should remember that the class of `sudan01` object is a `SpatialPolygonsDataFrame` hence it is composed of closed rings that are not holes (i.e. empty). Hence, in the plotting parameters, border and fill colours are specified separately.
+
+Let us now try to plot another map of `sudan01` object but this time change some of the default plotting parameters.
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+plot(sudan01, lty = 1, lwd = 2, border = "blue", col = "gray90")
+```
+
+&nbsp;
+
+This command gives us the following map of Sudan:
+
+&nbsp;
+
+```{r map2, echo = FALSE, eval = TRUE, fig.cap = "Map of the states of Sudan with new plotting parameters", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+plot(sudan01, lty = 1, lwd = 2, border = "blue", col = "gray90")
+```
+
+&nbsp;
+
+The map above illustrates the changes in the plot created by the changes in the plotting parameters that we have specified. The width of the border is now thicker and its colour is now blue. The inside of the map is now coloured gray.
+
+So far we have focused a lot on `sudan01` object. Hence we have learned a lot about the features, structure and characteristics of a **polygon** and a `SpatialPolygonsDataFrame` that contains **polygons** of each of the states of Sudan. However, we have yet to work with another `SpatialPolygonsDataFrame` object named `sudan02` which is a collection of **polygons** for each of the localities in Sudan.
+
+What we will try to learn now is how to work with the `sudan01` and `sudan02` objects to create a map of Sudan that shows the different localities and also shows how these localities are grouped in order to make up each of the states in Sudan.
+
+To be able to complete this task, we need to learn about *map layers*.
+
+The idea of *map layers* is that different set of map features (i.e. roads, topography, watery systems) that usually have separate **shapefile** datasets are put together in a single map by plotting each of these features on top of each other in layers. Depending on the type and class of the **shapefile** objects being layered, the order by which a feature is layered on to another determines which features of which layer is visible or given emphasis.
+
+Let us now try to layer `sudan01` and `sudan02` objects such that the base map is that of the localities and on top is that of the state boundaries. The final map will then show divisions by state and then further subdivisions per state by localities. We call the following commands to produce the map below:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+#
+# Plot localities of Sudan
+#
+plot(sudan02, border = "gray")
+#
+# Plot states of Sudan
+#
+plot(sudan01, lwd = 2, add = TRUE)
+```
+
+\newpage
+
+This produces the following map.
+
+&nbsp;
+
+```{r map3, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+plot(sudan02, border = "gray")
+plot(sudan01, lwd = 2, add = TRUE)
+```
+
+&nbsp;
+
+Now, let us learn how to add layers of other **shapefile** types/classes onto the base Sudan maps.
+
+Earlier in Exercise \@ref(exercise1), we have retrieved the dataset for the grid used in the Sudan S3M I and assigned it to the object `grid12poly` and `grid12kmSudan`. The difference between these two objects is that the first one is a `SpatialPolygonsDataFrame` while the second is a `SpatialLinesDataFrame`.
+
+We will focus our attention to `grid12kmSudan` to familiarise ourselves with the `SpatialLinesDataFrame` class objects. Let us look at the structure of a `SpatialLinesDataFrame`.
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+str(grid12kmSudan)
+```
+
+&nbsp;
+
+The results of this command is as expected quite long. But looking at the first line of the output, we learn that `grid12kmSudan` has 4 slots.
+
+&nbsp;
+
+```{r, echo = FALSE, eval = TRUE}
+str(grid12kmSudan)
+```
+
+\newpage
+
+The 4 slots in a `SpatialLinesDataFrame` are:
+
+&nbsp;
+
+Table: (\#tab:table3) SpatialLinesDataFrame structure
+
++-------------------------+--------------------------------------------------+
+| **data**                | Contains the index or reference data frame of the| 
+|                         | **shapefile** the number of rows of which        |
+|                         | indicates the number of *lines* that comprise the|
+|                         | entire **shapefile**                             |
++-------------------------+--------------------------------------------------+
+| **lines**               | Contains *n* number of datasets based on the     |
+|                         | number of *lines* that comprise the entire       |
+|                         | **shapefile**.                                   |
++-------------------------+--------------------------------------------------+
+| **bbox**                | Contains a matrix the values of which are the    |
+|                         | minimum and maximum `x` and `y` limits of the    |
+|                         | entire **shapefile**.                            |
++-------------------------+--------------------------------------------------+
+| **proj4string**         | Contains a character string that specifies the   |
+|                         | projection and datum of the **shapefile** object |
++-------------------------+--------------------------------------------------+
+
+&nbsp;
+
+Compared to the `SpatialPolygonsDataFrame`, `grid12kmSudan` has a slot for *lines* (as expected) but doesn't have the `plotOrder` slot. If we look back at what we've learned regarding `plotOrder`, it is understandable why this is not included in a `SpatialLinesDataFrame` object. The `plotOrder` is determined by the area of the shapes in the object. However, `SpatialLinesDataFrame` objects does not have a value for area because it is just composed of *lines*, not *polygons*.
+
+A closer look at the slot `grid12kmSudan@lines`, we notice that the data structure is much simpler than that of *polygons*. Each *line* is simply defined by a set of 2 points.
+
+Let us now add the `grid12kmSudan` object as another *layer* on our map. We should put it on top of `sudan02` and `sudan01` with a thin *line width* (`< 1`) and a light colour. Here is the command that will produce this.
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+plot(sudan02, border = "gray")
+plot(sudan01, lwd = 2, add = TRUE)
+plot(grid12kmSudan, lwd = 0.5, col = "gray90", add = TRUE)
+```
+
+\newpage
+
+This command produces the following map:
+
+&nbsp;
+
+```{r map4, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan with rectangular grid", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+plot(sudan02, border = "gray")
+plot(sudan01, lwd = 2, add = TRUE)
+plot(grid12kmSudan, lwd = 0.5, col = "gray90", add = TRUE)
+```
+
+&nbsp;
+
+Now let us learn about points data.
+
+Earlier, we have created an object called `villages`. This object contains village data for the whole of Sudan with their `x` and `y` geographical coordinates.
+
+If we check the class of the object `villages`
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+class(villages)
+```
+
+\newpage
+
+we find out that this object is a data.frame and not an sp class object.
+
+&nbsp;
+
+```{r, echo = FALSE, eval = TRUE}
+class(villages)
+```
+
+&nbsp;
+
+However, this object is still map data because it contains geographic information which in this case is the `x` and `y` coordinates of the villages of Sudan.
+
+This is the only information we need to be able to plot points data on the map. We can do this by calling the following commands:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+plot(sudan02, border = "gray")
+plot(sudan01, lwd = 2, add = TRUE)
+plot(grid12kmSudan, lwd = 0.5, col = "gray90", add = TRUE)
+points(villages$X, villages$Y, pch = 20, cex = 0.2, col = "gray90")
+```
+
+\newpage
+
+This produces the following map.
+
+&nbsp;
+
+```{r map5, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan with rectangular grid and villages", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+plot(sudan02, border = "gray")
+plot(sudan01, lwd = 2, add = TRUE)
+plot(grid12kmSudan, lwd = 0.5, col = "gray90", add = TRUE)
+points(villages$X, villages$Y, pch = 20, cex = 0.2, col = "gray90")
+```
+
+&nbsp;
+
+In the commands above, we learn a new function called `points()` and some new graphical parameters that are useful in plotting *points*.
+
+The `points()` function basically instructs **R** to plot a series of *points* given the specified coordinates. The kind of character that is drawn to represent the *point* is determined by the parameter called `pch` (*point character*) with default being a hollow circle.
+
+\newpage
+
+The most commonly used point characters are specified by the following numeric values:
+
+&nbsp;
+
+```{r, echo = FALSE, eval = TRUE, fig.align = "center", fig.pos = "H", out.width = "90%"}
+include_graphics(path = "figures/pch.png")
+```
+
+&nbsp;
+
+In this case, we used `pch = 20` which is a solid point that is 2/3 the size of `pch = 19`.
+
+The other graphical parameter that we learn here is `cex` (*character expansion*) which determines the size of the point character and has a default value of `cex = 1`.
+
+By now you would have noticed that when we used the `points()` function, we didn't have to add an argument to add the points on to the current graphical device. By default, the `points()` function will draw the points on to the current graphical device. In fact, `points()` will give an error message and will not plot anything if there is no open graphical device as you see below.
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+points(villages$X, villages$Y, pch = 20, cex = 0.2, col = "gray90")
+```
+
+&nbsp;
+
+Let us now learn how to add other map components onto the current map. These may include
+
+&nbsp;
+
+Table: (\#tab:table4) Other layers that can be added to maps
+
++-------------------------+--------------------------------------------------+
+| **labels**              | Either a numeric or character identifier that    |
+|                         | names the different features on the map          |
++-------------------------+--------------------------------------------------+
+| **legend**              | Guide to what the shapes and symbols on the map  |
+|                         | refer to or mean                                 |
++-------------------------+--------------------------------------------------+
+| **scale**               | The scale of a map is the ratio of a distance on |
+|                         | the map to the corresponding distance on the     |
+|                         | ground.                                          |
++-------------------------+--------------------------------------------------+
+| **compass**             | Indicates where the north, east, west and south  | 
+|                         | directions are on the map                        |
++-------------------------+--------------------------------------------------+
+
+&nbsp;
+
+First, let us try adding labels to our map.
+
+For `sudan01` object which contains a map of Sudan divided into states, we would like to be able to label each state accordingly. We would like this label to be placed at the centre of each state polygon as this is based on standard mapping conventions. To do this, we will use two functions that we have not learned yet. These are `coordinates()` and `text()`.
+
+The `coordinates()` function is a function made available in the `sp` package. This function returns the centroid of the **polygon** or **polygons** in a map object. The `coordinates()` function returns a matrix containing the `x` and `y` coordinates of the centroid of the **polygons** in the map object. If there is only 1 **polygon** in the map object, then the resulting matrix is a single row.
+
+The `text()` function on the other hand adds text into the current plotting device based on a specific `x` and `y` coordinates which for the purpose of labelling will be the centroid provided by the `coordinates()` function.
+
+Additional parameters required for `text()` are the labels which is a character vector specifying the text to be written. In this case, we need the names of the states. We can easily get this from the data slot in `sudan01`. We use the parameter `pos` to specify where and how far the text will be written in relation to the `x` and `y` coordinates specified. The `pos` parameter can take values of `1`, `2`, `3`, or `4` which places the text at the *bottom*, *left*, *top* or *right* of the centroid respectively. The `offset` parameter determines how far from the centroid the text will be written. The `cex` parameter sets the size of the text to be written.
+
+We apply this function to label the states by giving the following commands:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+sudan01Centroids <- coordinates(sudan01)
+plot(sudan01)
+text(x = sudan01Centroids[ , 1], 
+     y = sudan01Centroids[ , 2], 
+     labels = sudan01@data$State, 
+     pos = 3, 
+     offset = 0.2, 
+     cex = 0.65)
+```
+
+\newpage
+
+This results in the following map:
+
+&nbsp;
+
+```{r map6, echo = FALSE, eval = TRUE, fig.cap = "Map of states of Sudan with labels", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+sudan01Centroids <- coordinates(sudan01)
+plot(sudan01)
+text(x = sudan01Centroids[ , 1], 
+     y = sudan01Centroids[ , 2], 
+     labels = sudan01@data$State, 
+     pos = 3, 
+     offset = 0.2, 
+     cex = 0.65)
+```
+
+\newpage
+
+Now we shall add a *legend* on the map.
+
+We use the `legend()` function for this. Following are the commands to create a *legend* for the map of `sudan01`, `sudan02` and `villages`.
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+plot(sudan02, border = "gray")
+plot(sudan01, lwd = 2, add = TRUE)
+points(villages$X, 
+       villages$Y, 
+       pch = 20, 
+       cex = 0.2, 
+       col = "gray90")
+legend("topleft",
+       y.intersp = 1.2,
+       legend = c("state borders", "locality borders", "villages"),
+       lty = c(1, 1, NA),
+       lwd = c(2, 1, NA),
+       pch = c(NA, NA, 20),
+       col = c("black", "gray", "gray90"),
+       cex = 0.65,
+       pt.cex = 1,
+       bty = "o",
+       bg = "white")
+```
+
+\newpage
+
+This produces the following map:
+
+&nbsp;
+
+```{r map7, echo = FALSE, eval = TRUE, fig.cap = "Map of localities, states and villages of Sudan with labels and legend", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+plot(sudan02, border = "gray")
+plot(sudan01, lwd = 2, add = TRUE)
+points(villages$X, 
+       villages$Y, 
+       pch = 20, 
+       cex = 0.2, 
+       col = "gray90")
+legend("topleft",
+       y.intersp = 1.2,
+       legend = c("state borders", "locality borders", "villages"),
+       lty = c(1, 1, NA),
+       lwd = c(2, 1, NA),
+       pch = c(NA, NA, 20),
+       col = c("black", "gray", "gray90"),
+       cex = 0.65,
+       pt.cex = 1,
+       bty = "o",
+       bg = "white")
+```
+
+\newpage
+
+Lastly, we add a *scale* to our map.
+
+We use the `map.scale()` function for this. We need to install and load the library `maps` to use this function. We add the scale on the map through the following commands:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+plot(sudan02, border = "gray")
+plot(sudan01, lwd = 2, add = TRUE)
+points(villages$X, villages$Y, pch = 20, cex = 0.2, col = "gray90")
+legend("topleft",
+       y.intersp = 1.2,
+       legend = c("state borders", "locality borders", "villages"),
+       lty = c(1, 1, NA),
+       lwd = c(2, 1, NA),
+       pch = c(NA, NA, 20),
+       col = c("black", "gray", "gray90"),
+       cex = 0.65,
+       pt.cex = 1,
+       bty = "o",
+       bg = "white")
+map.scale(x = bbox(sudan01)[1,], 
+          y = bbox(sudan01)[2,],
+          ratio = TRUE, 
+          cex = 0.65)
+```
+
+\newpage
+
+This produces the following map:
+
+&nbsp;
+
+```{r map8, echo = FALSE, eval = TRUE, fig.cap = "Map of localities, states and villages of Sudan with labels, legend and scale", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+plot(sudan02, border = "gray")
+plot(sudan01, lwd = 2, add = TRUE)
+points(villages$X, villages$Y, pch = 20, cex = 0.2, col = "gray90")
+legend("topleft",
+       y.intersp = 1.2,
+       legend = c("state borders", "locality borders", "villages"),
+       lty = c(1, 1, NA),
+       lwd = c(2, 1, NA),
+       pch = c(NA, NA, 20),
+       col = c("black", "gray", "gray90"),
+       cex = 0.65,
+       pt.cex = 1,
+       bty = "o",
+       bg = "white")
+map.scale(ratio = TRUE, cex = 0.65)
+```
