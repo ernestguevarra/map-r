@@ -24,6 +24,8 @@ sudanCol <- createPalette(18)
 
 What this command uses the `colorRampPalette()` function to create a colour palette of 18 unique colours (one for each state). These colours were generated from a base set of 9 colours which in turn was chosen using a qualitative colour scheme from ColorBrewer 2.0 (see http://www.colorbrewer2.org).
 
+\newpage
+
 Once we have a colour palette to use, we now plot the map and use the colour palette to specify the parameter col. This is done as follows:
 
 &nbsp;
@@ -37,7 +39,7 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 0.2)
+     cex = 1)
 ```
 
 \newpage
@@ -55,10 +57,10 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 0.2)
+     cex = 1)
 ```
 
-&nbsp;
+\newpage
 
 Now, let us try to specify a colour to just a handful of the states while the others remain without colour. This is particularly useful when you just want to highlight specific states in the map for presentation purpose or for emphasis.
 
@@ -80,10 +82,10 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 0.5)
+     cex = 1)
 ```
 
-&nbsp;
+\newpage
 
 The resulting map is:
 
@@ -103,7 +105,7 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 0.5)
+     cex = 1)
 ```
  
 &nbsp;
@@ -111,6 +113,8 @@ text(x = coordinates(sudan01)[,1],
 There are practical uses for knowing how to manipulate map data so as to change the colour of the components polygons either based on a qualitative criteria (such as different colours for each state to distinguish them from each other) or on numerical data (such as in creating a choropleth map).
 
 The following example of simulated CMAM coverage results per state illustrates this usefullness.
+
+\newpage
 
 We first simulate the data as follows:
 
@@ -154,16 +158,16 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 0.5)
+     cex = 1)
 ```
 
-&nbsp;
+\newpage
 
 This results in the following map:
 
 &nbsp;
 
-```{r map11, echo = FALSE, eval = TRUE}
+```{r map11, echo = FALSE, eval = TRUE, fig.cap = "Sample coverage map", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
 plot(sudan01, lty = 0, col = mapPalette[exData$coverage])
 plot(sudan02, lwd = 0.5, lty = 3, border = "gray", add = TRUE)
 plot(sudan01, lwd = 1, add = TRUE)
@@ -172,7 +176,7 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 0.5)
+     cex = 1)
 ```
 
 &nbsp;
@@ -188,7 +192,7 @@ nDarfur <- subset(sudan01, sudan01@data$State == "North Darfur")
 plot(nDarfur)
 ```
 
-&nbsp;
+\newpage
 
 To produce the following:
 
@@ -199,7 +203,7 @@ nDarfur <- subset(sudan01, sudan01@data$State == "North Darfur")
 plot(nDarfur)
 ```
 
-&nbsp;
+\newpage
 
 However, this map will look better if we can also show the nearby states and their boundaries. We can do this by plotting `sudan01` but this time specifying a `xlim` and `ylim` parameters using the `bbox()` of the map object for North Darfur. The following commands illustrate this:
 
@@ -219,7 +223,7 @@ plot(nDarfur,
      add = TRUE)
 ```
 
-&nbsp;
+\newpage
 
 The resulting map is:
 
@@ -270,7 +274,7 @@ for(i in 1:nrow(sudan01@data)) {
 }
 ```
 
-&nbsp;
+\newpage
 
 The commands above will create a plot of the individual state maps on separate graphics device which can be saved one by one. An example of the maps is below.
 
@@ -290,7 +294,7 @@ points(villages$X, villages$Y, pch = 20, cex = 0.3, col = "gray90")
 title(main = "Al Gezira State", cex = 2)
 ```
 
-&nbsp;
+\newpage
 
 The other approach is to plot each of the individual state map on the same graphics device. This can be done using the following commands:
 
