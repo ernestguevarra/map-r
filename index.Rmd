@@ -20,7 +20,6 @@ urlcolor: blue
 fontsize: 12pt
 lof: TRUE
 lot: TRUE
-#always_allow_html: yes
 url: https\://validmeasures.org/map-r
 cover-image: figures/sudanMapTriSim.png
 description: "Mapping with R"
@@ -67,4 +66,6 @@ tab1 <- data.frame(col1, col2, col3)
 
 # Short course on the use of R for the mapping requirements of S3M {-}
 
-![](figures/sudanMapTriSim.png)
+```{r, echo = FALSE, eval = TRUE, fig.align = "center", fig.retina = 1}
+include_graphics(path = "figures/sudanMapTriSim.png")
+```
