@@ -1,1 +1,365 @@
 # Manipulating shapefile data {#exercise3}
+
+In this exercise, we will use what we have learned about the structure and features of shapefile data in manipulating the data and creating new map objects.
+
+By now you would have noticed that sudan01 and sudan02 shapefile objects contain data for the whole of Sudan. This is useful for creating maps for the whole country. However, there are times when we would like to create maps of the specific states only or assign colours for certain states differently rather than a single colour for all states.
+
+To do these maps does not require new shapefiles for each of the state. All this needs is some manipulation of the full country map dataset. This is possible because the data structure of shapefiles contains all the data required to map all the features of the overall map separately.
+
+First, let us try to create a map of sudan01 and sudan02 with the states and the localities coloured differently from each other.
+
+A colour palette should be created which would provide colours for each of the states. This can be done using the following commands:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = TRUE}
+createPalette <- colorRampPalette(colors = c("#FBB4AE", "#B3CDE3", "#CCEBC5", 
+                                             "#DECBE4", "#FED9A6", "#FFFFCC", 
+                                             "#E5D8BD", "#FDDAEC", "#F2F2F2"), 
+                                  space = "Lab")
+sudanCol <- createPalette(18)
+```
+
+&nbsp;
+
+What this command uses the `colorRampPalette()` function to create a colour palette of 18 unique colours (one for each state). These colours were generated from a base set of 9 colours which in turn was chosen using a qualitative colour scheme from ColorBrewer 2.0 (see http://www.colorbrewer2.org).
+
+Once we have a colour palette to use, we now plot the map and use the colour palette to specify the parameter col. This is done as follows:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+plot(sudan01, border = sudanCol, col = sudanCol)
+plot(sudan02, lwd = 0.5, lty = 3, border = "gray", add = TRUE)
+plot(sudan01, lwd = 1, border = "gray", add = TRUE)
+text(x = coordinates(sudan01)[,1], 
+     y = coordinates(sudan01)[,2],
+     labels = sudan01@data$State, 
+     pos = 3, 
+     offset = 0.2, 
+     cex = 0.2)
+```
+
+\newpage
+
+The resulting map is:
+
+&nbsp;
+
+```{r map9, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan coloured ", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+plot(sudan01, border = sudanCol, col = sudanCol)
+plot(sudan02, lwd = 0.5, lty = 3, border = "gray", add = TRUE)
+plot(sudan01, lwd = 1, border = "gray", add = TRUE)
+text(x = coordinates(sudan01)[,1], 
+     y = coordinates(sudan01)[,2],
+     labels = sudan01@data$State, 
+     pos = 3, 
+     offset = 0.2, 
+     cex = 0.2)
+```
+
+&nbsp;
+
+Now, let us try to specify a colour to just a handful of the states while the others remain without colour. This is particularly useful when you just want to highlight specific states in the map for presentation purpose or for emphasis.
+
+For this map, we will need to use the sudan01@data slot to steer our selection of the states of interest which we can then specify a colour for. For example, if we want to show the full Sudan map and Gedaref, Northern and Western Kordofan coloured light green, we call the following commands:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+plot(sudan01, 
+     lty = 0, 
+     col = ifelse(sudan01@data$State %in% c("Gedaref", 
+                                            "Northern", 
+                                            "Western Kordofan"), 
+                  "lightgreen", NA))
+plot(sudan02, lwd = 0.5, lty = 3, border = "gray", add = TRUE)
+plot(sudan01, lwd = 1, add = TRUE)
+text(x = coordinates(sudan01)[,1], 
+     y = coordinates(sudan01)[,2], 
+     labels = sudan01@data$State, 
+     pos = 3, 
+     offset = 0.2, 
+     cex = 0.5)
+```
+
+&nbsp;
+
+The resulting map is:
+
+&nbsp;
+
+```{r map10, echo = FALSE, eval = TRUE, fig.cap = "Map of specific states of Sudan coloured", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+plot(sudan01, 
+     lty = 0, 
+     col = ifelse(sudan01@data$State %in% c("Gedaref", 
+                                            "Northern", 
+                                            "Western Kordofan"), 
+                  "lightgreen", NA))
+plot(sudan02, lwd = 0.5, lty = 3, border = "gray", add = TRUE)
+plot(sudan01, lwd = 1, add = TRUE)
+text(x = coordinates(sudan01)[,1], 
+     y = coordinates(sudan01)[,2], 
+     labels = sudan01@data$State, 
+     pos = 3, 
+     offset = 0.2, 
+     cex = 0.5)
+```
+ 
+&nbsp;
+
+There are practical uses for knowing how to manipulate map data so as to change the colour of the components polygons either based on a qualitative criteria (such as different colours for each state to distinguish them from each other) or on numerical data (such as in creating a choropleth map).
+
+The following example of simulated CMAM coverage results per state illustrates this usefullness.
+
+We first simulate the data as follows:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = TRUE}
+states   <- as.vector(sudan01@data$State)
+coverage <- c(95, 56, 73, 55, 19, 97, 
+              60, 2, 46, 31, 70, 23, 
+              71, 66, 38, 78, 74, 51)
+
+exData <- data.frame(states, coverage)
+names(exData) <- c("states", "coverage") 
+```
+
+&nbsp;
+
+The `exData` object gives us the simulated of CMAM coverage by state. Then we specify a colour palette as follows:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = TRUE}
+createMapPalette <- colorRampPalette(colors = c("white", "lightgreen", 
+                                                "green", "darkgreen"), 
+                                     space = "Lab")
+mapPalette <- createMapPalette(101)
+```
+
+&nbsp;
+
+We now can map this data using the folowing commands:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+plot(sudan01, lty = 0, col = mapPalette[exData$coverage])
+plot(sudan02, lwd = 0.5, lty = 3, border = "gray", add = TRUE)
+plot(sudan01, lwd = 1, add = TRUE)
+text(x = coordinates(sudan01)[,1], 
+     y = coordinates(sudan01)[,2], 
+     labels = sudan01@data$State, 
+     pos = 3, 
+     offset = 0.2, 
+     cex = 0.5)
+```
+
+&nbsp;
+
+This results in the following map:
+
+&nbsp;
+
+```{r map11, echo = FALSE, eval = TRUE}
+plot(sudan01, lty = 0, col = mapPalette[exData$coverage])
+plot(sudan02, lwd = 0.5, lty = 3, border = "gray", add = TRUE)
+plot(sudan01, lwd = 1, add = TRUE)
+text(x = coordinates(sudan01)[,1], 
+     y = coordinates(sudan01)[,2], 
+     labels = sudan01@data$State, 
+     pos = 3, 
+     offset = 0.2, 
+     cex = 0.5)
+```
+
+&nbsp;
+
+Finally, we learn how to create maps for each state separately using the `sudan01` map dataset.
+
+To begin with, let's try to create and map a map dataset for North Darfur. We call the following commands:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+nDarfur <- subset(sudan01, sudan01@data$State == "North Darfur")
+plot(nDarfur)
+```
+
+&nbsp;
+
+To produce the following:
+
+&nbsp;
+
+```{r map12, echo = FALSE, eval = TRUE, fig.cap = "Map of North Darfur, Sudan", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+nDarfur <- subset(sudan01, sudan01@data$State == "North Darfur")
+plot(nDarfur)
+```
+
+&nbsp;
+
+However, this map will look better if we can also show the nearby states and their boundaries. We can do this by plotting `sudan01` but this time specifying a `xlim` and `ylim` parameters using the `bbox()` of the map object for North Darfur. The following commands illustrate this:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+nDarfur <- subset(sudan01, sudan01@data$State == "North Darfur")
+ndLimits <- bbox(nDarfur)
+plot(sudan01, 
+     xlim = ndLimits[1,], 
+     ylim = ndLimits[2,], 
+     border = "gray")
+plot(nDarfur, 
+     xlim = ndLimits[1,], 
+     ylim = ndLimits[2,], 
+     border = "blue", 
+     add = TRUE)
+```
+
+&nbsp;
+
+The resulting map is:
+
+&nbsp;
+
+```{r map13, echo = FALSE, eval = TRUE, fig.cap = "Map of North Darfur, Sudan", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+nDarfur <- subset(sudan01, sudan01@data$State == "North Darfur")
+ndLimits <- bbox(nDarfur)
+plot(sudan01, 
+     xlim = ndLimits[1,], 
+     ylim = ndLimits[2,], 
+     border = "gray")
+plot(nDarfur, 
+     xlim = ndLimits[1,], 
+     ylim = ndLimits[2,], 
+     border = "blue", 
+     add = TRUE)
+```
+
+&nbsp;
+
+We can apply the same approach to get the map for each of the states. However, we can also create a looping function that will create and plot the maps for us automatically. This can be done as follows:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+stateList <- as.vector(sudan01@data$State)
+
+for(i in 1:nrow(sudan01@data)) {
+  a <- subset(sudan01, sudan01@data$State == stateList[i])
+  
+  aLimits <- bbox(a)
+  
+  plot(sudan01, 
+       xlim = aLimits[1,], 
+       ylim = aLimits[2,], 
+       border = "gray")
+  
+  plot(a, 
+       xlim = aLimits[1,], 
+       ylim = aLimits[2,], 
+       border = "blue", 
+       add = TRUE)
+  
+  points(villages$X, villages$Y, pch = 20, cex = 0.3, col = "gray90")
+  
+  title(main = stateList[i], cex = 2)
+}
+```
+
+&nbsp;
+
+The commands above will create a plot of the individual state maps on separate graphics device which can be saved one by one. An example of the maps is below.
+
+&nbsp;
+
+```{r map14, echo = FALSE, eval = TRUE, fig.cap = "Map of Al Gezira State, Sudan", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+alGezira <- subset(sudan01, sudan01@data$State == "Al Gezira")
+
+plot(alGezira, lty = 0)
+
+plot(sudan01, border = "gray", add = TRUE)
+
+plot(alGezira, border = "blue", add = TRUE)
+
+points(villages$X, villages$Y, pch = 20, cex = 0.3, col = "gray90")
+  
+title(main = "Al Gezira State", cex = 2)
+```
+
+&nbsp;
+
+The other approach is to plot each of the individual state map on the same graphics device. This can be done using the following commands:
+
+&nbsp;
+
+```{r, echo = TRUE, eval = FALSE}
+stateList <- as.vector(sudan01@data$State)
+
+par(mar = c(2,2,2,2)); par(mfrow = c(6,3))
+
+for(i in 1:nrow(sudan01@data)) {
+  a <- subset(sudan01, sudan01@data$State == stateList[i])
+  aLimits <- bbox(a)
+    
+  plot(sudan01, 
+       xlim = aLimits[1,], 
+       ylim = aLimits[2,], 
+       border = "gray")
+      
+  plot(a, 
+       xlim = aLimits[1,], 
+       ylim = aLimits[2,], 
+       lwd = 2, 
+       border = "blue", 
+       add = TRUE)
+  
+  points(x = villages$X, 
+         y = villages$Y, 
+         pch = 20, 
+         cex = 0.3, 
+         col = "gray90")
+  
+  title(main = paste(stateList[i], "State", sep = " "), cex = 2)
+}
+```
+
+&nbsp;
+
+The resulting map is:
+
+&nbsp;
+
+```{r map15, echo = FALSE, eval = TRUE, fig.cap = "Map for each state of Sudan", fig.align = "center", fig.pos = "H", fig.width = 9, fig.height = 18, fig.retina = 1}
+stateList <- as.vector(sudan01@data$State)
+
+par(mar = c(2,2,2,2)); par(mfrow = c(6,3))
+
+for(i in 1:nrow(sudan01@data)) {
+  a <- subset(sudan01, sudan01@data$State == stateList[i])
+  aLimits <- bbox(a)
+    
+  plot(sudan01, 
+       xlim = aLimits[1,], 
+       ylim = aLimits[2,], 
+       border = "gray")
+      
+  plot(a, 
+       xlim = aLimits[1,], 
+       ylim = aLimits[2,], 
+       lwd = 2, 
+       border = "blue", 
+       add = TRUE)
+  
+  points(x = villages$X, 
+         y = villages$Y, 
+         pch = 20, 
+         cex = 0.3, 
+         col = "gray90")
+  
+  title(main = paste(stateList[i], "State", sep = " "), cex = 2)
+}
+```
