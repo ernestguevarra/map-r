@@ -120,7 +120,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-10-07}
+    \date{2018-10-08}
 
 \usepackage{booktabs}
 \usepackage[table]{xcolor}
@@ -882,7 +882,7 @@ The output of this command is:
 #>   .. .. ..$ : chr [1:2] "x" "y"
 #>   .. .. ..$ : chr [1:2] "min" "max"
 #>   ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slot
-#>   .. .. ..@ projargs: chr "+proj=utm +zone=36 +a=6378249.2 +b=6356514.999904194 +units=m +no_defs"
+#>   .. .. ..@ projargs: chr "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 \end{verbatim}
 
 ~
@@ -958,44 +958,44 @@ object. Making a call for the \texttt{data} slot gives:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{sudan01}\OperatorTok{@}\NormalTok{data}
-\CommentTok{#>                State         Old_state         New_State STATE_1}
-\CommentTok{#> 0        West Darfur       West Darfur       West Darfur    <NA>}
-\CommentTok{#> 1     Central Darfur       West Darfur    Central Darfur    <NA>}
-\CommentTok{#> 2       North Darfur      North Darfur      North Darfur    <NA>}
-\CommentTok{#> 3        East Darfur      South Darfur       East Darfur    <NA>}
-\CommentTok{#> 4       South Darfur      South Darfur      South Darfur    <NA>}
-\CommentTok{#> 5          Al Gezira              <NA>              <NA>    <NA>}
-\CommentTok{#> 6          Blue Nile              <NA>              <NA>    <NA>}
-\CommentTok{#> 7            Gedaref              <NA>              <NA>    <NA>}
-\CommentTok{#> 8            Kassala              <NA>              <NA>    <NA>}
-\CommentTok{#> 9           Khartoum              <NA>              <NA>    <NA>}
-\CommentTok{#> 10              Nile              <NA>              <NA>    <NA>}
-\CommentTok{#> 11          Northern              <NA>              <NA>    <NA>}
-\CommentTok{#> 12           Red Sea              <NA>              <NA>    <NA>}
-\CommentTok{#> 13            Sennar              <NA>              <NA>    <NA>}
-\CommentTok{#> 14        White Nile              <NA>              <NA>    <NA>}
-\CommentTok{#> 15 Southern Kordofan Southern Kordofan Southern Kordofan    <NA>}
-\CommentTok{#> 16  Western Kordofan    South Kordofan  Western Kordofan    <NA>}
-\CommentTok{#> 17 Northern Kordofan Northern Kordofan Northern Kordofan    <NA>}
-\CommentTok{#>         STATEAR Source STATE_CODE ISO_CODE}
-\CommentTok{#> 0          <NA>   <NA>       <NA>     <NA>}
-\CommentTok{#> 1          <NA>   <NA>       <NA>     <NA>}
-\CommentTok{#> 2          <NA>   <NA>       <NA>     <NA>}
-\CommentTok{#> 3          <NA>   <NA>       <NA>     <NA>}
-\CommentTok{#> 4          <NA>   <NA>       <NA>     <NA>}
-\CommentTok{#> 5       ÇáÌÒíÑÉ    CBS       SU04    SD-07}
-\CommentTok{#> 6  Çáäíá ÇáÇÒÑÞ    CBS       SU02    SD-24}
-\CommentTok{#> 7       ÇáÞÖÇÑÝ    CBS       SU05    SD-06}
-\CommentTok{#> 8          ßÓáÇ    CBS       SU07    SD-05}
-\CommentTok{#> 9       ÇáÎÑØæã    CBS       SU08    SD-03}
-\CommentTok{#> 10    äåÑ Çáäíá    CBS       SU10    SD-04}
-\CommentTok{#> 11     ÇáÔãÇáíÉ    CBS       SU11    SD-01}
-\CommentTok{#> 12 ÇáÈÍÑ ÇáÇÍãÑ    CBS       SU15    SD-26}
-\CommentTok{#> 13         ÓäÇÑ    CBS       SU16    SD-25}
-\CommentTok{#> 14 Çáäíá ÇáÇÈíÖ    CBS       SU25    SD-08}
-\CommentTok{#> 15         <NA>   <NA>       <NA>     <NA>}
-\CommentTok{#> 16         <NA>   <NA>       <NA>     <NA>}
-\CommentTok{#> 17         <NA>   <NA>       <NA>     <NA>}
+\CommentTok{#>                State         Old_state         New_State STATE_1 STATEAR}
+\CommentTok{#> 0        West Darfur       West Darfur       West Darfur    <NA>    <NA>}
+\CommentTok{#> 1     Central Darfur       West Darfur    Central Darfur    <NA>    <NA>}
+\CommentTok{#> 2       North Darfur      North Darfur      North Darfur    <NA>    <NA>}
+\CommentTok{#> 3        East Darfur      South Darfur       East Darfur    <NA>    <NA>}
+\CommentTok{#> 4       South Darfur      South Darfur      South Darfur    <NA>    <NA>}
+\CommentTok{#> 5          Al Gezira              <NA>              <NA>    <NA>    <NA>}
+\CommentTok{#> 6          Blue Nile              <NA>              <NA>    <NA>    <NA>}
+\CommentTok{#> 7            Gedaref              <NA>              <NA>    <NA>    <NA>}
+\CommentTok{#> 8            Kassala              <NA>              <NA>    <NA>    <NA>}
+\CommentTok{#> 9           Khartoum              <NA>              <NA>    <NA>    <NA>}
+\CommentTok{#> 10              Nile              <NA>              <NA>    <NA>    <NA>}
+\CommentTok{#> 11          Northern              <NA>              <NA>    <NA>    <NA>}
+\CommentTok{#> 12           Red Sea              <NA>              <NA>    <NA>    <NA>}
+\CommentTok{#> 13            Sennar              <NA>              <NA>    <NA>    <NA>}
+\CommentTok{#> 14        White Nile              <NA>              <NA>    <NA>    <NA>}
+\CommentTok{#> 15 Southern Kordofan Southern Kordofan Southern Kordofan    <NA>    <NA>}
+\CommentTok{#> 16  Western Kordofan    South Kordofan  Western Kordofan    <NA>    <NA>}
+\CommentTok{#> 17 Northern Kordofan Northern Kordofan Northern Kordofan    <NA>    <NA>}
+\CommentTok{#>    Source STATE_CODE ISO_CODE}
+\CommentTok{#> 0    <NA>       <NA>     <NA>}
+\CommentTok{#> 1    <NA>       <NA>     <NA>}
+\CommentTok{#> 2    <NA>       <NA>     <NA>}
+\CommentTok{#> 3    <NA>       <NA>     <NA>}
+\CommentTok{#> 4    <NA>       <NA>     <NA>}
+\CommentTok{#> 5     CBS       SU04    SD-07}
+\CommentTok{#> 6     CBS       SU02    SD-24}
+\CommentTok{#> 7     CBS       SU05    SD-06}
+\CommentTok{#> 8     CBS       SU07    SD-05}
+\CommentTok{#> 9     CBS       SU08    SD-03}
+\CommentTok{#> 10    CBS       SU10    SD-04}
+\CommentTok{#> 11    CBS       SU11    SD-01}
+\CommentTok{#> 12    CBS       SU15    SD-26}
+\CommentTok{#> 13    CBS       SU16    SD-25}
+\CommentTok{#> 14    CBS       SU25    SD-08}
+\CommentTok{#> 15   <NA>       <NA>     <NA>}
+\CommentTok{#> 16   <NA>       <NA>     <NA>}
+\CommentTok{#> 17   <NA>       <NA>     <NA>}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1407,62 +1407,6 @@ represent the \emph{polygon} that gets plotted first. In this case, the
 13th \emph{polygon} is the first to be plotted and the 1st
 \emph{polygon} will be the last to be plotted.
 
-The \texttt{plotOrder} slot is linked or related to the area slot of
-each of the \emph{polygon} found in the dataset for each of the
-\emph{polygons} in \texttt{sudan01} object. The \emph{polygon} with the
-biggest area gets plotted first and the one with the smallest area gets
-plotted last.
-
-Given this, it would be a good exercise of our newly learned skills of
-handling and manipulating mapping data to try to create a dataframe that
-combines the \texttt{sudan01@plotOrder} vector with the corresponding
-area size of each \emph{polygon} referred to in the plotting order. This
-is a good way of checking whether indeed the plotting order of
-\emph{polygons} is based on decreasing area size. We do this by:
-
-~
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{areaAll <-}\StringTok{ }\OtherTok{NULL}
-    
-\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(sudan01)) \{}
-\NormalTok{  area <-}\StringTok{ }\NormalTok{sudan01}\OperatorTok{@}\NormalTok{polygons[sudan01}\OperatorTok{@}\NormalTok{plotOrder][[i]]}\OperatorTok{@}\NormalTok{Polygons[[}\DecValTok{1}\NormalTok{]]}\OperatorTok{@}\NormalTok{area}
-\NormalTok{  areaAll <-}\StringTok{ }\KeywordTok{c}\NormalTok{(areaAll, area)}
-\NormalTok{\}}
-
-\NormalTok{orderByArea <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(sudan01}\OperatorTok{@}\NormalTok{plotOrder, areaAll)}
-\end{Highlighting}
-\end{Shaded}
-
-~
-
-The result of this is:
-
-~
-
-\begin{verbatim}
-#>    sudan01.plotOrder   areaAll
-#> 1                 12 31.366210
-#> 2                  3 26.736778
-#> 3                 13 18.573504
-#> 4                 18 15.716028
-#> 5                 11 11.146239
-#> 6                 17  9.469990
-#> 7                  5  6.905019
-#> 8                 16  6.491091
-#> 9                  8  4.985051
-#> 10                 4  4.436722
-#> 11                 9  4.102905
-#> 12                14  0.001525
-#> 13                15  3.169614
-#> 14                 7  3.160318
-#> 15                 2  2.745432
-#> 16                 6  2.277623
-#> 17                 1  1.859501
-#> 18                10  1.790615
-\end{verbatim}
-
 ~
 
 Let us now take a look at the \texttt{bbox} slot of \texttt{sudan01}. We
@@ -1482,11 +1426,11 @@ This gives the following results:
 
 ~
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sudan01}\OperatorTok{@}\NormalTok{bbox}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+#>        min      max
+#> x 21.81311 38.59092
+#> y  8.64114 23.14289
+\end{verbatim}
 
 ~
 
@@ -1558,14 +1502,1469 @@ This gives the same result but with a slightly different format.
 ~
 
 \begin{verbatim}
-#> [1] "+proj=utm +zone=36 +a=6378249.2 +b=6356514.999904194 +units=m +no_defs"
+#> [1] "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 \end{verbatim}
 
 \hypertarget{exercise2}{%
 \chapter{Plotting maps}\label{exercise2}}
 
+In this exercise, we will learn how to plot maps using your existing
+knowledge of basic plotting functions and new lessons on additional
+plotting functions specific to maps.
+
+By now you would be familiar already with the \texttt{plot()} function
+which is the most basic of plotting functions. For maps, we use
+\texttt{plot()} in the same way as we would for other datasets. The main
+difference is that the methods used in the plotting functions for
+\textbf{shapefiles} are set by the \texttt{sp} package and is optimised
+for mapping purposes.
+
+Therefore, plotting maps is as easy as calling the \texttt{plot()}
+function and passing the \texttt{spatial} object to it as shown below.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(sudan01)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+This produces the following map:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map1-1} 
+
+}
+
+\caption{Map of the states of Sudan with default plotting options}\label{fig:map1}
+\end{figure}
+
+~
+
+From this plot of \texttt{sudan01} \texttt{SpatialPolygonsDataFrame}
+object, we learn about some of the default plotting parameters under the
+\texttt{sp} package. \emph{Line type} (\texttt{lty}) is set as a solid
+line (\texttt{lty\ =\ 1}) and \emph{line width} (\texttt{lwd}) is set at
+\texttt{lwd\ =\ 1}. \emph{Border colour} (\texttt{border}) is set as
+\texttt{border\ =\ black} while the \emph{fill colour} (\texttt{col}) is
+set at \texttt{col\ =\ NA}. We should remember that the class of
+\texttt{sudan01} object is a \texttt{SpatialPolygonsDataFrame} hence it
+is composed of closed rings that are not holes (i.e.~empty). Hence, in
+the plotting parameters, border and fill colours are specified
+separately.
+
+Let us now try to plot another map of \texttt{sudan01} object but this
+time change some of the default plotting parameters.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }\DataTypeTok{border =} \StringTok{"blue"}\NormalTok{, }\DataTypeTok{col =} \StringTok{"gray90"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+This command gives us the following map of Sudan:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map2-1} 
+
+}
+
+\caption{Map of the states of Sudan with new plotting parameters}\label{fig:map2}
+\end{figure}
+
+~
+
+The map above illustrates the changes in the plot created by the changes
+in the plotting parameters that we have specified. The width of the
+border is now thicker and its colour is now blue. The inside of the map
+is now coloured gray.
+
+So far we have focused a lot on \texttt{sudan01} object. Hence we have
+learned a lot about the features, structure and characteristics of a
+\textbf{polygon} and a \texttt{SpatialPolygonsDataFrame} that contains
+\textbf{polygons} of each of the states of Sudan. However, we have yet
+to work with another \texttt{SpatialPolygonsDataFrame} object named
+\texttt{sudan02} which is a collection of \textbf{polygons} for each of
+the localities in Sudan.
+
+What we will try to learn now is how to work with the \texttt{sudan01}
+and \texttt{sudan02} objects to create a map of Sudan that shows the
+different localities and also shows how these localities are grouped in
+order to make up each of the states in Sudan.
+
+To be able to complete this task, we need to learn about \emph{map
+layers}.
+
+The idea of \emph{map layers} is that different set of map features
+(i.e.~roads, topography, watery systems) that usually have separate
+\textbf{shapefile} datasets are put together in a single map by plotting
+each of these features on top of each other in layers. Depending on the
+type and class of the \textbf{shapefile} objects being layered, the
+order by which a feature is layered on to another determines which
+features of which layer is visible or given emphasis.
+
+Let us now try to layer \texttt{sudan01} and \texttt{sudan02} objects
+such that the base map is that of the localities and on top is that of
+the state boundaries. The final map will then show divisions by state
+and then further subdivisions per state by localities. We call the
+following commands to produce the map below:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#}
+\CommentTok{# Plot localities of Sudan}
+\CommentTok{#}
+\KeywordTok{plot}\NormalTok{(sudan02, }\DataTypeTok{border =} \StringTok{"gray"}\NormalTok{)}
+\CommentTok{#}
+\CommentTok{# Plot states of Sudan}
+\CommentTok{#}
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+This produces the following map.
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map3-1} 
+
+}
+
+\caption{Map of localities and states of Sudan}\label{fig:map3}
+\end{figure}
+
+~
+
+Now, let us learn how to add layers of other \textbf{shapefile}
+types/classes onto the base Sudan maps.
+
+Earlier in Exercise \ref{exercise1}, we have retrieved the dataset for
+the grid used in the Sudan S3M I and assigned it to the object
+\texttt{grid12poly} and \texttt{grid12kmSudan}. The difference between
+these two objects is that the first one is a
+\texttt{SpatialPolygonsDataFrame} while the second is a
+\texttt{SpatialLinesDataFrame}.
+
+We will focus our attention to \texttt{grid12kmSudan} to familiarise
+ourselves with the \texttt{SpatialLinesDataFrame} class objects. Let us
+look at the structure of a \texttt{SpatialLinesDataFrame}.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(grid12kmSudan)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+The results of this command is as expected quite long. But looking at
+the first line of the output, we learn that \texttt{grid12kmSudan} has 4
+slots.
+
+~
+
+\begin{verbatim}
+#> Formal class 'SpatialLinesDataFrame' [package "sp"] with 4 slots
+#>   ..@ data       :'data.frame':  245 obs. of  2 variables:
+#>   .. ..$ ID   : chr [1:245] "0" "1" "2" "3" ...
+#>   .. ..$ COORD: num [1:245] 23.1 23 23 22.9 22.8 ...
+#>   ..@ lines      :List of 245
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 23.1 23.1
+#>   .. .. .. ..@ ID   : chr "0"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 23 23
+#>   .. .. .. ..@ ID   : chr "1"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 23 23
+#>   .. .. .. ..@ ID   : chr "2"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.9 22.9
+#>   .. .. .. ..@ ID   : chr "3"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.8 22.8
+#>   .. .. .. ..@ ID   : chr "4"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.7 22.7
+#>   .. .. .. ..@ ID   : chr "5"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.6 22.6
+#>   .. .. .. ..@ ID   : chr "6"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.5 22.5
+#>   .. .. .. ..@ ID   : chr "7"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.4 22.4
+#>   .. .. .. ..@ ID   : chr "8"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.3 22.3
+#>   .. .. .. ..@ ID   : chr "9"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.2 22.2
+#>   .. .. .. ..@ ID   : chr "10"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.1 22.1
+#>   .. .. .. ..@ ID   : chr "11"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22 22
+#>   .. .. .. ..@ ID   : chr "12"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.9 21.9
+#>   .. .. .. ..@ ID   : chr "13"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.8 21.8
+#>   .. .. .. ..@ ID   : chr "14"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.7 21.7
+#>   .. .. .. ..@ ID   : chr "15"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.6 21.6
+#>   .. .. .. ..@ ID   : chr "16"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.5 21.5
+#>   .. .. .. ..@ ID   : chr "17"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.4 21.4
+#>   .. .. .. ..@ ID   : chr "18"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.4 21.4
+#>   .. .. .. ..@ ID   : chr "19"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.3 21.3
+#>   .. .. .. ..@ ID   : chr "20"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.2 21.2
+#>   .. .. .. ..@ ID   : chr "21"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.1 21.1
+#>   .. .. .. ..@ ID   : chr "22"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21 21
+#>   .. .. .. ..@ ID   : chr "23"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.9 20.9
+#>   .. .. .. ..@ ID   : chr "24"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.8 20.8
+#>   .. .. .. ..@ ID   : chr "25"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.7 20.7
+#>   .. .. .. ..@ ID   : chr "26"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.6 20.6
+#>   .. .. .. ..@ ID   : chr "27"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.5 20.5
+#>   .. .. .. ..@ ID   : chr "28"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.4 20.4
+#>   .. .. .. ..@ ID   : chr "29"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.3 20.3
+#>   .. .. .. ..@ ID   : chr "30"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.2 20.2
+#>   .. .. .. ..@ ID   : chr "31"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.1 20.1
+#>   .. .. .. ..@ ID   : chr "32"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20 20
+#>   .. .. .. ..@ ID   : chr "33"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.9 19.9
+#>   .. .. .. ..@ ID   : chr "34"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.9 19.9
+#>   .. .. .. ..@ ID   : chr "35"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.8 19.8
+#>   .. .. .. ..@ ID   : chr "36"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.7 19.7
+#>   .. .. .. ..@ ID   : chr "37"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.6 19.6
+#>   .. .. .. ..@ ID   : chr "38"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.5 19.5
+#>   .. .. .. ..@ ID   : chr "39"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.4 19.4
+#>   .. .. .. ..@ ID   : chr "40"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.3 19.3
+#>   .. .. .. ..@ ID   : chr "41"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.2 19.2
+#>   .. .. .. ..@ ID   : chr "42"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.1 19.1
+#>   .. .. .. ..@ ID   : chr "43"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19 19
+#>   .. .. .. ..@ ID   : chr "44"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.9 18.9
+#>   .. .. .. ..@ ID   : chr "45"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.8 18.8
+#>   .. .. .. ..@ ID   : chr "46"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.7 18.7
+#>   .. .. .. ..@ ID   : chr "47"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.6 18.6
+#>   .. .. .. ..@ ID   : chr "48"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.5 18.5
+#>   .. .. .. ..@ ID   : chr "49"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.4 18.4
+#>   .. .. .. ..@ ID   : chr "50"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.3 18.3
+#>   .. .. .. ..@ ID   : chr "51"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.3 18.3
+#>   .. .. .. ..@ ID   : chr "52"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.2 18.2
+#>   .. .. .. ..@ ID   : chr "53"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.1 18.1
+#>   .. .. .. ..@ ID   : chr "54"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18 18
+#>   .. .. .. ..@ ID   : chr "55"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.9 17.9
+#>   .. .. .. ..@ ID   : chr "56"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.8 17.8
+#>   .. .. .. ..@ ID   : chr "57"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.7 17.7
+#>   .. .. .. ..@ ID   : chr "58"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.6 17.6
+#>   .. .. .. ..@ ID   : chr "59"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.5 17.5
+#>   .. .. .. ..@ ID   : chr "60"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.4 17.4
+#>   .. .. .. ..@ ID   : chr "61"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.3 17.3
+#>   .. .. .. ..@ ID   : chr "62"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.2 17.2
+#>   .. .. .. ..@ ID   : chr "63"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.1 17.1
+#>   .. .. .. ..@ ID   : chr "64"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17 17
+#>   .. .. .. ..@ ID   : chr "65"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.9 16.9
+#>   .. .. .. ..@ ID   : chr "66"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.8 16.8
+#>   .. .. .. ..@ ID   : chr "67"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.7 16.7
+#>   .. .. .. ..@ ID   : chr "68"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.7 16.7
+#>   .. .. .. ..@ ID   : chr "69"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.6 16.6
+#>   .. .. .. ..@ ID   : chr "70"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.5 16.5
+#>   .. .. .. ..@ ID   : chr "71"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.4 16.4
+#>   .. .. .. ..@ ID   : chr "72"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.3 16.3
+#>   .. .. .. ..@ ID   : chr "73"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.2 16.2
+#>   .. .. .. ..@ ID   : chr "74"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.1 16.1
+#>   .. .. .. ..@ ID   : chr "75"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16 16
+#>   .. .. .. ..@ ID   : chr "76"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.9 15.9
+#>   .. .. .. ..@ ID   : chr "77"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.8 15.8
+#>   .. .. .. ..@ ID   : chr "78"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.7 15.7
+#>   .. .. .. ..@ ID   : chr "79"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.6 15.6
+#>   .. .. .. ..@ ID   : chr "80"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.5 15.5
+#>   .. .. .. ..@ ID   : chr "81"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.4 15.4
+#>   .. .. .. ..@ ID   : chr "82"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.3 15.3
+#>   .. .. .. ..@ ID   : chr "83"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.2 15.2
+#>   .. .. .. ..@ ID   : chr "84"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.1 15.1
+#>   .. .. .. ..@ ID   : chr "85"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.1 15.1
+#>   .. .. .. ..@ ID   : chr "86"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15 15
+#>   .. .. .. ..@ ID   : chr "87"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.9 14.9
+#>   .. .. .. ..@ ID   : chr "88"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.8 14.8
+#>   .. .. .. ..@ ID   : chr "89"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.7 14.7
+#>   .. .. .. ..@ ID   : chr "90"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.6 14.6
+#>   .. .. .. ..@ ID   : chr "91"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.5 14.5
+#>   .. .. .. ..@ ID   : chr "92"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.4 14.4
+#>   .. .. .. ..@ ID   : chr "93"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.3 14.3
+#>   .. .. .. ..@ ID   : chr "94"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.2 14.2
+#>   .. .. .. ..@ ID   : chr "95"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.1 14.1
+#>   .. .. .. ..@ ID   : chr "96"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14 14
+#>   .. .. .. ..@ ID   : chr "97"
+#>   .. ..$ :Formal class 'Lines' [package "sp"] with 2 slots
+#>   .. .. .. ..@ Lines:List of 1
+#>   .. .. .. .. ..$ :Formal class 'Line' [package "sp"] with 1 slot
+#>   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 13.9 13.9
+#>   .. .. .. ..@ ID   : chr "98"
+#>   .. .. [list output truncated]
+#>   ..@ bbox       : num [1:2, 1:2] 21.81 8.64 38.59 23.14
+#>   .. ..- attr(*, "dimnames")=List of 2
+#>   .. .. ..$ : chr [1:2] "x" "y"
+#>   .. .. ..$ : chr [1:2] "min" "max"
+#>   ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slot
+#>   .. .. ..@ projargs: chr "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
+\end{verbatim}
+
+\newpage
+
+The 4 slots in a \texttt{SpatialLinesDataFrame} are:
+
+~
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{\label{tab:table3} SpatialLinesDataFrame structure}\tabularnewline
+\toprule
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
+\textbf{data}\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright
+Contains the index or reference data frame of the \textbf{shapefile} the
+number of rows of which indicates the number of \emph{lines} that
+comprise the entire \textbf{shapefile}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
+\textbf{lines}\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright
+Contains \emph{n} number of datasets based on the number of \emph{lines}
+that comprise the entire \textbf{shapefile}.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
+\textbf{bbox}\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright
+Contains a matrix the values of which are the minimum and maximum
+\texttt{x} and \texttt{y} limits of the entire \textbf{shapefile}.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
+\textbf{proj4string}\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright
+Contains a character string that specifies the projection and datum of
+the \textbf{shapefile} object\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+~
+
+Compared to the \texttt{SpatialPolygonsDataFrame},
+\texttt{grid12kmSudan} has a slot for \emph{lines} (as expected) but
+doesn't have the \texttt{plotOrder} slot. If we look back at what we've
+learned regarding \texttt{plotOrder}, it is understandable why this is
+not included in a \texttt{SpatialLinesDataFrame} object. The
+\texttt{plotOrder} is determined by the area of the shapes in the
+object. However, \texttt{SpatialLinesDataFrame} objects does not have a
+value for area because it is just composed of \emph{lines}, not
+\emph{polygons}.
+
+A closer look at the slot \texttt{grid12kmSudan@lines}, we notice that
+the data structure is much simpler than that of \emph{polygons}. Each
+\emph{line} is simply defined by a set of 2 points.
+
+Let us now add the \texttt{grid12kmSudan} object as another \emph{layer}
+on our map. We should put it on top of \texttt{sudan02} and
+\texttt{sudan01} with a thin \emph{line width} (\texttt{\textless{}\ 1})
+and a light colour. Here is the command that will produce this.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(sudan02, }\DataTypeTok{border =} \StringTok{"gray"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(grid12kmSudan, }\DataTypeTok{lwd =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{col =} \StringTok{"gray90"}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+This command produces the following map:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map4-1} 
+
+}
+
+\caption{Map of localities and states of Sudan with rectangular grid}\label{fig:map4}
+\end{figure}
+
+~
+
+Now let us learn about points data.
+
+Earlier, we have created an object called \texttt{villages}. This object
+contains village data for the whole of Sudan with their \texttt{x} and
+\texttt{y} geographical coordinates.
+
+If we check the class of the object \texttt{villages}
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{(villages)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+we find out that this object is a data.frame and not an sp class object.
+
+~
+
+\begin{verbatim}
+#> [1] "data.frame"
+\end{verbatim}
+
+~
+
+However, this object is still map data because it contains geographic
+information which in this case is the \texttt{x} and \texttt{y}
+coordinates of the villages of Sudan.
+
+This is the only information we need to be able to plot points data on
+the map. We can do this by calling the following commands:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(sudan02, }\DataTypeTok{border =} \StringTok{"gray"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(grid12kmSudan, }\DataTypeTok{lwd =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{col =} \StringTok{"gray90"}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(villages}\OperatorTok{$}\NormalTok{X, villages}\OperatorTok{$}\NormalTok{Y, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{col =} \StringTok{"gray90"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+This produces the following map.
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map5-1} 
+
+}
+
+\caption{Map of localities and states of Sudan with rectangular grid and villages}\label{fig:map5}
+\end{figure}
+
+~
+
+In the commands above, we learn a new function called \texttt{points()}
+and some new graphical parameters that are useful in plotting
+\emph{points}.
+
+The \texttt{points()} function basically instructs \textbf{R} to plot a
+series of \emph{points} given the specified coordinates. The kind of
+character that is drawn to represent the \emph{point} is determined by
+the parameter called \texttt{pch} (\emph{point character}) with default
+being a hollow circle.
+
+\newpage
+
+The most commonly used point characters are specified by the following
+numeric values:
+
+~
+
+\begin{center}\includegraphics[width=0.9\linewidth]{figures/pch} \end{center}
+
+~
+
+In this case, we used \texttt{pch\ =\ 20} which is a solid point that is
+2/3 the size of \texttt{pch\ =\ 19}.
+
+The other graphical parameter that we learn here is \texttt{cex}
+(\emph{character expansion}) which determines the size of the point
+character and has a default value of \texttt{cex\ =\ 1}.
+
+By now you would have noticed that when we used the \texttt{points()}
+function, we didn't have to add an argument to add the points on to the
+current graphical device. By default, the \texttt{points()} function
+will draw the points on to the current graphical device. In fact,
+\texttt{points()} will give an error message and will not plot anything
+if there is no open graphical device as you see below.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{points}\NormalTok{(villages}\OperatorTok{$}\NormalTok{X, villages}\OperatorTok{$}\NormalTok{Y, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{col =} \StringTok{"gray90"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+Let us now learn how to add other map components onto the current map.
+These may include
+
+~
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{\label{tab:table4} Other layers that can be added to
+maps}\tabularnewline
+\toprule
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
+\textbf{labels}\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright
+Either a numeric or character identifier that names the different
+features on the map\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
+\textbf{legend}\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright
+Guide to what the shapes and symbols on the map refer to or mean\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
+\textbf{scale}\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright
+The scale of a map is the ratio of a distance on the map to the
+corresponding distance on the ground.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
+\textbf{compass}\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright
+Indicates where the north, east, west and south directions are on the
+map\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+~
+
+First, let us try adding labels to our map.
+
+For \texttt{sudan01} object which contains a map of Sudan divided into
+states, we would like to be able to label each state accordingly. We
+would like this label to be placed at the centre of each state polygon
+as this is based on standard mapping conventions. To do this, we will
+use two functions that we have not learned yet. These are
+\texttt{coordinates()} and \texttt{text()}.
+
+The \texttt{coordinates()} function is a function made available in the
+\texttt{sp} package. This function returns the centroid of the
+\textbf{polygon} or \textbf{polygons} in a map object. The
+\texttt{coordinates()} function returns a matrix containing the
+\texttt{x} and \texttt{y} coordinates of the centroid of the
+\textbf{polygons} in the map object. If there is only 1 \textbf{polygon}
+in the map object, then the resulting matrix is a single row.
+
+The \texttt{text()} function on the other hand adds text into the
+current plotting device based on a specific \texttt{x} and \texttt{y}
+coordinates which for the purpose of labelling will be the centroid
+provided by the \texttt{coordinates()} function.
+
+Additional parameters required for \texttt{text()} are the labels which
+is a character vector specifying the text to be written. In this case,
+we need the names of the states. We can easily get this from the data
+slot in \texttt{sudan01}. We use the parameter \texttt{pos} to specify
+where and how far the text will be written in relation to the \texttt{x}
+and \texttt{y} coordinates specified. The \texttt{pos} parameter can
+take values of \texttt{1}, \texttt{2}, \texttt{3}, or \texttt{4} which
+places the text at the \emph{bottom}, \emph{left}, \emph{top} or
+\emph{right} of the centroid respectively. The \texttt{offset} parameter
+determines how far from the centroid the text will be written. The
+\texttt{cex} parameter sets the size of the text to be written.
+
+We apply this function to label the states by giving the following
+commands:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sudan01Centroids <-}\StringTok{ }\KeywordTok{coordinates}\NormalTok{(sudan01)}
+\KeywordTok{plot}\NormalTok{(sudan01)}
+\KeywordTok{text}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sudan01Centroids[ , }\DecValTok{1}\NormalTok{], }
+     \DataTypeTok{y =}\NormalTok{ sudan01Centroids[ , }\DecValTok{2}\NormalTok{], }
+     \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
+     \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
+     \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
+     \DataTypeTok{cex =} \FloatTok{0.65}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+This results in the following map:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map6-1} 
+
+}
+
+\caption{Map of states of Sudan with labels}\label{fig:map6}
+\end{figure}
+
+\newpage
+
+Now we shall add a \emph{legend} on the map.
+
+We use the \texttt{legend()} function for this. Following are the
+commands to create a \emph{legend} for the map of \texttt{sudan01},
+\texttt{sudan02} and \texttt{villages}.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(sudan02, }\DataTypeTok{border =} \StringTok{"gray"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(villages}\OperatorTok{$}\NormalTok{X, }
+\NormalTok{       villages}\OperatorTok{$}\NormalTok{Y, }
+       \DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }
+       \DataTypeTok{cex =} \FloatTok{0.2}\NormalTok{, }
+       \DataTypeTok{col =} \StringTok{"gray90"}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{,}
+       \DataTypeTok{y.intersp =} \FloatTok{1.2}\NormalTok{,}
+       \DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\StringTok{"state borders"}\NormalTok{, }\StringTok{"locality borders"}\NormalTok{, }\StringTok{"villages"}\NormalTok{),}
+       \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\OtherTok{NA}\NormalTok{),}
+       \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\OtherTok{NA}\NormalTok{),}
+       \DataTypeTok{pch =} \KeywordTok{c}\NormalTok{(}\OtherTok{NA}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+       \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\StringTok{"gray"}\NormalTok{, }\StringTok{"gray90"}\NormalTok{),}
+       \DataTypeTok{cex =} \FloatTok{0.65}\NormalTok{,}
+       \DataTypeTok{pt.cex =} \DecValTok{1}\NormalTok{,}
+       \DataTypeTok{bty =} \StringTok{"o"}\NormalTok{,}
+       \DataTypeTok{bg =} \StringTok{"white"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+This produces the following map:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map7-1} 
+
+}
+
+\caption{Map of localities, states and villages of Sudan with labels and legend}\label{fig:map7}
+\end{figure}
+
+\newpage
+
+Lastly, we add a \emph{scale} to our map.
+
+We use the \texttt{map.scale()} function for this. We need to install
+and load the library \texttt{maps} to use this function. We add the
+scale on the map through the following commands:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(sudan02, }\DataTypeTok{border =} \StringTok{"gray"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(villages}\OperatorTok{$}\NormalTok{X, villages}\OperatorTok{$}\NormalTok{Y, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{col =} \StringTok{"gray90"}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{,}
+       \DataTypeTok{y.intersp =} \FloatTok{1.2}\NormalTok{,}
+       \DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\StringTok{"state borders"}\NormalTok{, }\StringTok{"locality borders"}\NormalTok{, }\StringTok{"villages"}\NormalTok{),}
+       \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\OtherTok{NA}\NormalTok{),}
+       \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\OtherTok{NA}\NormalTok{),}
+       \DataTypeTok{pch =} \KeywordTok{c}\NormalTok{(}\OtherTok{NA}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+       \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\StringTok{"gray"}\NormalTok{, }\StringTok{"gray90"}\NormalTok{),}
+       \DataTypeTok{cex =} \FloatTok{0.65}\NormalTok{,}
+       \DataTypeTok{pt.cex =} \DecValTok{1}\NormalTok{,}
+       \DataTypeTok{bty =} \StringTok{"o"}\NormalTok{,}
+       \DataTypeTok{bg =} \StringTok{"white"}\NormalTok{)}
+\KeywordTok{map.scale}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{bbox}\NormalTok{(sudan01)[}\DecValTok{1}\NormalTok{,], }
+          \DataTypeTok{y =} \KeywordTok{bbox}\NormalTok{(sudan01)[}\DecValTok{2}\NormalTok{,],}
+          \DataTypeTok{ratio =} \OtherTok{TRUE}\NormalTok{, }
+          \DataTypeTok{cex =} \FloatTok{0.65}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+This produces the following map:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map8-1} 
+
+}
+
+\caption{Map of localities, states and villages of Sudan with labels, legend and scale}\label{fig:map8}
+\end{figure}
+
 \hypertarget{exercise3}{%
 \chapter{Manipulating shapefile data}\label{exercise3}}
+
+In this exercise, we will use what we have learned about the structure
+and features of shapefile data in manipulating the data and creating new
+map objects.
+
+By now you would have noticed that sudan01 and sudan02 shapefile objects
+contain data for the whole of Sudan. This is useful for creating maps
+for the whole country. However, there are times when we would like to
+create maps of the specific states only or assign colours for certain
+states differently rather than a single colour for all states.
+
+To do these maps does not require new shapefiles for each of the state.
+All this needs is some manipulation of the full country map dataset.
+This is possible because the data structure of shapefiles contains all
+the data required to map all the features of the overall map separately.
+
+First, let us try to create a map of sudan01 and sudan02 with the states
+and the localities coloured differently from each other.
+
+A colour palette should be created which would provide colours for each
+of the states. This can be done using the following commands:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{createPalette <-}\StringTok{ }\KeywordTok{colorRampPalette}\NormalTok{(}\DataTypeTok{colors =} \KeywordTok{c}\NormalTok{(}\StringTok{"#FBB4AE"}\NormalTok{, }\StringTok{"#B3CDE3"}\NormalTok{, }\StringTok{"#CCEBC5"}\NormalTok{, }
+                                             \StringTok{"#DECBE4"}\NormalTok{, }\StringTok{"#FED9A6"}\NormalTok{, }\StringTok{"#FFFFCC"}\NormalTok{, }
+                                             \StringTok{"#E5D8BD"}\NormalTok{, }\StringTok{"#FDDAEC"}\NormalTok{, }\StringTok{"#F2F2F2"}\NormalTok{), }
+                                  \DataTypeTok{space =} \StringTok{"Lab"}\NormalTok{)}
+\NormalTok{sudanCol <-}\StringTok{ }\KeywordTok{createPalette}\NormalTok{(}\DecValTok{18}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+What this command uses the \texttt{colorRampPalette()} function to
+create a colour palette of 18 unique colours (one for each state). These
+colours were generated from a base set of 9 colours which in turn was
+chosen using a qualitative colour scheme from ColorBrewer 2.0 (see
+\url{http://www.colorbrewer2.org}).
+
+Once we have a colour palette to use, we now plot the map and use the
+colour palette to specify the parameter col. This is done as follows:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{border =}\NormalTok{ sudanCol, }\DataTypeTok{col =}\NormalTok{ sudanCol)}
+\KeywordTok{plot}\NormalTok{(sudan02, }\DataTypeTok{lwd =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{3}\NormalTok{, }\DataTypeTok{border =} \StringTok{"gray"}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lwd =} \DecValTok{1}\NormalTok{, }\DataTypeTok{border =} \StringTok{"gray"}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{coordinates}\NormalTok{(sudan01)[,}\DecValTok{1}\NormalTok{], }
+     \DataTypeTok{y =} \KeywordTok{coordinates}\NormalTok{(sudan01)[,}\DecValTok{2}\NormalTok{],}
+     \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
+     \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
+     \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
+     \DataTypeTok{cex =} \FloatTok{0.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+The resulting map is:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map9-1} 
+
+}
+
+\caption{Map of localities and states of Sudan coloured }\label{fig:map9}
+\end{figure}
+
+~
+
+Now, let us try to specify a colour to just a handful of the states
+while the others remain without colour. This is particularly useful when
+you just want to highlight specific states in the map for presentation
+purpose or for emphasis.
+
+For this map, we will need to use the
+\href{mailto:sudan01@data}{\nolinkurl{sudan01@data}} slot to steer our
+selection of the states of interest which we can then specify a colour
+for. For example, if we want to show the full Sudan map and Gedaref,
+Northern and Western Kordofan coloured light green, we call the
+following commands:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(sudan01, }
+     \DataTypeTok{lty =} \DecValTok{0}\NormalTok{, }
+     \DataTypeTok{col =} \KeywordTok{ifelse}\NormalTok{(sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Gedaref"}\NormalTok{, }
+                                            \StringTok{"Northern"}\NormalTok{, }
+                                            \StringTok{"Western Kordofan"}\NormalTok{), }
+                  \StringTok{"lightgreen"}\NormalTok{, }\OtherTok{NA}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(sudan02, }\DataTypeTok{lwd =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{3}\NormalTok{, }\DataTypeTok{border =} \StringTok{"gray"}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lwd =} \DecValTok{1}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{coordinates}\NormalTok{(sudan01)[,}\DecValTok{1}\NormalTok{], }
+     \DataTypeTok{y =} \KeywordTok{coordinates}\NormalTok{(sudan01)[,}\DecValTok{2}\NormalTok{], }
+     \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
+     \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
+     \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
+     \DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+The resulting map is:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map10-1} 
+
+}
+
+\caption{Map of specific states of Sudan coloured}\label{fig:map10}
+\end{figure}
+
+~
+
+There are practical uses for knowing how to manipulate map data so as to
+change the colour of the components polygons either based on a
+qualitative criteria (such as different colours for each state to
+distinguish them from each other) or on numerical data (such as in
+creating a choropleth map).
+
+The following example of simulated CMAM coverage results per state
+illustrates this usefullness.
+
+We first simulate the data as follows:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{states   <-}\StringTok{ }\KeywordTok{as.vector}\NormalTok{(sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State)}
+\NormalTok{coverage <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{95}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{73}\NormalTok{, }\DecValTok{55}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{97}\NormalTok{, }
+              \DecValTok{60}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{46}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{23}\NormalTok{, }
+              \DecValTok{71}\NormalTok{, }\DecValTok{66}\NormalTok{, }\DecValTok{38}\NormalTok{, }\DecValTok{78}\NormalTok{, }\DecValTok{74}\NormalTok{, }\DecValTok{51}\NormalTok{)}
+
+\NormalTok{exData <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(states, coverage)}
+\KeywordTok{names}\NormalTok{(exData) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"states"}\NormalTok{, }\StringTok{"coverage"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+The \texttt{exData} object gives us the simulated of CMAM coverage by
+state. Then we specify a colour palette as follows:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{createMapPalette <-}\StringTok{ }\KeywordTok{colorRampPalette}\NormalTok{(}\DataTypeTok{colors =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"lightgreen"}\NormalTok{, }
+                                                \StringTok{"green"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }
+                                     \DataTypeTok{space =} \StringTok{"Lab"}\NormalTok{)}
+\NormalTok{mapPalette <-}\StringTok{ }\KeywordTok{createMapPalette}\NormalTok{(}\DecValTok{101}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+We now can map this data using the folowing commands:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lty =} \DecValTok{0}\NormalTok{, }\DataTypeTok{col =}\NormalTok{ mapPalette[exData}\OperatorTok{$}\NormalTok{coverage])}
+\KeywordTok{plot}\NormalTok{(sudan02, }\DataTypeTok{lwd =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{3}\NormalTok{, }\DataTypeTok{border =} \StringTok{"gray"}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lwd =} \DecValTok{1}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{coordinates}\NormalTok{(sudan01)[,}\DecValTok{1}\NormalTok{], }
+     \DataTypeTok{y =} \KeywordTok{coordinates}\NormalTok{(sudan01)[,}\DecValTok{2}\NormalTok{], }
+     \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
+     \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
+     \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
+     \DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+This results in the following map:
+
+~
+
+\includegraphics{figures/map11-1.pdf}
+
+~
+
+Finally, we learn how to create maps for each state separately using the
+\texttt{sudan01} map dataset.
+
+To begin with, let's try to create and map a map dataset for North
+Darfur. We call the following commands:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nDarfur <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(sudan01, sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State }\OperatorTok{==}\StringTok{ "North Darfur"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(nDarfur)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+To produce the following:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map12-1} 
+
+}
+
+\caption{Map of North Darfur, Sudan}\label{fig:map12}
+\end{figure}
+
+~
+
+However, this map will look better if we can also show the nearby states
+and their boundaries. We can do this by plotting \texttt{sudan01} but
+this time specifying a \texttt{xlim} and \texttt{ylim} parameters using
+the \texttt{bbox()} of the map object for North Darfur. The following
+commands illustrate this:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nDarfur <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(sudan01, sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State }\OperatorTok{==}\StringTok{ "North Darfur"}\NormalTok{)}
+\NormalTok{ndLimits <-}\StringTok{ }\KeywordTok{bbox}\NormalTok{(nDarfur)}
+\KeywordTok{plot}\NormalTok{(sudan01, }
+     \DataTypeTok{xlim =}\NormalTok{ ndLimits[}\DecValTok{1}\NormalTok{,], }
+     \DataTypeTok{ylim =}\NormalTok{ ndLimits[}\DecValTok{2}\NormalTok{,], }
+     \DataTypeTok{border =} \StringTok{"gray"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(nDarfur, }
+     \DataTypeTok{xlim =}\NormalTok{ ndLimits[}\DecValTok{1}\NormalTok{,], }
+     \DataTypeTok{ylim =}\NormalTok{ ndLimits[}\DecValTok{2}\NormalTok{,], }
+     \DataTypeTok{border =} \StringTok{"blue"}\NormalTok{, }
+     \DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+The resulting map is:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map13-1} 
+
+}
+
+\caption{Map of North Darfur, Sudan}\label{fig:map13}
+\end{figure}
+
+~
+
+We can apply the same approach to get the map for each of the states.
+However, we can also create a looping function that will create and plot
+the maps for us automatically. This can be done as follows:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stateList <-}\StringTok{ }\KeywordTok{as.vector}\NormalTok{(sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(sudan01}\OperatorTok{@}\NormalTok{data)) \{}
+\NormalTok{  a <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(sudan01, sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State }\OperatorTok{==}\StringTok{ }\NormalTok{stateList[i])}
+  
+\NormalTok{  aLimits <-}\StringTok{ }\KeywordTok{bbox}\NormalTok{(a)}
+  
+  \KeywordTok{plot}\NormalTok{(sudan01, }
+       \DataTypeTok{xlim =}\NormalTok{ aLimits[}\DecValTok{1}\NormalTok{,], }
+       \DataTypeTok{ylim =}\NormalTok{ aLimits[}\DecValTok{2}\NormalTok{,], }
+       \DataTypeTok{border =} \StringTok{"gray"}\NormalTok{)}
+  
+  \KeywordTok{plot}\NormalTok{(a, }
+       \DataTypeTok{xlim =}\NormalTok{ aLimits[}\DecValTok{1}\NormalTok{,], }
+       \DataTypeTok{ylim =}\NormalTok{ aLimits[}\DecValTok{2}\NormalTok{,], }
+       \DataTypeTok{border =} \StringTok{"blue"}\NormalTok{, }
+       \DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+  
+  \KeywordTok{points}\NormalTok{(villages}\OperatorTok{$}\NormalTok{X, villages}\OperatorTok{$}\NormalTok{Y, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.3}\NormalTok{, }\DataTypeTok{col =} \StringTok{"gray90"}\NormalTok{)}
+  
+  \KeywordTok{title}\NormalTok{(}\DataTypeTok{main =}\NormalTok{ stateList[i], }\DataTypeTok{cex =} \DecValTok{2}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+The commands above will create a plot of the individual state maps on
+separate graphics device which can be saved one by one. An example of
+the maps is below.
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map14-1} 
+
+}
+
+\caption{Map of Al Gezira State, Sudan}\label{fig:map14}
+\end{figure}
+
+~
+
+The other approach is to plot each of the individual state map on the
+same graphics device. This can be done using the following commands:
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stateList <-}\StringTok{ }\KeywordTok{as.vector}\NormalTok{(sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State)}
+
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)); }\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(sudan01}\OperatorTok{@}\NormalTok{data)) \{}
+\NormalTok{  a <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(sudan01, sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State }\OperatorTok{==}\StringTok{ }\NormalTok{stateList[i])}
+\NormalTok{  aLimits <-}\StringTok{ }\KeywordTok{bbox}\NormalTok{(a)}
+    
+  \KeywordTok{plot}\NormalTok{(sudan01, }
+       \DataTypeTok{xlim =}\NormalTok{ aLimits[}\DecValTok{1}\NormalTok{,], }
+       \DataTypeTok{ylim =}\NormalTok{ aLimits[}\DecValTok{2}\NormalTok{,], }
+       \DataTypeTok{border =} \StringTok{"gray"}\NormalTok{)}
+      
+  \KeywordTok{plot}\NormalTok{(a, }
+       \DataTypeTok{xlim =}\NormalTok{ aLimits[}\DecValTok{1}\NormalTok{,], }
+       \DataTypeTok{ylim =}\NormalTok{ aLimits[}\DecValTok{2}\NormalTok{,], }
+       \DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }
+       \DataTypeTok{border =} \StringTok{"blue"}\NormalTok{, }
+       \DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+  
+  \KeywordTok{points}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ villages}\OperatorTok{$}\NormalTok{X, }
+         \DataTypeTok{y =}\NormalTok{ villages}\OperatorTok{$}\NormalTok{Y, }
+         \DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }
+         \DataTypeTok{cex =} \FloatTok{0.3}\NormalTok{, }
+         \DataTypeTok{col =} \StringTok{"gray90"}\NormalTok{)}
+  
+  \KeywordTok{title}\NormalTok{(}\DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(stateList[i], }\StringTok{"State"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{" "}\NormalTok{), }\DataTypeTok{cex =} \DecValTok{2}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+The resulting map is:
+
+~
+
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map15-1} 
+
+}
+
+\caption{Map for each state of Sudan}\label{fig:map15}
+\end{figure}
 
 \bibliography{book.bib}
 

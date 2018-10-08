@@ -25,7 +25,7 @@
 <meta name="author" content="Ernest Guevarra">
 
 
-<meta name="date" content="2018-10-07">
+<meta name="date" content="2018-10-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,6 +147,788 @@ code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Infor
             <section class="normal" id="section-">
 <div id="exercise2" class="section level1">
 <h1><span class="header-section-number">Exercise 2</span> Plotting maps</h1>
+<p>In this exercise, we will learn how to plot maps using your existing knowledge of basic plotting functions and new lessons on additional plotting functions specific to maps.</p>
+<p>By now you would be familiar already with the <code>plot()</code> function which is the most basic of plotting functions. For maps, we use <code>plot()</code> in the same way as we would for other datasets. The main difference is that the methods used in the plotting functions for <strong>shapefiles</strong> are set by the <code>sp</code> package and is optimised for mapping purposes.</p>
+<p>Therefore, plotting maps is as easy as calling the <code>plot()</code> function and passing the <code>spatial</code> object to it as shown below.</p>
+<p> </p>
+<pre class="sourceCode r" id="cb30"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">plot</span>(sudan01)</a></code></pre>
+
+<p>This produces the following map:</p>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:map1"></span>
+<img src="figures/map1-1.png" alt="Map of the states of Sudan with default plotting options"  />
+<p class="caption">
+Figure 2.1: Map of the states of Sudan with default plotting options
+</p>
+</div>
+<p> </p>
+<p>From this plot of <code>sudan01</code> <code>SpatialPolygonsDataFrame</code> object, we learn about some of the default plotting parameters under the <code>sp</code> package. <em>Line type</em> (<code>lty</code>) is set as a solid line (<code>lty = 1</code>) and <em>line width</em> (<code>lwd</code>) is set at <code>lwd = 1</code>. <em>Border colour</em> (<code>border</code>) is set as <code>border = black</code> while the <em>fill colour</em> (<code>col</code>) is set at <code>col = NA</code>. We should remember that the class of <code>sudan01</code> object is a <code>SpatialPolygonsDataFrame</code> hence it is composed of closed rings that are not holes (i.e. empty). Hence, in the plotting parameters, border and fill colours are specified separately.</p>
+<p>Let us now try to plot another map of <code>sudan01</code> object but this time change some of the default plotting parameters.</p>
+<p> </p>
+<pre class="sourceCode r" id="cb31"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">plot</span>(sudan01, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">border =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;gray90&quot;</span>)</a></code></pre>
+<p> </p>
+<p>This command gives us the following map of Sudan:</p>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:map2"></span>
+<img src="figures/map2-1.png" alt="Map of the states of Sudan with new plotting parameters"  />
+<p class="caption">
+Figure 2.2: Map of the states of Sudan with new plotting parameters
+</p>
+</div>
+<p> </p>
+<p>The map above illustrates the changes in the plot created by the changes in the plotting parameters that we have specified. The width of the border is now thicker and its colour is now blue. The inside of the map is now coloured gray.</p>
+<p>So far we have focused a lot on <code>sudan01</code> object. Hence we have learned a lot about the features, structure and characteristics of a <strong>polygon</strong> and a <code>SpatialPolygonsDataFrame</code> that contains <strong>polygons</strong> of each of the states of Sudan. However, we have yet to work with another <code>SpatialPolygonsDataFrame</code> object named <code>sudan02</code> which is a collection of <strong>polygons</strong> for each of the localities in Sudan.</p>
+<p>What we will try to learn now is how to work with the <code>sudan01</code> and <code>sudan02</code> objects to create a map of Sudan that shows the different localities and also shows how these localities are grouped in order to make up each of the states in Sudan.</p>
+<p>To be able to complete this task, we need to learn about <em>map layers</em>.</p>
+<p>The idea of <em>map layers</em> is that different set of map features (i.e. roads, topography, watery systems) that usually have separate <strong>shapefile</strong> datasets are put together in a single map by plotting each of these features on top of each other in layers. Depending on the type and class of the <strong>shapefile</strong> objects being layered, the order by which a feature is layered on to another determines which features of which layer is visible or given emphasis.</p>
+<p>Let us now try to layer <code>sudan01</code> and <code>sudan02</code> objects such that the base map is that of the localities and on top is that of the state boundaries. The final map will then show divisions by state and then further subdivisions per state by localities. We call the following commands to produce the map below:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb32"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co">#</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="co"># Plot localities of Sudan</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="co">#</span></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="kw">plot</span>(sudan02, <span class="dt">border =</span> <span class="st">&quot;gray&quot;</span>)</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="co">#</span></a>
+<a class="sourceLine" id="cb32-6" data-line-number="6"><span class="co"># Plot states of Sudan</span></a>
+<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="co">#</span></a>
+<a class="sourceLine" id="cb32-8" data-line-number="8"><span class="kw">plot</span>(sudan01, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre>
+
+<p>This produces the following map.</p>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:map3"></span>
+<img src="figures/map3-1.png" alt="Map of localities and states of Sudan"  />
+<p class="caption">
+Figure 2.3: Map of localities and states of Sudan
+</p>
+</div>
+<p> </p>
+<p>Now, let us learn how to add layers of other <strong>shapefile</strong> types/classes onto the base Sudan maps.</p>
+<p>Earlier in Exercise <a href="exercise1.html#exercise1">1</a>, we have retrieved the dataset for the grid used in the Sudan S3M I and assigned it to the object <code>grid12poly</code> and <code>grid12kmSudan</code>. The difference between these two objects is that the first one is a <code>SpatialPolygonsDataFrame</code> while the second is a <code>SpatialLinesDataFrame</code>.</p>
+<p>We will focus our attention to <code>grid12kmSudan</code> to familiarise ourselves with the <code>SpatialLinesDataFrame</code> class objects. Let us look at the structure of a <code>SpatialLinesDataFrame</code>.</p>
+<p> </p>
+<pre class="sourceCode r" id="cb33"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">str</span>(grid12kmSudan)</a></code></pre>
+<p> </p>
+<p>The results of this command is as expected quite long. But looking at the first line of the output, we learn that <code>grid12kmSudan</code> has 4 slots.</p>
+<p> </p>
+<pre><code>#&gt; Formal class &#39;SpatialLinesDataFrame&#39; [package &quot;sp&quot;] with 4 slots
+#&gt;   ..@ data       :&#39;data.frame&#39;:  245 obs. of  2 variables:
+#&gt;   .. ..$ ID   : chr [1:245] &quot;0&quot; &quot;1&quot; &quot;2&quot; &quot;3&quot; ...
+#&gt;   .. ..$ COORD: num [1:245] 23.1 23 23 22.9 22.8 ...
+#&gt;   ..@ lines      :List of 245
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 23.1 23.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;0&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 23 23
+#&gt;   .. .. .. ..@ ID   : chr &quot;1&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 23 23
+#&gt;   .. .. .. ..@ ID   : chr &quot;2&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.9 22.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;3&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.8 22.8
+#&gt;   .. .. .. ..@ ID   : chr &quot;4&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.7 22.7
+#&gt;   .. .. .. ..@ ID   : chr &quot;5&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.6 22.6
+#&gt;   .. .. .. ..@ ID   : chr &quot;6&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.5 22.5
+#&gt;   .. .. .. ..@ ID   : chr &quot;7&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.4 22.4
+#&gt;   .. .. .. ..@ ID   : chr &quot;8&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.3 22.3
+#&gt;   .. .. .. ..@ ID   : chr &quot;9&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.2 22.2
+#&gt;   .. .. .. ..@ ID   : chr &quot;10&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22.1 22.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;11&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 22 22
+#&gt;   .. .. .. ..@ ID   : chr &quot;12&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.9 21.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;13&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.8 21.8
+#&gt;   .. .. .. ..@ ID   : chr &quot;14&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.7 21.7
+#&gt;   .. .. .. ..@ ID   : chr &quot;15&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.6 21.6
+#&gt;   .. .. .. ..@ ID   : chr &quot;16&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.5 21.5
+#&gt;   .. .. .. ..@ ID   : chr &quot;17&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.4 21.4
+#&gt;   .. .. .. ..@ ID   : chr &quot;18&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.4 21.4
+#&gt;   .. .. .. ..@ ID   : chr &quot;19&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.3 21.3
+#&gt;   .. .. .. ..@ ID   : chr &quot;20&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.2 21.2
+#&gt;   .. .. .. ..@ ID   : chr &quot;21&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21.1 21.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;22&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 21 21
+#&gt;   .. .. .. ..@ ID   : chr &quot;23&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.9 20.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;24&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.8 20.8
+#&gt;   .. .. .. ..@ ID   : chr &quot;25&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.7 20.7
+#&gt;   .. .. .. ..@ ID   : chr &quot;26&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.6 20.6
+#&gt;   .. .. .. ..@ ID   : chr &quot;27&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.5 20.5
+#&gt;   .. .. .. ..@ ID   : chr &quot;28&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.4 20.4
+#&gt;   .. .. .. ..@ ID   : chr &quot;29&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.3 20.3
+#&gt;   .. .. .. ..@ ID   : chr &quot;30&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.2 20.2
+#&gt;   .. .. .. ..@ ID   : chr &quot;31&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20.1 20.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;32&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 20 20
+#&gt;   .. .. .. ..@ ID   : chr &quot;33&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.9 19.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;34&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.9 19.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;35&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.8 19.8
+#&gt;   .. .. .. ..@ ID   : chr &quot;36&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.7 19.7
+#&gt;   .. .. .. ..@ ID   : chr &quot;37&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.6 19.6
+#&gt;   .. .. .. ..@ ID   : chr &quot;38&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.5 19.5
+#&gt;   .. .. .. ..@ ID   : chr &quot;39&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.4 19.4
+#&gt;   .. .. .. ..@ ID   : chr &quot;40&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.3 19.3
+#&gt;   .. .. .. ..@ ID   : chr &quot;41&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.2 19.2
+#&gt;   .. .. .. ..@ ID   : chr &quot;42&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19.1 19.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;43&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 19 19
+#&gt;   .. .. .. ..@ ID   : chr &quot;44&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.9 18.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;45&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.8 18.8
+#&gt;   .. .. .. ..@ ID   : chr &quot;46&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.7 18.7
+#&gt;   .. .. .. ..@ ID   : chr &quot;47&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.6 18.6
+#&gt;   .. .. .. ..@ ID   : chr &quot;48&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.5 18.5
+#&gt;   .. .. .. ..@ ID   : chr &quot;49&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.4 18.4
+#&gt;   .. .. .. ..@ ID   : chr &quot;50&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.3 18.3
+#&gt;   .. .. .. ..@ ID   : chr &quot;51&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.3 18.3
+#&gt;   .. .. .. ..@ ID   : chr &quot;52&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.2 18.2
+#&gt;   .. .. .. ..@ ID   : chr &quot;53&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18.1 18.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;54&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 18 18
+#&gt;   .. .. .. ..@ ID   : chr &quot;55&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.9 17.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;56&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.8 17.8
+#&gt;   .. .. .. ..@ ID   : chr &quot;57&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.7 17.7
+#&gt;   .. .. .. ..@ ID   : chr &quot;58&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.6 17.6
+#&gt;   .. .. .. ..@ ID   : chr &quot;59&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.5 17.5
+#&gt;   .. .. .. ..@ ID   : chr &quot;60&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.4 17.4
+#&gt;   .. .. .. ..@ ID   : chr &quot;61&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.3 17.3
+#&gt;   .. .. .. ..@ ID   : chr &quot;62&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.2 17.2
+#&gt;   .. .. .. ..@ ID   : chr &quot;63&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17.1 17.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;64&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 17 17
+#&gt;   .. .. .. ..@ ID   : chr &quot;65&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.9 16.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;66&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.8 16.8
+#&gt;   .. .. .. ..@ ID   : chr &quot;67&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.7 16.7
+#&gt;   .. .. .. ..@ ID   : chr &quot;68&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.7 16.7
+#&gt;   .. .. .. ..@ ID   : chr &quot;69&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.6 16.6
+#&gt;   .. .. .. ..@ ID   : chr &quot;70&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.5 16.5
+#&gt;   .. .. .. ..@ ID   : chr &quot;71&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.4 16.4
+#&gt;   .. .. .. ..@ ID   : chr &quot;72&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.3 16.3
+#&gt;   .. .. .. ..@ ID   : chr &quot;73&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.2 16.2
+#&gt;   .. .. .. ..@ ID   : chr &quot;74&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16.1 16.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;75&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 16 16
+#&gt;   .. .. .. ..@ ID   : chr &quot;76&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.9 15.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;77&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.8 15.8
+#&gt;   .. .. .. ..@ ID   : chr &quot;78&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.7 15.7
+#&gt;   .. .. .. ..@ ID   : chr &quot;79&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.6 15.6
+#&gt;   .. .. .. ..@ ID   : chr &quot;80&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.5 15.5
+#&gt;   .. .. .. ..@ ID   : chr &quot;81&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.4 15.4
+#&gt;   .. .. .. ..@ ID   : chr &quot;82&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.3 15.3
+#&gt;   .. .. .. ..@ ID   : chr &quot;83&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.2 15.2
+#&gt;   .. .. .. ..@ ID   : chr &quot;84&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.1 15.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;85&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15.1 15.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;86&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 15 15
+#&gt;   .. .. .. ..@ ID   : chr &quot;87&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.9 14.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;88&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.8 14.8
+#&gt;   .. .. .. ..@ ID   : chr &quot;89&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.7 14.7
+#&gt;   .. .. .. ..@ ID   : chr &quot;90&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.6 14.6
+#&gt;   .. .. .. ..@ ID   : chr &quot;91&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.5 14.5
+#&gt;   .. .. .. ..@ ID   : chr &quot;92&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.4 14.4
+#&gt;   .. .. .. ..@ ID   : chr &quot;93&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.3 14.3
+#&gt;   .. .. .. ..@ ID   : chr &quot;94&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.2 14.2
+#&gt;   .. .. .. ..@ ID   : chr &quot;95&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14.1 14.1
+#&gt;   .. .. .. ..@ ID   : chr &quot;96&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 14 14
+#&gt;   .. .. .. ..@ ID   : chr &quot;97&quot;
+#&gt;   .. ..$ :Formal class &#39;Lines&#39; [package &quot;sp&quot;] with 2 slots
+#&gt;   .. .. .. ..@ Lines:List of 1
+#&gt;   .. .. .. .. ..$ :Formal class &#39;Line&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. .. .. .. .. ..@ coords: num [1:2, 1:2] 21.8 38.6 13.9 13.9
+#&gt;   .. .. .. ..@ ID   : chr &quot;98&quot;
+#&gt;   .. .. [list output truncated]
+#&gt;   ..@ bbox       : num [1:2, 1:2] 21.81 8.64 38.59 23.14
+#&gt;   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+#&gt;   .. .. ..$ : chr [1:2] &quot;x&quot; &quot;y&quot;
+#&gt;   .. .. ..$ : chr [1:2] &quot;min&quot; &quot;max&quot;
+#&gt;   ..@ proj4string:Formal class &#39;CRS&#39; [package &quot;sp&quot;] with 1 slot
+#&gt;   .. .. ..@ projargs: chr &quot;+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0&quot;</code></pre>
+
+<p>The 4 slots in a <code>SpatialLinesDataFrame</code> are:</p>
+<p> </p>
+<table>
+<caption><span id="tab:table3">Table 2.1: </span> SpatialLinesDataFrame structure</caption>
+<colgroup>
+<col width="33%" />
+<col width="66%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>data</strong></td>
+<td>Contains the index or reference data frame of the
+<strong>shapefile</strong> the number of rows of which
+indicates the number of <em>lines</em> that comprise the
+entire <strong>shapefile</strong></td>
+</tr>
+<tr class="even">
+<td><strong>lines</strong></td>
+<td>Contains <em>n</em> number of datasets based on the
+number of <em>lines</em> that comprise the entire
+<strong>shapefile</strong>.</td>
+</tr>
+<tr class="odd">
+<td><strong>bbox</strong></td>
+<td>Contains a matrix the values of which are the
+minimum and maximum <code>x</code> and <code>y</code> limits of the
+entire <strong>shapefile</strong>.</td>
+</tr>
+<tr class="even">
+<td><strong>proj4string</strong></td>
+<td>Contains a character string that specifies the
+projection and datum of the <strong>shapefile</strong> object</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>Compared to the <code>SpatialPolygonsDataFrame</code>, <code>grid12kmSudan</code> has a slot for <em>lines</em> (as expected) but doesn’t have the <code>plotOrder</code> slot. If we look back at what we’ve learned regarding <code>plotOrder</code>, it is understandable why this is not included in a <code>SpatialLinesDataFrame</code> object. The <code>plotOrder</code> is determined by the area of the shapes in the object. However, <code>SpatialLinesDataFrame</code> objects does not have a value for area because it is just composed of <em>lines</em>, not <em>polygons</em>.</p>
+<p>A closer look at the slot <code>grid12kmSudan@lines</code>, we notice that the data structure is much simpler than that of <em>polygons</em>. Each <em>line</em> is simply defined by a set of 2 points.</p>
+<p>Let us now add the <code>grid12kmSudan</code> object as another <em>layer</em> on our map. We should put it on top of <code>sudan02</code> and <code>sudan01</code> with a thin <em>line width</em> (<code>&lt; 1</code>) and a light colour. Here is the command that will produce this.</p>
+<p> </p>
+<pre class="sourceCode r" id="cb35"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">plot</span>(sudan02, <span class="dt">border =</span> <span class="st">&quot;gray&quot;</span>)</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="kw">plot</span>(sudan01, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="kw">plot</span>(grid12kmSudan, <span class="dt">lwd =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;gray90&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre>
+
+<p>This command produces the following map:</p>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:map4"></span>
+<img src="figures/map4-1.png" alt="Map of localities and states of Sudan with rectangular grid"  />
+<p class="caption">
+Figure 2.4: Map of localities and states of Sudan with rectangular grid
+</p>
+</div>
+<p> </p>
+<p>Now let us learn about points data.</p>
+<p>Earlier, we have created an object called <code>villages</code>. This object contains village data for the whole of Sudan with their <code>x</code> and <code>y</code> geographical coordinates.</p>
+<p>If we check the class of the object <code>villages</code></p>
+<p> </p>
+<pre class="sourceCode r" id="cb36"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">class</span>(villages)</a></code></pre>
+
+<p>we find out that this object is a data.frame and not an sp class object.</p>
+<p> </p>
+<pre><code>#&gt; [1] &quot;data.frame&quot;</code></pre>
+<p> </p>
+<p>However, this object is still map data because it contains geographic information which in this case is the <code>x</code> and <code>y</code> coordinates of the villages of Sudan.</p>
+<p>This is the only information we need to be able to plot points data on the map. We can do this by calling the following commands:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb38"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">plot</span>(sudan02, <span class="dt">border =</span> <span class="st">&quot;gray&quot;</span>)</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw">plot</span>(sudan01, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="kw">plot</span>(grid12kmSudan, <span class="dt">lwd =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;gray90&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="kw">points</span>(villages<span class="op">$</span>X, villages<span class="op">$</span>Y, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">0.2</span>, <span class="dt">col =</span> <span class="st">&quot;gray90&quot;</span>)</a></code></pre>
+
+<p>This produces the following map.</p>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:map5"></span>
+<img src="figures/map5-1.png" alt="Map of localities and states of Sudan with rectangular grid and villages"  />
+<p class="caption">
+Figure 2.5: Map of localities and states of Sudan with rectangular grid and villages
+</p>
+</div>
+<p> </p>
+<p>In the commands above, we learn a new function called <code>points()</code> and some new graphical parameters that are useful in plotting <em>points</em>.</p>
+<p>The <code>points()</code> function basically instructs <strong>R</strong> to plot a series of <em>points</em> given the specified coordinates. The kind of character that is drawn to represent the <em>point</em> is determined by the parameter called <code>pch</code> (<em>point character</em>) with default being a hollow circle.</p>
+
+<p>The most commonly used point characters are specified by the following numeric values:</p>
+<p> </p>
+<p><img src="figures/pch.png" width="90%" style="display: block; margin: auto;" /></p>
+<p> </p>
+<p>In this case, we used <code>pch = 20</code> which is a solid point that is 2/3 the size of <code>pch = 19</code>.</p>
+<p>The other graphical parameter that we learn here is <code>cex</code> (<em>character expansion</em>) which determines the size of the point character and has a default value of <code>cex = 1</code>.</p>
+<p>By now you would have noticed that when we used the <code>points()</code> function, we didn’t have to add an argument to add the points on to the current graphical device. By default, the <code>points()</code> function will draw the points on to the current graphical device. In fact, <code>points()</code> will give an error message and will not plot anything if there is no open graphical device as you see below.</p>
+<p> </p>
+<pre class="sourceCode r" id="cb39"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">points</span>(villages<span class="op">$</span>X, villages<span class="op">$</span>Y, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">0.2</span>, <span class="dt">col =</span> <span class="st">&quot;gray90&quot;</span>)</a></code></pre>
+<p> </p>
+<p>Let us now learn how to add other map components onto the current map. These may include</p>
+<p> </p>
+<table>
+<caption><span id="tab:table4">Table 2.2: </span> Other layers that can be added to maps</caption>
+<colgroup>
+<col width="33%" />
+<col width="66%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>labels</strong></td>
+<td>Either a numeric or character identifier that
+names the different features on the map</td>
+</tr>
+<tr class="even">
+<td><strong>legend</strong></td>
+<td>Guide to what the shapes and symbols on the map
+refer to or mean</td>
+</tr>
+<tr class="odd">
+<td><strong>scale</strong></td>
+<td>The scale of a map is the ratio of a distance on
+the map to the corresponding distance on the
+ground.</td>
+</tr>
+<tr class="even">
+<td><strong>compass</strong></td>
+<td>Indicates where the north, east, west and south
+directions are on the map</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>First, let us try adding labels to our map.</p>
+<p>For <code>sudan01</code> object which contains a map of Sudan divided into states, we would like to be able to label each state accordingly. We would like this label to be placed at the centre of each state polygon as this is based on standard mapping conventions. To do this, we will use two functions that we have not learned yet. These are <code>coordinates()</code> and <code>text()</code>.</p>
+<p>The <code>coordinates()</code> function is a function made available in the <code>sp</code> package. This function returns the centroid of the <strong>polygon</strong> or <strong>polygons</strong> in a map object. The <code>coordinates()</code> function returns a matrix containing the <code>x</code> and <code>y</code> coordinates of the centroid of the <strong>polygons</strong> in the map object. If there is only 1 <strong>polygon</strong> in the map object, then the resulting matrix is a single row.</p>
+<p>The <code>text()</code> function on the other hand adds text into the current plotting device based on a specific <code>x</code> and <code>y</code> coordinates which for the purpose of labelling will be the centroid provided by the <code>coordinates()</code> function.</p>
+<p>Additional parameters required for <code>text()</code> are the labels which is a character vector specifying the text to be written. In this case, we need the names of the states. We can easily get this from the data slot in <code>sudan01</code>. We use the parameter <code>pos</code> to specify where and how far the text will be written in relation to the <code>x</code> and <code>y</code> coordinates specified. The <code>pos</code> parameter can take values of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code> which places the text at the <em>bottom</em>, <em>left</em>, <em>top</em> or <em>right</em> of the centroid respectively. The <code>offset</code> parameter determines how far from the centroid the text will be written. The <code>cex</code> parameter sets the size of the text to be written.</p>
+<p>We apply this function to label the states by giving the following commands:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb40"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">sudan01Centroids &lt;-<span class="st"> </span><span class="kw">coordinates</span>(sudan01)</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">plot</span>(sudan01)</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="kw">text</span>(<span class="dt">x =</span> sudan01Centroids[ , <span class="dv">1</span>], </a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">     <span class="dt">y =</span> sudan01Centroids[ , <span class="dv">2</span>], </a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">     <span class="dt">labels =</span> sudan01<span class="op">@</span>data<span class="op">$</span>State, </a>
+<a class="sourceLine" id="cb40-6" data-line-number="6">     <span class="dt">pos =</span> <span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb40-7" data-line-number="7">     <span class="dt">offset =</span> <span class="fl">0.2</span>, </a>
+<a class="sourceLine" id="cb40-8" data-line-number="8">     <span class="dt">cex =</span> <span class="fl">0.65</span>)</a></code></pre>
+
+<p>This results in the following map:</p>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:map6"></span>
+<img src="figures/map6-1.png" alt="Map of states of Sudan with labels"  />
+<p class="caption">
+Figure 2.6: Map of states of Sudan with labels
+</p>
+</div>
+
+<p>Now we shall add a <em>legend</em> on the map.</p>
+<p>We use the <code>legend()</code> function for this. Following are the commands to create a <em>legend</em> for the map of <code>sudan01</code>, <code>sudan02</code> and <code>villages</code>.</p>
+<p> </p>
+<pre class="sourceCode r" id="cb41"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">plot</span>(sudan02, <span class="dt">border =</span> <span class="st">&quot;gray&quot;</span>)</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw">plot</span>(sudan01, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="kw">points</span>(villages<span class="op">$</span>X, </a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">       villages<span class="op">$</span>Y, </a>
+<a class="sourceLine" id="cb41-5" data-line-number="5">       <span class="dt">pch =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb41-6" data-line-number="6">       <span class="dt">cex =</span> <span class="fl">0.2</span>, </a>
+<a class="sourceLine" id="cb41-7" data-line-number="7">       <span class="dt">col =</span> <span class="st">&quot;gray90&quot;</span>)</a>
+<a class="sourceLine" id="cb41-8" data-line-number="8"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,</a>
+<a class="sourceLine" id="cb41-9" data-line-number="9">       <span class="dt">y.intersp =</span> <span class="fl">1.2</span>,</a>
+<a class="sourceLine" id="cb41-10" data-line-number="10">       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;state borders&quot;</span>, <span class="st">&quot;locality borders&quot;</span>, <span class="st">&quot;villages&quot;</span>),</a>
+<a class="sourceLine" id="cb41-11" data-line-number="11">       <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="ot">NA</span>),</a>
+<a class="sourceLine" id="cb41-12" data-line-number="12">       <span class="dt">lwd =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="ot">NA</span>),</a>
+<a class="sourceLine" id="cb41-13" data-line-number="13">       <span class="dt">pch =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">20</span>),</a>
+<a class="sourceLine" id="cb41-14" data-line-number="14">       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;gray&quot;</span>, <span class="st">&quot;gray90&quot;</span>),</a>
+<a class="sourceLine" id="cb41-15" data-line-number="15">       <span class="dt">cex =</span> <span class="fl">0.65</span>,</a>
+<a class="sourceLine" id="cb41-16" data-line-number="16">       <span class="dt">pt.cex =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb41-17" data-line-number="17">       <span class="dt">bty =</span> <span class="st">&quot;o&quot;</span>,</a>
+<a class="sourceLine" id="cb41-18" data-line-number="18">       <span class="dt">bg =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre>
+
+<p>This produces the following map:</p>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:map7"></span>
+<img src="figures/map7-1.png" alt="Map of localities, states and villages of Sudan with labels and legend"  />
+<p class="caption">
+Figure 2.7: Map of localities, states and villages of Sudan with labels and legend
+</p>
+</div>
+
+<p>Lastly, we add a <em>scale</em> to our map.</p>
+<p>We use the <code>map.scale()</code> function for this. We need to install and load the library <code>maps</code> to use this function. We add the scale on the map through the following commands:</p>
+<p> </p>
+<pre class="sourceCode r" id="cb42"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">plot</span>(sudan02, <span class="dt">border =</span> <span class="st">&quot;gray&quot;</span>)</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">plot</span>(sudan01, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="kw">points</span>(villages<span class="op">$</span>X, villages<span class="op">$</span>Y, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">0.2</span>, <span class="dt">col =</span> <span class="st">&quot;gray90&quot;</span>)</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,</a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">       <span class="dt">y.intersp =</span> <span class="fl">1.2</span>,</a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;state borders&quot;</span>, <span class="st">&quot;locality borders&quot;</span>, <span class="st">&quot;villages&quot;</span>),</a>
+<a class="sourceLine" id="cb42-7" data-line-number="7">       <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="ot">NA</span>),</a>
+<a class="sourceLine" id="cb42-8" data-line-number="8">       <span class="dt">lwd =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="ot">NA</span>),</a>
+<a class="sourceLine" id="cb42-9" data-line-number="9">       <span class="dt">pch =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">20</span>),</a>
+<a class="sourceLine" id="cb42-10" data-line-number="10">       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;gray&quot;</span>, <span class="st">&quot;gray90&quot;</span>),</a>
+<a class="sourceLine" id="cb42-11" data-line-number="11">       <span class="dt">cex =</span> <span class="fl">0.65</span>,</a>
+<a class="sourceLine" id="cb42-12" data-line-number="12">       <span class="dt">pt.cex =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb42-13" data-line-number="13">       <span class="dt">bty =</span> <span class="st">&quot;o&quot;</span>,</a>
+<a class="sourceLine" id="cb42-14" data-line-number="14">       <span class="dt">bg =</span> <span class="st">&quot;white&quot;</span>)</a>
+<a class="sourceLine" id="cb42-15" data-line-number="15"><span class="kw">map.scale</span>(<span class="dt">x =</span> <span class="kw">bbox</span>(sudan01)[<span class="dv">1</span>,], </a>
+<a class="sourceLine" id="cb42-16" data-line-number="16">          <span class="dt">y =</span> <span class="kw">bbox</span>(sudan01)[<span class="dv">2</span>,],</a>
+<a class="sourceLine" id="cb42-17" data-line-number="17">          <span class="dt">ratio =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb42-18" data-line-number="18">          <span class="dt">cex =</span> <span class="fl">0.65</span>)</a></code></pre>
+
+<p>This produces the following map:</p>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:map8"></span>
+<img src="figures/map8-1.png" alt="Map of localities, states and villages of Sudan with labels, legend and scale"  />
+<p class="caption">
+Figure 2.8: Map of localities, states and villages of Sudan with labels, legend and scale
+</p>
+</div>
 
 </div>
             </section>
