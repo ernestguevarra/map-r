@@ -160,6 +160,7 @@ code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Infor
 <a class="sourceLine" id="cb43-5" data-line-number="5">sudanCol &lt;-<span class="st"> </span><span class="kw">createPalette</span>(<span class="dv">18</span>)</a></code></pre>
 <p> </p>
 <p>What this command uses the <code>colorRampPalette()</code> function to create a colour palette of 18 unique colours (one for each state). These colours were generated from a base set of 9 colours which in turn was chosen using a qualitative colour scheme from ColorBrewer 2.0 (see <a href="http://www.colorbrewer2.org" class="uri">http://www.colorbrewer2.org</a>).</p>
+
 <p>Once we have a colour palette to use, we now plot the map and use the colour palette to specify the parameter col. This is done as follows:</p>
 <p> </p>
 <pre class="sourceCode r" id="cb44"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">plot</span>(sudan01, <span class="dt">border =</span> sudanCol, <span class="dt">col =</span> sudanCol)</a>
@@ -170,7 +171,7 @@ code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Infor
 <a class="sourceLine" id="cb44-6" data-line-number="6">     <span class="dt">labels =</span> sudan01<span class="op">@</span>data<span class="op">$</span>State, </a>
 <a class="sourceLine" id="cb44-7" data-line-number="7">     <span class="dt">pos =</span> <span class="dv">3</span>, </a>
 <a class="sourceLine" id="cb44-8" data-line-number="8">     <span class="dt">offset =</span> <span class="fl">0.2</span>, </a>
-<a class="sourceLine" id="cb44-9" data-line-number="9">     <span class="dt">cex =</span> <span class="fl">0.2</span>)</a></code></pre>
+<a class="sourceLine" id="cb44-9" data-line-number="9">     <span class="dt">cex =</span> <span class="dv">1</span>)</a></code></pre>
 
 <p>The resulting map is:</p>
 <p> </p>
@@ -180,7 +181,7 @@ code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Infor
 Figure 3.1: Map of localities and states of Sudan coloured
 </p>
 </div>
-<p> </p>
+
 <p>Now, let us try to specify a colour to just a handful of the states while the others remain without colour. This is particularly useful when you just want to highlight specific states in the map for presentation purpose or for emphasis.</p>
 <p>For this map, we will need to use the <a href="mailto:sudan01@data">sudan01@data</a> slot to steer our selection of the states of interest which we can then specify a colour for. For example, if we want to show the full Sudan map and Gedaref, Northern and Western Kordofan coloured light green, we call the following commands:</p>
 <p> </p>
@@ -197,8 +198,8 @@ Figure 3.1: Map of localities and states of Sudan coloured
 <a class="sourceLine" id="cb45-11" data-line-number="11">     <span class="dt">labels =</span> sudan01<span class="op">@</span>data<span class="op">$</span>State, </a>
 <a class="sourceLine" id="cb45-12" data-line-number="12">     <span class="dt">pos =</span> <span class="dv">3</span>, </a>
 <a class="sourceLine" id="cb45-13" data-line-number="13">     <span class="dt">offset =</span> <span class="fl">0.2</span>, </a>
-<a class="sourceLine" id="cb45-14" data-line-number="14">     <span class="dt">cex =</span> <span class="fl">0.5</span>)</a></code></pre>
-<p> </p>
+<a class="sourceLine" id="cb45-14" data-line-number="14">     <span class="dt">cex =</span> <span class="dv">1</span>)</a></code></pre>
+
 <p>The resulting map is:</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:map10"></span>
@@ -210,6 +211,7 @@ Figure 3.2: Map of specific states of Sudan coloured
 <p> </p>
 <p>There are practical uses for knowing how to manipulate map data so as to change the colour of the components polygons either based on a qualitative criteria (such as different colours for each state to distinguish them from each other) or on numerical data (such as in creating a choropleth map).</p>
 <p>The following example of simulated CMAM coverage results per state illustrates this usefullness.</p>
+
 <p>We first simulate the data as follows:</p>
 <p> </p>
 <pre class="sourceCode r" id="cb46"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">states   &lt;-<span class="st"> </span><span class="kw">as.vector</span>(sudan01<span class="op">@</span>data<span class="op">$</span>State)</a>
@@ -237,27 +239,32 @@ Figure 3.2: Map of specific states of Sudan coloured
 <a class="sourceLine" id="cb48-6" data-line-number="6">     <span class="dt">labels =</span> sudan01<span class="op">@</span>data<span class="op">$</span>State, </a>
 <a class="sourceLine" id="cb48-7" data-line-number="7">     <span class="dt">pos =</span> <span class="dv">3</span>, </a>
 <a class="sourceLine" id="cb48-8" data-line-number="8">     <span class="dt">offset =</span> <span class="fl">0.2</span>, </a>
-<a class="sourceLine" id="cb48-9" data-line-number="9">     <span class="dt">cex =</span> <span class="fl">0.5</span>)</a></code></pre>
-<p> </p>
+<a class="sourceLine" id="cb48-9" data-line-number="9">     <span class="dt">cex =</span> <span class="dv">1</span>)</a></code></pre>
+
 <p>This results in the following map:</p>
 <p> </p>
-<p><img src="figures/map11-1.png" width="672" /></p>
+<div class="figure" style="text-align: center"><span id="fig:map11"></span>
+<img src="figures/map11-1.png" alt="Sample coverage map"  />
+<p class="caption">
+Figure 3.3: Sample coverage map
+</p>
+</div>
 <p> </p>
 <p>Finally, we learn how to create maps for each state separately using the <code>sudan01</code> map dataset.</p>
 <p>To begin with, let’s try to create and map a map dataset for North Darfur. We call the following commands:</p>
 <p> </p>
 <pre class="sourceCode r" id="cb49"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">nDarfur &lt;-<span class="st"> </span><span class="kw">subset</span>(sudan01, sudan01<span class="op">@</span>data<span class="op">$</span>State <span class="op">==</span><span class="st"> &quot;North Darfur&quot;</span>)</a>
 <a class="sourceLine" id="cb49-2" data-line-number="2"><span class="kw">plot</span>(nDarfur)</a></code></pre>
-<p> </p>
+
 <p>To produce the following:</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:map12"></span>
 <img src="figures/map12-1.png" alt="Map of North Darfur, Sudan"  />
 <p class="caption">
-Figure 3.3: Map of North Darfur, Sudan
+Figure 3.4: Map of North Darfur, Sudan
 </p>
 </div>
-<p> </p>
+
 <p>However, this map will look better if we can also show the nearby states and their boundaries. We can do this by plotting <code>sudan01</code> but this time specifying a <code>xlim</code> and <code>ylim</code> parameters using the <code>bbox()</code> of the map object for North Darfur. The following commands illustrate this:</p>
 <p> </p>
 <pre class="sourceCode r" id="cb50"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">nDarfur &lt;-<span class="st"> </span><span class="kw">subset</span>(sudan01, sudan01<span class="op">@</span>data<span class="op">$</span>State <span class="op">==</span><span class="st"> &quot;North Darfur&quot;</span>)</a>
@@ -271,13 +278,13 @@ Figure 3.3: Map of North Darfur, Sudan
 <a class="sourceLine" id="cb50-9" data-line-number="9">     <span class="dt">ylim =</span> ndLimits[<span class="dv">2</span>,], </a>
 <a class="sourceLine" id="cb50-10" data-line-number="10">     <span class="dt">border =</span> <span class="st">&quot;blue&quot;</span>, </a>
 <a class="sourceLine" id="cb50-11" data-line-number="11">     <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre>
-<p> </p>
+
 <p>The resulting map is:</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:map13"></span>
 <img src="figures/map13-1.png" alt="Map of North Darfur, Sudan"  />
 <p class="caption">
-Figure 3.4: Map of North Darfur, Sudan
+Figure 3.5: Map of North Darfur, Sudan
 </p>
 </div>
 <p> </p>
@@ -305,16 +312,16 @@ Figure 3.4: Map of North Darfur, Sudan
 <a class="sourceLine" id="cb51-20" data-line-number="20">  </a>
 <a class="sourceLine" id="cb51-21" data-line-number="21">  <span class="kw">title</span>(<span class="dt">main =</span> stateList[i], <span class="dt">cex =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb51-22" data-line-number="22">}</a></code></pre>
-<p> </p>
+
 <p>The commands above will create a plot of the individual state maps on separate graphics device which can be saved one by one. An example of the maps is below.</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:map14"></span>
 <img src="figures/map14-1.png" alt="Map of Al Gezira State, Sudan"  />
 <p class="caption">
-Figure 3.5: Map of Al Gezira State, Sudan
+Figure 3.6: Map of Al Gezira State, Sudan
 </p>
 </div>
-<p> </p>
+
 <p>The other approach is to plot each of the individual state map on the same graphics device. This can be done using the following commands:</p>
 <p> </p>
 <pre class="sourceCode r" id="cb52"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">stateList &lt;-<span class="st"> </span><span class="kw">as.vector</span>(sudan01<span class="op">@</span>data<span class="op">$</span>State)</a>
@@ -351,7 +358,7 @@ Figure 3.5: Map of Al Gezira State, Sudan
 <div class="figure" style="text-align: center"><span id="fig:map15"></span>
 <img src="figures/map15-1.png" alt="Map for each state of Sudan"  />
 <p class="caption">
-Figure 3.6: Map for each state of Sudan
+Figure 3.7: Map for each state of Sudan
 </p>
 </div>
 

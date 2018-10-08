@@ -265,7 +265,7 @@ S3M}\label{short-course-on-the-use-of-r-for-the-mapping-requirements-of-s3m}}
 \addcontentsline{toc}{chapter}{Short course on the use of R for the
 mapping requirements of S3M}
 
-\includegraphics{figures/sudanMapTriSim.png}
+\begin{center}\includegraphics[width=18.75in]{figures/sudanMapTriSim} \end{center}
 
 \hypertarget{exercise1}{%
 \chapter{Retrieving map data in R}\label{exercise1}}
@@ -2472,7 +2472,7 @@ commands:
      \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
      \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
      \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
-     \DataTypeTok{cex =} \FloatTok{0.65}\NormalTok{)}
+     \DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2631,6 +2631,8 @@ colours were generated from a base set of 9 colours which in turn was
 chosen using a qualitative colour scheme from ColorBrewer 2.0 (see
 \url{http://www.colorbrewer2.org}).
 
+\newpage
+
 Once we have a colour palette to use, we now plot the map and use the
 colour palette to specify the parameter col. This is done as follows:
 
@@ -2646,7 +2648,7 @@ colour palette to specify the parameter col. This is done as follows:
      \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
      \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
      \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
-     \DataTypeTok{cex =} \FloatTok{0.2}\NormalTok{)}
+     \DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2665,7 +2667,7 @@ The resulting map is:
 \caption{Map of localities and states of Sudan coloured }\label{fig:map9}
 \end{figure}
 
-~
+\newpage
 
 Now, let us try to specify a colour to just a handful of the states
 while the others remain without colour. This is particularly useful when
@@ -2696,11 +2698,11 @@ following commands:
      \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
      \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
      \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
-     \DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
+     \DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-~
+\newpage
 
 The resulting map is:
 
@@ -2725,6 +2727,8 @@ creating a choropleth map).
 
 The following example of simulated CMAM coverage results per state
 illustrates this usefullness.
+
+\newpage
 
 We first simulate the data as follows:
 
@@ -2774,17 +2778,24 @@ We now can map this data using the folowing commands:
      \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
      \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
      \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
-     \DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
+     \DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-~
+\newpage
 
 This results in the following map:
 
 ~
 
-\includegraphics{figures/map11-1.pdf}
+\begin{figure}[H]
+
+{\centering \includegraphics{figures/map11-1} 
+
+}
+
+\caption{Sample coverage map}\label{fig:map11}
+\end{figure}
 
 ~
 
@@ -2803,7 +2814,7 @@ Darfur. We call the following commands:
 \end{Highlighting}
 \end{Shaded}
 
-~
+\newpage
 
 To produce the following:
 
@@ -2818,7 +2829,7 @@ To produce the following:
 \caption{Map of North Darfur, Sudan}\label{fig:map12}
 \end{figure}
 
-~
+\newpage
 
 However, this map will look better if we can also show the nearby states
 and their boundaries. We can do this by plotting \texttt{sudan01} but
@@ -2844,7 +2855,7 @@ commands illustrate this:
 \end{Highlighting}
 \end{Shaded}
 
-~
+\newpage
 
 The resulting map is:
 
@@ -2894,7 +2905,7 @@ the maps for us automatically. This can be done as follows:
 \end{Highlighting}
 \end{Shaded}
 
-~
+\newpage
 
 The commands above will create a plot of the individual state maps on
 separate graphics device which can be saved one by one. An example of
@@ -2911,7 +2922,7 @@ the maps is below.
 \caption{Map of Al Gezira State, Sudan}\label{fig:map14}
 \end{figure}
 
-~
+\newpage
 
 The other approach is to plot each of the individual state map on the
 same graphics device. This can be done using the following commands:
