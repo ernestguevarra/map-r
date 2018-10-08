@@ -28,9 +28,8 @@ description: "Mapping with R"
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  warning = FALSE,
-  message = FALSE,
   collapse = TRUE,
+  error = TRUE,
   comment = "#>",
   fig.path = "figures/"
 )
