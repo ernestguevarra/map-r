@@ -1,5 +1,4 @@
 bookdown::gitbook:
-  dev: svglite
   highlight: tango
   css: style.css
   fig_caption: yes
@@ -21,5 +20,4 @@ bookdown::pdf_book:
   dev: "cairo_pdf"
   fig_caption: yes
 bookdown::epub_book:
-  dev: svglite
   stylesheet: style.css
