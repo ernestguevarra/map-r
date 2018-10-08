@@ -381,33 +381,6 @@ sudan01@plotOrder
 
 The output is a numeric vector of length 18. The values in the vector represent the *polygon* that gets plotted first. In this case, the 13th *polygon* is the first to be plotted and the 1st *polygon* will be the last to be plotted.
 
-The `plotOrder` slot is linked  or related to the area slot of each of the *polygon* found in the dataset for each of the *polygons* in `sudan01` object. The *polygon* with the biggest area gets plotted first and the one with the smallest area gets plotted last.
-
-Given this, it would be a good exercise of our newly learned skills of handling and manipulating mapping data to try to create a dataframe that combines the `sudan01@plotOrder` vector with the corresponding area size of each *polygon* referred to in the plotting order. This is a good way of checking whether indeed the plotting order of *polygons* is based on decreasing area size. We do this by:
-
-&nbsp;
-
-```{r, echo = TRUE, eval = TRUE}
-areaAll <- NULL
-    
-for(i in 1:length(sudan01)) {
-  area <- sudan01@polygons[sudan01@plotOrder][[i]]@Polygons[[1]]@area
-  areaAll <- c(areaAll, area)
-}
-
-orderByArea <- data.frame(sudan01@plotOrder, areaAll)
-```
-
-&nbsp;
-
-The result of this is:
-
-&nbsp;
-
-```{r, echo = FALSE, eval = TRUE}
-orderByArea
-```
-
 &nbsp;
 
 Let us now take a look at the `bbox` slot of `sudan01`. We make a call as follows:
@@ -424,7 +397,7 @@ This gives the following results:
 
 &nbsp;
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = TRUE}
 sudan01@bbox
 ```
 
