@@ -289,7 +289,7 @@ text(x = sudan01Centroids[ , 1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 0.65)
+     cex = 1)
 ```
 
 \newpage
@@ -306,7 +306,7 @@ text(x = sudan01Centroids[ , 1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 0.65)
+     cex = 1)
 ```
 
 \newpage
@@ -415,5 +415,8 @@ legend("topleft",
        pt.cex = 1,
        bty = "o",
        bg = "white")
-map.scale(ratio = TRUE, cex = 0.65)
+map.scale(x = bbox(sudan01)[1, 1] - 0.5,
+          y = bbox(sudan01)[2, 2] - 0.8,
+          ratio = TRUE, 
+          cex = 0.65)
 ```
