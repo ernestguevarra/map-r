@@ -39,7 +39,7 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 1)
+     cex = 0.8)
 ```
 
 \newpage
@@ -48,7 +48,7 @@ The resulting map is:
 
 &nbsp;
 
-```{r map9, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan coloured ", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map9, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan coloured ", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 plot(sudan01, border = sudanCol, col = sudanCol)
 plot(sudan02, lwd = 0.5, lty = 3, border = "gray", add = TRUE)
 plot(sudan01, lwd = 1, border = "gray", add = TRUE)
@@ -57,7 +57,7 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 1)
+     cex = 0.8)
 ```
 
 \newpage
@@ -82,7 +82,7 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 1)
+     cex = 0.8)
 ```
 
 \newpage
@@ -91,7 +91,7 @@ The resulting map is:
 
 &nbsp;
 
-```{r map10, echo = FALSE, eval = TRUE, fig.cap = "Map of specific states of Sudan coloured", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map10, echo = FALSE, eval = TRUE, fig.cap = "Map of specific states of Sudan coloured", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 plot(sudan01, 
      lty = 0, 
      col = ifelse(sudan01@data$State %in% c("Gedaref", 
@@ -105,7 +105,7 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 1)
+     cex = 0.8)
 ```
  
 &nbsp;
@@ -150,7 +150,7 @@ We now can map this data using the folowing commands:
 &nbsp;
 
 ```{r, echo = TRUE, eval = FALSE}
-plot(sudan01, lty = 0, col = mapPalette[exData$coverage])
+plot(sudan01, lty = 0, col = mapPalette[exData$coverage + 1])
 plot(sudan02, lwd = 0.5, lty = 3, border = "gray", add = TRUE)
 plot(sudan01, lwd = 1, add = TRUE)
 text(x = coordinates(sudan01)[,1], 
@@ -158,7 +158,7 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 1)
+     cex = 0.8)
 ```
 
 \newpage
@@ -167,8 +167,8 @@ This results in the following map:
 
 &nbsp;
 
-```{r map11, echo = FALSE, eval = TRUE, fig.cap = "Sample coverage map", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
-plot(sudan01, lty = 0, col = mapPalette[exData$coverage])
+```{r map11, echo = FALSE, eval = TRUE, fig.cap = "Sample coverage map", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
+plot(sudan01, lty = 0, col = mapPalette[exData$coverage + 1])
 plot(sudan02, lwd = 0.5, lty = 3, border = "gray", add = TRUE)
 plot(sudan01, lwd = 1, add = TRUE)
 text(x = coordinates(sudan01)[,1], 
@@ -176,7 +176,7 @@ text(x = coordinates(sudan01)[,1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 1)
+     cex = 0.8)
 ```
 
 &nbsp;
@@ -198,7 +198,7 @@ To produce the following:
 
 &nbsp;
 
-```{r map12, echo = FALSE, eval = TRUE, fig.cap = "Map of North Darfur, Sudan", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map12, echo = FALSE, eval = TRUE, fig.cap = "Map of North Darfur, Sudan", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 nDarfur <- subset(sudan01, sudan01@data$State == "North Darfur")
 plot(nDarfur)
 ```
@@ -229,7 +229,7 @@ The resulting map is:
 
 &nbsp;
 
-```{r map13, echo = FALSE, eval = TRUE, fig.cap = "Map of North Darfur, Sudan", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map13, echo = FALSE, eval = TRUE, fig.cap = "Map of North Darfur, Sudan", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 nDarfur <- subset(sudan01, sudan01@data$State == "North Darfur")
 ndLimits <- bbox(nDarfur)
 plot(sudan01, 
@@ -243,7 +243,7 @@ plot(nDarfur,
      add = TRUE)
 ```
 
-&nbsp;
+\newpage
 
 We can apply the same approach to get the map for each of the states. However, we can also create a looping function that will create and plot the maps for us automatically. This can be done as follows:
 
@@ -280,7 +280,7 @@ The commands above will create a plot of the individual state maps on separate g
 
 &nbsp;
 
-```{r map14, echo = FALSE, eval = TRUE, fig.cap = "Map of Al Gezira State, Sudan", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map14, echo = FALSE, eval = TRUE, fig.cap = "Map of Al Gezira State, Sudan", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 alGezira <- subset(sudan01, sudan01@data$State == "Al Gezira")
 
 plot(alGezira, lty = 0)
@@ -331,7 +331,7 @@ for(i in 1:nrow(sudan01@data)) {
 }
 ```
 
-&nbsp;
+\newpage
 
 The resulting map is:
 
