@@ -120,7 +120,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-10-08}
+    \date{2018-10-09}
 
 \usepackage{booktabs}
 \usepackage[table]{xcolor}
@@ -2472,7 +2472,7 @@ commands:
      \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
      \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
      \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
-     \DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
+     \DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2648,7 +2648,7 @@ colour palette to specify the parameter col. This is done as follows:
      \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
      \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
      \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
-     \DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
+     \DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2698,7 +2698,7 @@ following commands:
      \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
      \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
      \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
-     \DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
+     \DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2770,7 +2770,7 @@ We now can map this data using the folowing commands:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lty =} \DecValTok{0}\NormalTok{, }\DataTypeTok{col =}\NormalTok{ mapPalette[exData}\OperatorTok{$}\NormalTok{coverage])}
+\KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lty =} \DecValTok{0}\NormalTok{, }\DataTypeTok{col =}\NormalTok{ mapPalette[exData}\OperatorTok{$}\NormalTok{coverage }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{])}
 \KeywordTok{plot}\NormalTok{(sudan02, }\DataTypeTok{lwd =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{3}\NormalTok{, }\DataTypeTok{border =} \StringTok{"gray"}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
 \KeywordTok{plot}\NormalTok{(sudan01, }\DataTypeTok{lwd =} \DecValTok{1}\NormalTok{, }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
 \KeywordTok{text}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{coordinates}\NormalTok{(sudan01)[,}\DecValTok{1}\NormalTok{], }
@@ -2778,7 +2778,7 @@ We now can map this data using the folowing commands:
      \DataTypeTok{labels =}\NormalTok{ sudan01}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{State, }
      \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
      \DataTypeTok{offset =} \FloatTok{0.2}\NormalTok{, }
-     \DataTypeTok{cex =} \DecValTok{1}\NormalTok{)}
+     \DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2870,7 +2870,7 @@ The resulting map is:
 \caption{Map of North Darfur, Sudan}\label{fig:map13}
 \end{figure}
 
-~
+\newpage
 
 We can apply the same approach to get the map for each of the states.
 However, we can also create a looping function that will create and plot
@@ -2962,7 +2962,7 @@ same graphics device. This can be done using the following commands:
 \end{Highlighting}
 \end{Shaded}
 
-~
+\newpage
 
 The resulting map is:
 

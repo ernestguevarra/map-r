@@ -25,7 +25,7 @@
 <meta name="author" content="Ernest Guevarra">
 
 
-<meta name="date" content="2018-10-08">
+<meta name="date" content="2018-10-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -171,7 +171,7 @@ code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Infor
 <a class="sourceLine" id="cb44-6" data-line-number="6">     <span class="dt">labels =</span> sudan01<span class="op">@</span>data<span class="op">$</span>State, </a>
 <a class="sourceLine" id="cb44-7" data-line-number="7">     <span class="dt">pos =</span> <span class="dv">3</span>, </a>
 <a class="sourceLine" id="cb44-8" data-line-number="8">     <span class="dt">offset =</span> <span class="fl">0.2</span>, </a>
-<a class="sourceLine" id="cb44-9" data-line-number="9">     <span class="dt">cex =</span> <span class="dv">1</span>)</a></code></pre>
+<a class="sourceLine" id="cb44-9" data-line-number="9">     <span class="dt">cex =</span> <span class="fl">0.8</span>)</a></code></pre>
 
 <p>The resulting map is:</p>
 <p> </p>
@@ -198,7 +198,7 @@ Figure 3.1: Map of localities and states of Sudan coloured
 <a class="sourceLine" id="cb45-11" data-line-number="11">     <span class="dt">labels =</span> sudan01<span class="op">@</span>data<span class="op">$</span>State, </a>
 <a class="sourceLine" id="cb45-12" data-line-number="12">     <span class="dt">pos =</span> <span class="dv">3</span>, </a>
 <a class="sourceLine" id="cb45-13" data-line-number="13">     <span class="dt">offset =</span> <span class="fl">0.2</span>, </a>
-<a class="sourceLine" id="cb45-14" data-line-number="14">     <span class="dt">cex =</span> <span class="dv">1</span>)</a></code></pre>
+<a class="sourceLine" id="cb45-14" data-line-number="14">     <span class="dt">cex =</span> <span class="fl">0.8</span>)</a></code></pre>
 
 <p>The resulting map is:</p>
 <p> </p>
@@ -231,7 +231,7 @@ Figure 3.2: Map of specific states of Sudan coloured
 <p> </p>
 <p>We now can map this data using the folowing commands:</p>
 <p> </p>
-<pre class="sourceCode r" id="cb48"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">plot</span>(sudan01, <span class="dt">lty =</span> <span class="dv">0</span>, <span class="dt">col =</span> mapPalette[exData<span class="op">$</span>coverage])</a>
+<pre class="sourceCode r" id="cb48"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">plot</span>(sudan01, <span class="dt">lty =</span> <span class="dv">0</span>, <span class="dt">col =</span> mapPalette[exData<span class="op">$</span>coverage <span class="op">+</span><span class="st"> </span><span class="dv">1</span>])</a>
 <a class="sourceLine" id="cb48-2" data-line-number="2"><span class="kw">plot</span>(sudan02, <span class="dt">lwd =</span> <span class="fl">0.5</span>, <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">border =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb48-3" data-line-number="3"><span class="kw">plot</span>(sudan01, <span class="dt">lwd =</span> <span class="dv">1</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb48-4" data-line-number="4"><span class="kw">text</span>(<span class="dt">x =</span> <span class="kw">coordinates</span>(sudan01)[,<span class="dv">1</span>], </a>
@@ -239,7 +239,7 @@ Figure 3.2: Map of specific states of Sudan coloured
 <a class="sourceLine" id="cb48-6" data-line-number="6">     <span class="dt">labels =</span> sudan01<span class="op">@</span>data<span class="op">$</span>State, </a>
 <a class="sourceLine" id="cb48-7" data-line-number="7">     <span class="dt">pos =</span> <span class="dv">3</span>, </a>
 <a class="sourceLine" id="cb48-8" data-line-number="8">     <span class="dt">offset =</span> <span class="fl">0.2</span>, </a>
-<a class="sourceLine" id="cb48-9" data-line-number="9">     <span class="dt">cex =</span> <span class="dv">1</span>)</a></code></pre>
+<a class="sourceLine" id="cb48-9" data-line-number="9">     <span class="dt">cex =</span> <span class="fl">0.8</span>)</a></code></pre>
 
 <p>This results in the following map:</p>
 <p> </p>
@@ -287,7 +287,7 @@ Figure 3.4: Map of North Darfur, Sudan
 Figure 3.5: Map of North Darfur, Sudan
 </p>
 </div>
-<p> </p>
+
 <p>We can apply the same approach to get the map for each of the states. However, we can also create a looping function that will create and plot the maps for us automatically. This can be done as follows:</p>
 <p> </p>
 <pre class="sourceCode r" id="cb51"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">stateList &lt;-<span class="st"> </span><span class="kw">as.vector</span>(sudan01<span class="op">@</span>data<span class="op">$</span>State)</a>
@@ -352,7 +352,7 @@ Figure 3.6: Map of Al Gezira State, Sudan
 <a class="sourceLine" id="cb52-26" data-line-number="26">  </a>
 <a class="sourceLine" id="cb52-27" data-line-number="27">  <span class="kw">title</span>(<span class="dt">main =</span> <span class="kw">paste</span>(stateList[i], <span class="st">&quot;State&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">cex =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb52-28" data-line-number="28">}</a></code></pre>
-<p> </p>
+
 <p>The resulting map is:</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:map15"></span>
