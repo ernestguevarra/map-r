@@ -18,7 +18,7 @@ This produces the following map:
 
 &nbsp;
 
-```{r map1, echo = FALSE, eval = TRUE, fig.cap = "Map of the states of Sudan with default plotting options", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map1, echo = FALSE, eval = TRUE, fig.cap = "Map of the states of Sudan with default plotting options", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 plot(sudan01)
 ```
 
@@ -40,7 +40,7 @@ This command gives us the following map of Sudan:
 
 &nbsp;
 
-```{r map2, echo = FALSE, eval = TRUE, fig.cap = "Map of the states of Sudan with new plotting parameters", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map2, echo = FALSE, eval = TRUE, fig.cap = "Map of the states of Sudan with new plotting parameters", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 plot(sudan01, lty = 1, lwd = 2, border = "blue", col = "gray90")
 ```
 
@@ -77,7 +77,7 @@ This produces the following map.
 
 &nbsp;
 
-```{r map3, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map3, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 plot(sudan02, border = "gray")
 plot(sudan01, lwd = 2, add = TRUE)
 ```
@@ -154,7 +154,7 @@ This command produces the following map:
 
 &nbsp;
 
-```{r map4, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan with rectangular grid", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map4, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan with rectangular grid", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 plot(sudan02, border = "gray")
 plot(sudan01, lwd = 2, add = TRUE)
 plot(grid12kmSudan, lwd = 0.5, col = "gray90", add = TRUE)
@@ -205,7 +205,7 @@ This produces the following map.
 
 &nbsp;
 
-```{r map5, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan with rectangular grid and villages", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map5, echo = FALSE, eval = TRUE, fig.cap = "Map of localities and states of Sudan with rectangular grid and villages", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 plot(sudan02, border = "gray")
 plot(sudan01, lwd = 2, add = TRUE)
 plot(grid12kmSudan, lwd = 0.5, col = "gray90", add = TRUE)
@@ -289,7 +289,7 @@ text(x = sudan01Centroids[ , 1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 1)
+     cex = 0.8)
 ```
 
 \newpage
@@ -298,7 +298,7 @@ This results in the following map:
 
 &nbsp;
 
-```{r map6, echo = FALSE, eval = TRUE, fig.cap = "Map of states of Sudan with labels", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map6, echo = FALSE, eval = TRUE, fig.cap = "Map of states of Sudan with labels", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 sudan01Centroids <- coordinates(sudan01)
 plot(sudan01)
 text(x = sudan01Centroids[ , 1], 
@@ -306,7 +306,7 @@ text(x = sudan01Centroids[ , 1],
      labels = sudan01@data$State, 
      pos = 3, 
      offset = 0.2, 
-     cex = 1)
+     cex = 0.8)
 ```
 
 \newpage
@@ -344,7 +344,7 @@ This produces the following map:
 
 &nbsp;
 
-```{r map7, echo = FALSE, eval = TRUE, fig.cap = "Map of localities, states and villages of Sudan with labels and legend", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map7, echo = FALSE, eval = TRUE, fig.cap = "Map of localities, states and villages of Sudan with labels and legend", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 plot(sudan02, border = "gray")
 plot(sudan01, lwd = 2, add = TRUE)
 points(villages$X, 
@@ -400,7 +400,7 @@ This produces the following map:
 
 &nbsp;
 
-```{r map8, echo = FALSE, eval = TRUE, fig.cap = "Map of localities, states and villages of Sudan with labels, legend and scale", fig.align = "center", fig.pos = "H", fig.width = 10, fig.height = 10, fig.retina = 1}
+```{r map8, echo = FALSE, eval = TRUE, fig.cap = "Map of localities, states and villages of Sudan with labels, legend and scale", fig.align = "center", fig.pos = "H", fig.width = 8, fig.height = 8, fig.retina = 1}
 plot(sudan02, border = "gray")
 plot(sudan01, lwd = 2, add = TRUE)
 points(villages$X, villages$Y, pch = 20, cex = 0.2, col = "gray90")
@@ -416,7 +416,7 @@ legend("topleft",
        bty = "o",
        bg = "white")
 map.scale(x = bbox(sudan01)[1, 1] - 0.5,
-          y = bbox(sudan01)[2, 2] - 0.8,
+          y = bbox(sudan01)[2, 2] - 1,
           ratio = TRUE, 
           cex = 0.65)
 ```
